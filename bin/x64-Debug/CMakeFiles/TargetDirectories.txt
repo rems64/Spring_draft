@@ -1,0 +1,5 @@
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/CMakeFiles/Spring.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/CMakeFiles/edit_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/CMakeFiles/rebuild_cache.dir
