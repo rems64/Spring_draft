@@ -2,8 +2,12 @@ C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/CMakeFiles/edit_cache.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/CMakeFiles/rebuild_cache.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/CMakeFiles/edit_cache.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/CMakeFiles/rebuild_cache.dir
-C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringDNA/CMakeFiles/edit_cache.dir
-C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringDNA/CMakeFiles/rebuild_cache.dir
-C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/Test1.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/edit_cache.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/rebuild_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/edit_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/rebuild_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/rebuild_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/edit_cache.dir

@@ -1,7 +1,17 @@
-#include <iostream>
+#include <Windows.h>
+#include <stdio.h>
 
-int main()
+#ifndef SPRING_CONSOLELESS
+int main(int argc, char* argv[])
+#else
+int WINAPI WinMain(HWIND instance, HWIND previnstance, LPSTR cmdline, int cmdshow)
+#endif
 {
-    std::cout << "Test" << std::endl;
-    return 0;
+    printf("coucou\n%i\n", argc);
+    for (short i = 0; i < argc; i++)
+    {
+        printf(argv[i]);
+        printf("\n");
+    }
+    return true;
 }

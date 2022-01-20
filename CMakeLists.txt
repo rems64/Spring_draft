@@ -1,14 +1,8 @@
-﻿# CMakeList.txt : fichier projet CMake de niveau supérieur, effectuez une configuration globale
-# et incluez les sous-projets ici.
-#
+﻿# Root CMakeLists.txt
+
 cmake_minimum_required (VERSION 3.8)
 
-project ("Spring")
+project(SpringAll)
 
-# Incluez les sous-projets.
-add_subdirectory ("Spring")
-
-#if(MSVC)
-#  target_compile_options(<target> PUBLIC "/ZI")
-#  target_link_options(<target> PUBLIC "/INCREMENTAL")
-#endif()
+add_subdirectory (Spring)
+add_subdirectory (SpringEditor)

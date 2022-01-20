@@ -1,3 +1,10 @@
 # ninja log v5
-0	959	6624333059087288	Spring/CMakeFiles/Spring.dir/Spring.cpp.obj	82f2f87b7a6122e9
-961	1401	6624333063338628	Spring/Spring.exe	31ff91f29747039d
+1	114	6643904923972052	Spring/SpringCore/CMakeFiles/SpringCore.dir/src/SpringTime.cpp.obj	495db9fb77a84e7d
+13	703	6644039048199751	SpringEditor/CMakeFiles/SpringEditor.dir/src/SpringEditor.cpp.obj	5a45cbbc0197e455
+1	442	6643944335819888	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringGraphicsDevice.cpp.obj	33164e58401e1dd
+116	194	6643904924762018	Spring/SpringCore/SpringCore.lib	5ef847e8e4aa0911
+818	1171	6644039052315223	SpringEditor/SpringEditor.exe	2f132f644953490e
+689	817	6644039048839625	Spring/SpringGraphics/SpringGraphics.lib	dbd73b76a0152e68
+3	687	6644039048029711	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringGraphicsDevice_Vk.cpp.obj	71140d12e625a5fd
+2	496	6644069876394458	SpringEditor/CMakeFiles/SpringEditor.dir/src/SpringEditor.cpp.obj	5a45cbbc0197e455
+498	780	6644069878824700	SpringEditor/SpringEditor.exe	2f132f644953490e
