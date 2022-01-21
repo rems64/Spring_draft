@@ -18,10 +18,15 @@ namespace spring::graphics
 	public:
 		Device_Vulkan();
 		virtual ~Device_Vulkan() override;
-	
+
+		virtual int createSwapChain(SwapChain* swapchain, SwapChainDesc swapchainDesc, spring::graphics::SpringWindow* window);
+
 	protected:
 		VkInstance m_instance = VK_NULL_HANDLE;
 		VkDebugUtilsMessengerEXT m_debugUtilsMessenger = VK_NULL_HANDLE;
+		VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
+		VkDevice m_device = VK_NULL_HANDLE;
+		VkQueue m_graphicsQueue = VK_NULL_HANDLE;
 	};
 }
 

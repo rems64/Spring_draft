@@ -1,10 +1,16 @@
 # ninja log v5
-1	114	6643904923972052	Spring/SpringCore/CMakeFiles/SpringCore.dir/src/SpringTime.cpp.obj	495db9fb77a84e7d
-13	703	6644039048199751	SpringEditor/CMakeFiles/SpringEditor.dir/src/SpringEditor.cpp.obj	5a45cbbc0197e455
-1	442	6643944335819888	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringGraphicsDevice.cpp.obj	33164e58401e1dd
-116	194	6643904924762018	Spring/SpringCore/SpringCore.lib	5ef847e8e4aa0911
-818	1171	6644039052315223	SpringEditor/SpringEditor.exe	2f132f644953490e
-689	817	6644039048839625	Spring/SpringGraphics/SpringGraphics.lib	dbd73b76a0152e68
-3	687	6644039048029711	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringGraphicsDevice_Vk.cpp.obj	71140d12e625a5fd
-2	496	6644069876394458	SpringEditor/CMakeFiles/SpringEditor.dir/src/SpringEditor.cpp.obj	5a45cbbc0197e455
-498	780	6644069878824700	SpringEditor/SpringEditor.exe	2f132f644953490e
+1	978	6644886062126938	Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.cxx.obj	3acd9828f5127b4
+7	1038	6644886062724485	SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.cxx.obj	fbb0efb1a46620ba
+4	487	6644926726748365	Spring/SpringCore/CMakeFiles/SpringCore.dir/src/SpringApplication.cpp.obj	ac37104d7d87b158
+979	1050	6644886062815375	Spring/SpringCore/CMakeFiles/SpringCore.dir/src/SpringMisc.cpp.obj	f5ea49cd26ae1f09
+1	195	6644889660547876	Spring/SpringCore/CMakeFiles/SpringCore.dir/src/SpringModule.cpp.obj	84eb9cbf274a934d
+2	99	6644928227698695	Spring/SpringCore/SpringCore.lib	d65ca159cc54a268
+16	143	6644929130316509	SpringEditor/CMakeFiles/SpringEditor.dir/src/SpringEditorApplication.cpp.obj	838c23d9b58ef092
+4	1379	6644886066173917	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.cxx.obj	126ee8c0b4f7511f
+5	199	6644889660547876	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringWindow.cpp.obj	3e9ea1dcc4a227fd
+2	637	6644951359366877	SpringEditor/CMakeFiles/SpringEditor.dir/src/SpringEditor.cpp.obj	1d332847c4c3351d
+1382	1538	6644886067773451	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringGraphicsModule.cpp.obj	7a6f1d97822978e7
+3	373	6644956492687680	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringGraphicsDevice_Vk.cpp.obj	d32f91987b5d3987
+374	474	6644956493187706	Spring/SpringGraphics/SpringGraphics.lib	730295e6e66c78c2
+475	762	6644956496228024	SpringEditor/SpringEditor.exe	53f3e57df0fcb9b5
+10	145	6644952306099880	Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/src/SpringWindow_Native.cpp.obj	4c99b5a77c576592

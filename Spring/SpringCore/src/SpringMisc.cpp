@@ -1,7 +1,5 @@
 #include <Spring/SpringCore/SpringMisc.hpp>
 
-#include <Windows.h>
-
 namespace spring::core
 {
     void info(const char* message, const char* title)

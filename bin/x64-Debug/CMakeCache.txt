@@ -217,7 +217,7 @@ SpringAll_IS_TOP_LEVEL:STATIC=ON
 SpringAll_SOURCE_DIR:STATIC=C:/Users/rfaye/source/repos/Spring
 
 //Dependencies for the target
-SpringGraphics_LIB_DEPENDS:STATIC=general;SpringCore;general;Vulkan::Vulkan;
+SpringGraphics_LIB_DEPENDS:STATIC=general;Spring::SpringCore;general;Vulkan::Vulkan;
 
 //Path to a program.
 Vulkan_GLSLANG_VALIDATOR_EXECUTABLE:FILEPATH=C:/VulkanSDK/1.2.198.1/Bin/glslangValidator.exe

@@ -3,9 +3,10 @@ project(springeditor VERSION 1.0.0 LANGUAGES CXX)
 
 set(SRCS
 	"src/SpringEditor.cpp"
+	"src/SpringEditorApplication.cpp"
 )
 
-add_executable(SpringEditor ${SRCS})
+add_executable(SpringEditor WIN32 ${SRCS})
 
 target_include_directories(SpringEditor
 	PUBLIC

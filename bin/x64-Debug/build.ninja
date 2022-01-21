@@ -105,8 +105,38 @@ build Spring\rebuild_cache: phony Spring\CMakeFiles\rebuild_cache.util
 
 build cmake_object_order_depends_target_SpringCore: phony || Spring\SpringCore\CMakeFiles\SpringCore.dir
 
-build Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringTime.cpp.obj: CXX_COMPILER__SpringCore_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringCore\src\SpringTime.cpp || cmake_object_order_depends_target_SpringCore
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
+build Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.cxx.obj: CXX_COMPILER__SpringCore_Debug C$:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.cxx | Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.hxx || cmake_object_order_depends_target_SpringCore
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YcC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -I\src
+  OBJECT_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir
+  OBJECT_FILE_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir
+  TARGET_COMPILE_PDB = Spring\SpringCore\CMakeFiles\SpringCore.dir\SpringCore.pdb
+  TARGET_PDB = Spring\SpringCore\SpringCore.pdb
+
+
+#############################################
+# Additional output files.
+
+build Spring\SpringCore\CMakeFiles\SpringCore.dir\.\cmake_pch.cxx.pch: phony Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.cxx.obj
+
+build Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringMisc.cpp.obj: CXX_COMPILER__SpringCore_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringCore\src\SpringMisc.cpp | Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.hxx Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringCore
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -I\src
+  OBJECT_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir
+  OBJECT_FILE_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir\src
+  TARGET_COMPILE_PDB = Spring\SpringCore\CMakeFiles\SpringCore.dir\SpringCore.pdb
+  TARGET_PDB = Spring\SpringCore\SpringCore.pdb
+
+build Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringApplication.cpp.obj: CXX_COMPILER__SpringCore_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringCore\src\SpringApplication.cpp | Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.hxx Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringCore
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -I\src
+  OBJECT_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir
+  OBJECT_FILE_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir\src
+  TARGET_COMPILE_PDB = Spring\SpringCore\CMakeFiles\SpringCore.dir\SpringCore.pdb
+  TARGET_PDB = Spring\SpringCore\SpringCore.pdb
+
+build Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringModule.cpp.obj: CXX_COMPILER__SpringCore_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringCore\src\SpringModule.cpp | Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.hxx Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringCore
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/CMakeFiles/SpringCore.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -I\src
   OBJECT_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir
   OBJECT_FILE_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir\src
@@ -121,7 +151,7 @@ build Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringTime.cpp.obj: CXX_CO
 #############################################
 # Link the static library Spring\SpringCore\SpringCore.lib
 
-build Spring\SpringCore\SpringCore.lib: CXX_STATIC_LIBRARY_LINKER__SpringCore_Debug Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringTime.cpp.obj
+build Spring\SpringCore\SpringCore.lib: CXX_STATIC_LIBRARY_LINKER__SpringCore_Debug Spring\SpringCore\CMakeFiles\SpringCore.dir\cmake_pch.cxx.obj Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringMisc.cpp.obj Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringApplication.cpp.obj Spring\SpringCore\CMakeFiles\SpringCore.dir\src\SpringModule.cpp.obj
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = Spring\SpringCore\CMakeFiles\SpringCore.dir
@@ -168,8 +198,46 @@ build Spring\SpringCore\rebuild_cache: phony Spring\SpringCore\CMakeFiles\rebuil
 
 build cmake_object_order_depends_target_SpringGraphics: phony || cmake_object_order_depends_target_SpringCore
 
-build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevice_Vk.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsDevice_Vk.cpp || cmake_object_order_depends_target_SpringGraphics
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
+build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx || cmake_object_order_depends_target_SpringGraphics
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YcC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\VulkanSDK\1.2.198.1\Include
+  OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
+  TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
+
+
+#############################################
+# Additional output files.
+
+build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\.\cmake_pch.cxx.pch: phony Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj
+
+build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevice_Vk.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsDevice_Vk.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\VulkanSDK\1.2.198.1\Include
+  OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
+  TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
+
+build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModule.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsModule.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\VulkanSDK\1.2.198.1\Include
+  OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
+  TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
+
+build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringWindow.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\VulkanSDK\1.2.198.1\Include
+  OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
+  TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
+
+build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Native.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringWindow_Native.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\VulkanSDK\1.2.198.1\Include
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
@@ -184,7 +252,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevi
 #############################################
 # Link the static library Spring\SpringGraphics\SpringGraphics.lib
 
-build Spring\SpringGraphics\SpringGraphics.lib: CXX_STATIC_LIBRARY_LINKER__SpringGraphics_Debug Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevice_Vk.cpp.obj || Spring\SpringCore\SpringCore.lib
+build Spring\SpringGraphics\SpringGraphics.lib: CXX_STATIC_LIBRARY_LINKER__SpringGraphics_Debug Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevice_Vk.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModule.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Native.cpp.obj || Spring\SpringCore\SpringCore.lib
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -243,8 +311,30 @@ build SpringEditor\rebuild_cache: phony SpringEditor\CMakeFiles\rebuild_cache.ut
 
 build cmake_object_order_depends_target_SpringEditor: phony || cmake_object_order_depends_target_SpringCore cmake_object_order_depends_target_SpringGraphics
 
-build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj: CXX_COMPILER__SpringEditor_Debug C$:\Users\rfaye\source\repos\Spring\SpringEditor\src\SpringEditor.cpp || cmake_object_order_depends_target_SpringEditor
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
+build SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.obj: CXX_COMPILER__SpringEditor_Debug C$:\Users\rfaye\source\repos\Spring\bin\x64-Debug\SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx | SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.hxx || cmake_object_order_depends_target_SpringEditor
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YcC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -IC:\VulkanSDK\1.2.198.1\Include
+  OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
+  OBJECT_FILE_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
+  TARGET_COMPILE_PDB = SpringEditor\CMakeFiles\SpringEditor.dir\
+  TARGET_PDB = SpringEditor\SpringEditor.pdb
+
+
+#############################################
+# Additional output files.
+
+build SpringEditor\CMakeFiles\SpringEditor.dir\.\cmake_pch.cxx.pch: phony SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.obj
+
+build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj: CXX_COMPILER__SpringEditor_Debug C$:\Users\rfaye\source\repos\Spring\SpringEditor\src\SpringEditor.cpp | SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.hxx SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringEditor
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -IC:\VulkanSDK\1.2.198.1\Include
+  OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
+  OBJECT_FILE_DIR = SpringEditor\CMakeFiles\SpringEditor.dir\src
+  TARGET_COMPILE_PDB = SpringEditor\CMakeFiles\SpringEditor.dir\
+  TARGET_PDB = SpringEditor\SpringEditor.pdb
+
+build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditorApplication.cpp.obj: CXX_COMPILER__SpringEditor_Debug C$:\Users\rfaye\source\repos\Spring\SpringEditor\src\SpringEditorApplication.cpp | SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.hxx SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringEditor
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -IC:\VulkanSDK\1.2.198.1\Include
   OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
   OBJECT_FILE_DIR = SpringEditor\CMakeFiles\SpringEditor.dir\src
@@ -259,9 +349,9 @@ build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj: CXX_COM
 #############################################
 # Link the executable SpringEditor\SpringEditor.exe
 
-build SpringEditor\SpringEditor.exe: CXX_EXECUTABLE_LINKER__SpringEditor_Debug SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj | Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib Spring\SpringCore\SpringCore.lib C$:\VulkanSDK\1.2.198.1\Lib\vulkan-1.lib || Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib
+build SpringEditor\SpringEditor.exe: CXX_EXECUTABLE_LINKER__SpringEditor_Debug SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.obj SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditorApplication.cpp.obj | Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib Spring\SpringCore\SpringCore.lib C$:\VulkanSDK\1.2.198.1\Lib\vulkan-1.lib || Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
-  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:windows
   LINK_LIBRARIES = Spring\SpringCore\SpringCore.lib  Spring\SpringGraphics\SpringGraphics.lib  Spring\SpringCore\SpringCore.lib  C:\VulkanSDK\1.2.198.1\Lib\vulkan-1.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
   POST_BUILD = cd .
