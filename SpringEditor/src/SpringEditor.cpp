@@ -19,25 +19,27 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	freopen_s(&fp, "CONOUT$", "w", stderr);
 	std::cout << "[DEBUG WINDOW]\n";
-
-	SpringEditorApplication app(hInstance);
-	graphics::SpringGraphicsModule* graphicsModule = app.registerModule<graphics::SpringGraphicsModule>();
-	graphics::SpringWindow_Native window;
-	window.create();
-	graphicsModule->setWindow(window.getHandle());
-
-	MSG msg = { 0 };
-	while (msg.message != WM_QUIT)
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-			//std::cout << msg.message << std::endl;
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		else {
+		SpringEditorApplication app(hInstance);
+		graphics::SpringGraphicsModule* graphicsModule = app.registerModule<graphics::SpringGraphicsModule>();
+		graphics::SpringWindow_Native window;
+		window.setTitle("Spring Editor");
+		window.create();
+		graphicsModule->setWindow(&window);
+
+		MSG msg = { 0 };
+		while (msg.message != WM_QUIT)
+		{
+			if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+				//std::cout << msg.message << std::endl;
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+			else {
+			}
 		}
 	}
 
-	//std::cin.get();
+	std::cin.get();
 	return 0;
 }

@@ -13,8 +13,14 @@ namespace spring::graphics
     {
     }
 
-    bool SpringGraphicsModule::setWindow(HWND handle)
+    bool SpringGraphicsModule::setWindow(SpringWindow* window)
     {
+        SwapChainDesc desc = {};
+        desc.fullscreen = false;
+        desc.width = 1280;
+        desc.height = 720;
+        desc.vsync = true;
+        m_device->createSwapChain(&m_swapchain, desc, window);
         return true;
     }
 }

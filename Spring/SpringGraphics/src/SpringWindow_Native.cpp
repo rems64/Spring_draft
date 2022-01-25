@@ -26,7 +26,7 @@ namespace spring::graphics
 		wc.hInstance = hInst;
 		wc.lpszClassName = CLASS_NAME;
 		RegisterClass(&wc);
-		m_window = CreateWindowEx(WS_EX_APPWINDOW, CLASS_NAME, "Window title", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, hInst, NULL);
+		m_window = CreateWindowEx(WS_EX_APPWINDOW, CLASS_NAME, this->m_title, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, hInst, NULL);
 		SetWindowLongPtr(m_window, 0, reinterpret_cast<LONG_PTR>(this));
 		ShowWindow(m_window, SW_SHOWNORMAL);
 		return true;

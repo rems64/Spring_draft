@@ -10,10 +10,10 @@ namespace spring::graphics
         SpringGraphicsModule(spring::core::SpringApplication* app);
         virtual ~SpringGraphicsModule() override;
 
-        bool setWindow(HWND handle);
+        bool setWindow(SpringWindow* window);
 
     protected:
         std::unique_ptr<spring::graphics::Device> m_device;
-        spring::graphics::SwapChain swapchain;
+        spring::graphics::SwapChain m_swapchain;
     };
 }
