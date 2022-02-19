@@ -11,13 +11,14 @@ namespace spring::graphics
 		virtual ~SpringWindow_Native() override;
 
 		virtual bool create() override;
-		virtual HWND getHandle() override;
+		virtual nwin getHandle() override;
+		virtual SpringSurface getSurface() override;
 
-		LRESULT CALLBACK windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+		LRESULT CALLBACK windowProc(nwin hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	protected:
-		HWND m_window;
+		nwin m_window;
 	};
 
-	LRESULT CALLBACK winProcDispatch(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT CALLBACK winProcDispatch(nwin hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 }

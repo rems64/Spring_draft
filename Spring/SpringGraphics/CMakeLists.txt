@@ -4,7 +4,10 @@ project(springgraphics VERSION 1.0.0 LANGUAGES CXX)
 set(SRCS
 	"src/SpringGraphicsDevice_Vk.cpp"
 	"src/SpringGraphicsModule.cpp"
- "src/SpringWindow.cpp" "src/SpringWindow_Native.cpp")
+	"src/SpringWindow.cpp"
+	"src/SpringWindow_Native.cpp"
+	"src/SpringRenderer.cpp"
+ "src/SpringGraphicsDevice_Gl.cpp")
 
 add_library(SpringGraphics ${SRCS})
 add_library(Spring::SpringGraphics ALIAS SpringGraphics)

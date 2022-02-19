@@ -14,8 +14,9 @@ namespace spring::graphics
 	enum class Format
 	{
 		SRGB_8,
-		SRGBA_8,
-		RGBA_16
+		B8G8R8A8_SRGB,
+		B8G8R8A8_UNORM,
+		R8G8B8A8_SRGB
 	};
 
 	struct GraphicsResource
@@ -28,6 +29,7 @@ namespace spring::graphics
 	{
 		uint32_t width;
 		uint32_t height;
+		Format format;
 		bool fullscreen;
 		bool vsync;
 	};
@@ -44,10 +46,21 @@ namespace spring::graphics
 		ShaderStages shaderStage = ShaderStages::None;
 	};
 
+	struct InputElement
+	{
+		size_t size;
+	};
+
+	struct InputDescription
+	{
+		InputElement* elements;
+	};
+
 	struct PipelineStateDesc
 	{
 		const Shader* vertexShader;
 		const Shader* fragmentShader;
+		const InputDescription* inputDesc = nullptr;
 	};
 
 	struct PipelineState : public GraphicsResource
@@ -106,5 +119,9 @@ namespace spring::graphics
 	{
 		RenderPassDesc desc;
 		constexpr const RenderPassDesc& getDesc() { return desc; };
+	};
+
+	struct CommandList : public GraphicsResource
+	{
 	};
 }

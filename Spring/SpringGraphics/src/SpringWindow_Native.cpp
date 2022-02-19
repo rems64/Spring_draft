@@ -37,6 +37,15 @@ namespace spring::graphics
 		return m_window;
 	}
 
+	SpringSurface SpringWindow_Native::getSurface()
+	{
+		SpringSurface surface{};
+		surface.handle = m_window;
+		surface.width = m_width;
+		surface.height = m_height;
+		return surface;
+	}
+
 	LRESULT CALLBACK SpringWindow_Native::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		switch (uMsg)

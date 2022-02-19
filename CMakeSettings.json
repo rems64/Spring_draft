@@ -12,7 +12,7 @@
       "ctestCommandArgs": ""
     },
     {
-      "name": "Linux_WSL - Debug",
+      "name": "Linux_WSL_Debug",
       "generator": "Ninja",
       "configurationType": "Debug",
       "buildRoot": "${projectDir}\\bin\\${name}",
@@ -36,7 +36,7 @@
       "inheritEnvironments": [ "msvc_x64_x64" ]
     },
     {
-      "name": "Linux_WSL - Release",
+      "name": "Linux_WSL_Release",
       "generator": "Ninja",
       "configurationType": "RelWithDebInfo",
       "buildRoot": "${projectDir}\\bin\\${name}",

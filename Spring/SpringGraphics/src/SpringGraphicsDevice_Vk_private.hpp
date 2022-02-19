@@ -15,10 +15,17 @@ namespace spring::graphics
 		std::deque<VkRenderPass> pending_renderPasses = {};
 		std::deque<VkFramebuffer> pending_framebuffers = {};
 		std::deque<VkPipeline> pending_pipelines = {};
+		std::deque<VkSemaphore> pending_semaphores = {};
 		
 		void collect()
 		{
 			std::lock_guard<std::mutex> guardian(locker);
+			while (!pending_semaphores.empty())
+			{
+				VkSemaphore pending = pending_semaphores.front();
+				pending_semaphores.pop_front();
+				vkDestroySemaphore(device, pending, nullptr);
+			}
 
 			while (!pending_imageViews.empty())
 			{
@@ -68,6 +75,13 @@ namespace spring::graphics
 				pending_pipelines.pop_front();
 				vkDestroyPipeline(device, pending, nullptr);
 			}
+
+			while (!pending_shaderModules.empty())
+			{
+				VkShaderModule pending = pending_shaderModules.front();
+				pending_shaderModules.pop_front();
+				vkDestroyShaderModule(device, pending, nullptr);
+			}
 		}
 	};
 
@@ -89,20 +103,34 @@ namespace spring::graphics
 		std::shared_ptr<AllocationCollector> allocationCollector;
 		VkSwapchainKHR swapchain;
 		VkSurfaceKHR surface;
+		
+		Texture defaultTexture;
+		RenderPass renderPass;
 
 		VkExtent2D extent;
 		VkFormat imageFormat;
 
+		VkSemaphore imageAvailableSemaphore;
+		VkSemaphore renderFinishedSemaphore;
+
 		std::vector<VkImage> swapChainImages;
 		std::vector<VkImageView> swapChainImageViews;
 
+		uint32_t swapchainImageIndex;
+
+		std::vector<VkFramebuffer> framebuffers;
+
 		~SwapChain_Vk()
 		{
+			std::lock_guard<std::mutex> guard(allocationCollector->locker);
 			allocationCollector->pending_surfaces.push_back(surface);
 			allocationCollector->pending_swapchains.push_back(swapchain);
+			allocationCollector->pending_semaphores.push_back(imageAvailableSemaphore);
+			allocationCollector->pending_semaphores.push_back(renderFinishedSemaphore);
 			for (uint32_t i = 0; i < swapChainImages.size(); i++)
 			{
 				allocationCollector->pending_imageViews.push_back(swapChainImageViews[i]);
+				allocationCollector->pending_framebuffers.push_back(framebuffers[i]);
 			}
 		}
 	};
@@ -120,6 +148,7 @@ namespace spring::graphics
 		VkPipelineRasterizationStateCreateInfo rasterizer;
 		std::vector<VkPipelineColorBlendAttachmentState> colorBlendAttachments;
 		VkPipelineColorBlendStateCreateInfo colorBlending;
+		VkPipelineMultisampleStateCreateInfo multisampling;
 
 		VkGraphicsPipelineCreateInfo pipelineCreateInfo;
 		VkPipeline pipeline;
@@ -141,12 +170,26 @@ namespace spring::graphics
 		VkRenderPass renderPass;
 		VkFramebuffer framebuffer;
 
+		VkRenderPassBeginInfo renderPassBeginInfo;
+
 		~RenderPass_Vk()
 		{
 			std::lock_guard<std::mutex> guardian(allocationCollector->locker);
 			allocationCollector->pending_framebuffers.push_back(framebuffer);
 			allocationCollector->pending_renderPasses.push_back(renderPass);
 		}
+	};
+
+	struct CommandList_Vk
+	{
+		std::shared_ptr<AllocationCollector> allocationCollector;
+
+		VkCommandPool commandPool;
+		std::vector<VkCommandBuffer> commandBuffers;
+
+		const RenderPass* renderpass;
+		const PipelineState* pipelineState;
+		bool invalidPipeline = true;
 	};
 
 }

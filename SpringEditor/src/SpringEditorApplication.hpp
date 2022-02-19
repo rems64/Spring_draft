@@ -5,6 +5,6 @@
 class SpringEditorApplication : public spring::core::SpringApplication
 {
 public:
-    SpringEditorApplication(HINSTANCE instance);
+    SpringEditorApplication(spring::core::SpringApplicationInfos info);
     virtual ~SpringEditorApplication() override;
 };

@@ -4,10 +4,16 @@
 
 namespace spring::core
 {
+    struct SpringApplicationInfos
+    {
+        bool showConsole;
+        HINSTANCE instance;
+    };
+
     class SpringApplication
     {
     public:
-        SpringApplication(HINSTANCE instance);
+        SpringApplication(SpringApplicationInfos infos);
         virtual ~SpringApplication() = default;
 
         template<typename T>
@@ -21,9 +27,12 @@ namespace spring::core
         static SpringApplication* get() { return m_app; };
         HINSTANCE getNativeInstance() { return m_instance; };
 
+        virtual int mainLoop();
+
     protected:
         static SpringApplication* m_app;
         HINSTANCE m_instance;
+        HWND m_console;
         std::vector<std::unique_ptr<SpringModule>> m_modules;
     };
 }

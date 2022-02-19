@@ -10,8 +10,9 @@ namespace spring::graphics
 	void SpringWindow::setName(const char* name)
 	{
 		free(m_name);
-		m_name = (char*)malloc(sizeof(name) / sizeof(char));
-		strcpy(m_name, name);
+		size_t size = sizeof(name) / sizeof(char);
+		m_name = (char*)malloc(size);
+		strcpy_s(m_name, size, name);
 	}
 	
 	const char* SpringWindow::getTitle()
