@@ -11,6 +11,6 @@ namespace spring::graphics
 {
 	Device_OpenGL::Device_OpenGL()
 	{
-		GetDC()
+		//GetDC()
 	}
 }

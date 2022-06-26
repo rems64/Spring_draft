@@ -7,7 +7,7 @@ set(SRCS
 	"src/SpringWindow.cpp"
 	"src/SpringWindow_Native.cpp"
 	"src/SpringRenderer.cpp"
- "src/SpringGraphicsDevice_Gl.cpp")
+ "src/SpringGraphicsDevice_Gl.cpp" "src/SpringWindow_Glfw.cpp" "src/SpringGraphicsApi_Vulkan.cpp" "src/ISpringGraphicsApi.cpp")
 
 add_library(SpringGraphics ${SRCS})
 add_library(Spring::SpringGraphics ALIAS SpringGraphics)
@@ -31,4 +31,4 @@ find_package(Vulkan REQUIRED)
 target_link_libraries(SpringGraphics Spring::SpringCore)
 target_link_libraries(SpringGraphics Vulkan::Vulkan)
 
-target_compile_features(SpringGraphics PRIVATE cxx_std_17)
+target_compile_features(SpringGraphics PRIVATE cxx_std_20)

@@ -1,12 +1,18 @@
 #include <Spring/SpringCore/SpringApplication.hpp>
 
 #include <Spring/SpringCore/SpringMisc.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
+
+#include <spdlog/spdlog.h>
 
 namespace spring::core
 {
     SpringApplication* SpringApplication::m_app = nullptr;
     SpringApplication::SpringApplication(SpringApplicationInfos infos)
     {
+        spdlog::set_pattern("%^%v%$");
+        spdlog::set_level(spdlog::level::trace);
+
         if (!!m_app)
         {
             spring::core::error("Application already exist");

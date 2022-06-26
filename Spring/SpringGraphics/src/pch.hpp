@@ -17,8 +17,12 @@
 #define SPRING_BUILD_GL
 
 #ifdef SPRING_BUILD_VK
-#include <vulkan/vulkan.h>
+#define VULKAN_HPP_NO_CONSTRUCTORS
+#include <vulkan/vulkan.hpp>
+//#include <vulkan/vulkan.h>
 #endif
 #ifdef SPRING_BUILD_GL
 #include <gl/GL.h>
 #endif
+
+//#include <spdlog/spdlog.h>

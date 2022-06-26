@@ -15,7 +15,7 @@ namespace spring::graphics
 		Device_OpenGL();
 		virtual ~Device_OpenGL() override;
 
-		virtual int createSwapChain(SwapChain* swapchain, SwapChainDesc& swapchainDesc, SpringSurface& surface) override;
+		virtual int createSwapChain(SwapChain* swapchain, SwapChainDesc& swapchainDesc, SpringSurface surface) override;
 		virtual int createShader(Shader* shader, ShaderStages shaderStage, const void* source, size_t size) override;
 		virtual int createPipelineState(PipelineState* pipelineState, PipelineStateDesc* desc) override;
 		virtual int createRenderPass(RenderPass* renderPass, RenderPassDesc* desc) override;

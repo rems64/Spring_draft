@@ -629,10 +629,10 @@ namespace spring::graphics
         }
     }
 
-    VKAPI_ATTR VkBool32 VKAPI_CALL debugUtilsMessengerCallback(
-        VkDebugUtilsMessageSeverityFlagBitsEXT message_severity, 
-        VkDebugUtilsMessageTypeFlagsEXT message_type,
-        const VkDebugUtilsMessengerCallbackDataEXT* callback_data,
+    VKAPI_ATTR vk::Bool32 VKAPI_CALL debugUtilsMessengerCallback(
+        vk::DebugUtilsMessageSeverityFlagBitsEXT message_severity, 
+        vk::DebugUtilsMessageTypeFlagsEXT message_type,
+        const vk::DebugUtilsMessengerCallbackDataEXT* callback_data,
         void* user_data)
 	{
         std::cout << "[Vulkan Warning]: " << callback_data->pMessage << std::endl;
@@ -698,7 +698,7 @@ namespace spring::graphics
         createInfo.ppEnabledLayerNames = validationLayers.data();
 
         // Here checking for debug mode would be nice
-        VkDebugUtilsMessengerCreateInfoEXT debugUtilsCreateInfo = { VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT };
+        vk::DebugUtilsMessengerCreateInfoEXT debugUtilsCreateInfo = { VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT };
 
         debugUtilsCreateInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT;
         debugUtilsCreateInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
@@ -742,10 +742,10 @@ namespace spring::graphics
         std::cout << "Available queue families (" << queueFamilyCount << "):" << std::endl;
         for (uint32_t i = 0; i < queueFamilyCount; i++) {
             std::cout << "  Queue family " << i << ": " << std::endl;
-            std::cout << "    Graphics queue: " << ((queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) ? "yes" : "no") << std::endl;
-            std::cout << "    Compute queue: " << ((queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT) ? "yes" : "no") << std::endl;
-            std::cout << "    Transfer queue: " << ((queueFamilies[i].queueFlags & VK_QUEUE_TRANSFER_BIT) ? "yes" : "no") << std::endl;
-            std::cout << "    Queue count: " << queueFamilies[i].queueCount << std::endl;
+            std::cout << "    Graphics : " << ((queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) ? "yes" : "no") << std::endl;
+            std::cout << "    Compute  : " << ((queueFamilies[i].queueFlags & VK_QUEUE_COMPUTE_BIT) ? "yes" : "no") << std::endl;
+            std::cout << "    Transfer : " << ((queueFamilies[i].queueFlags & VK_QUEUE_TRANSFER_BIT) ? "yes" : "no") << std::endl;
+            std::cout << "    Queues count: " << queueFamilies[i].queueCount << std::endl;
             std::cout << "    Timestamp valid bits: " << queueFamilies[i].timestampValidBits << std::endl;
             std::cout << "    Min image transfer granularity: " << queueFamilies[i].minImageTransferGranularity.width << "x" << queueFamilies[i].minImageTransferGranularity.height << "x" << queueFamilies[i].minImageTransferGranularity.depth << std::endl;
         }
@@ -819,7 +819,7 @@ namespace spring::graphics
         std::cout << "Destroyed graphics\n";
     }
 
-    int Device_Vulkan::createSwapChain(SwapChain* swapchain, SwapChainDesc& swapchainDesc, SpringSurface& surface)
+    int Device_Vulkan::createSwapChain(SwapChain* swapchain, SwapChainDesc& swapchainDesc, SpringSurface surface)
     {
         std::cout << "Creating swapchain" << std::endl;
         VkWin32SurfaceCreateInfoKHR createInfo{};

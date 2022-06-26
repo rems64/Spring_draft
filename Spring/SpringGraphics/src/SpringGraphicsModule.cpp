@@ -5,53 +5,38 @@
 #include <Spring/SpringCore/SpringMisc.hpp>
 #include <Spring/SpringGraphics/SpringWindow.hpp>
 #include <Spring/SpringGraphics/SpringWindow_Native.hpp>
-
-static std::vector<char> readFile(const std::string& filename) {
-    std::ifstream file(filename, std::ios::ate | std::ios::binary);
-
-    if (!file.is_open()) {
-        spring::core::error("Failed to open file!");
-        throw std::runtime_error("failed to open file!");
-    }
-    size_t fileSize = (size_t)file.tellg();
-    std::vector<char> buffer(fileSize);
-    file.seekg(0);
-    file.read(buffer.data(), fileSize);
-    file.close();
-
-    return buffer;
-}
+#include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
 
 
 namespace spring::graphics
 {
     SpringGraphicsModule::SpringGraphicsModule(core::SpringApplication* app) : SpringModule(app)
     {
+        m_api = SpringGraphicsApi::build();
+        m_api->init();
         m_device = std::make_unique<graphics::Device_Vulkan>();
     }
 
     SpringGraphicsModule::~SpringGraphicsModule()
     {
+        m_api->shutdown();
+        delete m_api;
     }
 
-    SpringWindow* SpringGraphicsModule::createWindow(const char* title, SpringWindowTypes type)
+    SpringWindow* SpringGraphicsModule::createWindow(const char* title)
     {
         std::shared_ptr<SpringWindow> window;
-        switch (type)
-        {
-        case SpringWindowTypes::Native:
-            window = std::make_shared<SpringWindow_Native>();
-            window->setTitle(title);
-            window->create();
-            m_windows.emplace_back(window);
-            break;
-        case SpringWindowTypes::None:
-            spring::core::error("Can't create a window from None");
-            return nullptr;
-        default:
-            spring::core::error("Can't create a window");
-            return nullptr;
-        }
+#ifdef SE_WINDOWS
+        window = std::make_shared<SpringWindow_Native>();
+#elif GLFW3
+        window = std::make_shared<SpringWindow_Glfw3>();
+#else
+        spring::core::error("Can't create a window, no supported backend");
+        return nullptr;
+#endif
+        window->setTitle(title);
+        window->create();
+        m_windows.emplace_back(window);
         return window.get();
     }
 

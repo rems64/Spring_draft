@@ -11,8 +11,12 @@ set(SRCS
 	"src/SpringApplication.cpp"
  "src/SpringModule.cpp")
 
+
 add_library(SpringCore STATIC ${SRCS})
 add_library(Spring::SpringCore ALIAS SpringCore)
+
+target_link_libraries(SpringCore PUBLIC spdlog::spdlog)
+
 target_include_directories(SpringCore
 	PUBLIC
 		$<INSTALL_INTERFACE:include>

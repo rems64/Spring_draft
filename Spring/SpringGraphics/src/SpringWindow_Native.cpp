@@ -39,10 +39,12 @@ namespace spring::graphics
 
 	SpringSurface SpringWindow_Native::getSurface()
 	{
-		SpringSurface surface{};
-		surface.handle = m_window;
-		surface.width = m_width;
-		surface.height = m_height;
+		SpringSurface surface
+		{
+			.handle = m_window,
+			.width = m_width,
+			.height = m_height
+		};
 		return surface;
 	}
 

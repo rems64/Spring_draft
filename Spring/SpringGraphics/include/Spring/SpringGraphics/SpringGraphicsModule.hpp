@@ -4,13 +4,8 @@
 
 namespace spring::graphics
 {
+    class SpringGraphicsApi;
     class SpringWindow;
-
-    enum class SpringWindowTypes
-    {
-        None,
-        Native
-    };
 
     class SpringGraphicsModule : public spring::core::SpringModule
     {
@@ -18,7 +13,9 @@ namespace spring::graphics
         SpringGraphicsModule(spring::core::SpringApplication* app);
         virtual ~SpringGraphicsModule() override;
 
-        SpringWindow* createWindow(const char* title, SpringWindowTypes type);
+        // Windowing
+        SpringWindow* createWindow(const char* title);
+        
         bool createSwapChain(SpringWindow* window);
         Device* getDevice() { return m_device.get(); };
 
@@ -26,6 +23,7 @@ namespace spring::graphics
         void tmpFrame();
 
     protected:
+        SpringGraphicsApi* m_api;
         std::unique_ptr<Device> m_device;
 
         std::vector<std::shared_ptr<SpringWindow>> m_windows;

@@ -4,3 +4,5 @@
 #define NOMINMAX
 #include <Windows.h>
 #endif
+
+//#include <spdlog/spdlog.h>

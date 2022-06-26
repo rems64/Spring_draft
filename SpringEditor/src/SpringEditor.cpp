@@ -20,7 +20,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	graphics::SpringGraphicsModule* graphicsModule = app.registerModule<graphics::SpringGraphicsModule>();
 
-	graphics::SpringWindow* mainWindow = graphicsModule->createWindow("Spring Editor", graphics::SpringWindowTypes::Native);
+	graphics::SpringWindow* mainWindow = graphicsModule->createWindow("Spring Editor");
 	if (!mainWindow)
 		return -1;
 	graphicsModule->createSwapChain(mainWindow);
@@ -38,7 +38,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 			DispatchMessage(&msg);
 		}
 		graphicsModule->tmpFrame();
-	}
+	};
+	//while(true) {}
 
 	return 0;
 }

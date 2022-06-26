@@ -18,7 +18,7 @@ namespace spring::graphics
 		Device_Vulkan();
 		virtual ~Device_Vulkan() override;
 
-		virtual int createSwapChain(SwapChain* swapchain, SwapChainDesc& swapchainDesc, SpringSurface& surface) override;
+		virtual int createSwapChain(SwapChain* swapchain, SwapChainDesc& swapchainDesc, SpringSurface surface) override;
 		virtual int createShader(Shader* shader, ShaderStages shaderStage, const void* source, size_t size) override;
 		virtual int createPipelineState(PipelineState* pipelineState, PipelineStateDesc* desc) override;
 		virtual int createRenderPass(RenderPass* renderPass, RenderPassDesc* desc) override;
@@ -33,11 +33,11 @@ namespace spring::graphics
 		int validatePipeline(CommandList* commandList);
 
 	protected:
-		VkInstance m_instance = VK_NULL_HANDLE;
-		VkDebugUtilsMessengerEXT m_debugUtilsMessenger = VK_NULL_HANDLE;
-		VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
-		VkDevice m_device = VK_NULL_HANDLE;
-		VkQueue m_graphicsQueue = VK_NULL_HANDLE;
+		vk::Instance m_instance = VK_NULL_HANDLE;
+		vk::DebugUtilsMessengerEXT m_debugUtilsMessenger = VK_NULL_HANDLE;
+		vk::PhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
+		vk::Device m_device = VK_NULL_HANDLE;
+		vk::Queue m_graphicsQueue = VK_NULL_HANDLE;
 		uint32_t m_graphicsQueueFamilyIdx;
 
 		std::vector<std::shared_ptr<CommandList_Vk>> m_commandLists;
