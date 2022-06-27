@@ -3,10 +3,10 @@
 
 namespace spring::graphics
 {
-	SpringGraphicsApi* SpringGraphicsApi::build()
+	Scope<SpringGraphicsApi> SpringGraphicsApi::build()
 	{
 #ifdef SPRING_BUILD_VK
-		return new SpringGraphicsApi_Vulkan();
+		return makeScope<SpringGraphicsApi_Vulkan>();
 #elif SPRING_BUILD_GL
 #endif
 	}

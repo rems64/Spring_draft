@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 3.5)
 project(springgraphics VERSION 1.0.0 LANGUAGES CXX)
 
 set(SRCS
-	"src/SpringGraphicsDevice_Vk.cpp"
+	
 	"src/SpringGraphicsModule.cpp"
 	"src/SpringWindow.cpp"
-	"src/SpringWindow_Native.cpp"
-	"src/SpringRenderer.cpp"
- "src/SpringGraphicsDevice_Gl.cpp" "src/SpringWindow_Glfw.cpp" "src/SpringGraphicsApi_Vulkan.cpp" "src/ISpringGraphicsApi.cpp")
+	"src/SpringWindow_Win32.cpp"
+	
+  "src/SpringWindow_Glfw.cpp" "src/SpringGraphicsApi_Vulkan.cpp" "src/ISpringGraphicsApi.cpp")
 
 add_library(SpringGraphics ${SRCS})
 add_library(Spring::SpringGraphics ALIAS SpringGraphics)
@@ -28,6 +28,14 @@ target_precompile_headers(SpringGraphics
 )
 
 find_package(Vulkan REQUIRED)
+
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/lib/glfw)
+target_link_libraries(SpringGraphics glfw)
+
 target_link_libraries(SpringGraphics Spring::SpringCore)
 target_link_libraries(SpringGraphics Vulkan::Vulkan)
 

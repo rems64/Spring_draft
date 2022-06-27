@@ -1,38 +1,35 @@
 #include <Spring/SpringGraphics/SpringWindow.hpp>
 
+#include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
+#include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
+
 namespace spring::graphics
 {
-	const char* SpringWindow::getName()
+	std::string SpringWindow::getTitle()
 	{
-		return m_name;
+		return m_desc.title;
 	}
 
-	void SpringWindow::setName(const char* name)
+	void SpringWindow::setTitle(std::string title)
 	{
-		free(m_name);
-		size_t size = sizeof(name) / sizeof(char);
-		m_name = (char*)malloc(size);
-		strcpy_s(m_name, size, name);
-	}
-	
-	const char* SpringWindow::getTitle()
-	{
-		return m_title;
+		m_desc.title = title;
 	}
 
-	void SpringWindow::setTitle(const char* title)
+	Scope<SpringWindow> SpringWindow::build(WindowDesc desc)
 	{
-		size_t size = strlen(title);
-		if (size <= SPRING_WINDOW_MAXTITLE_LEN)
-		{
-			memcpy(m_title, title, SPRING_WINDOW_MAXTITLE_LEN);
-		}
-		else
-		{
-			memcpy(m_title, title, SPRING_WINDOW_MAXTITLE_LEN-3);
-			m_title[SPRING_WINDOW_MAXTITLE_LEN - 3] = '.';
-			m_title[SPRING_WINDOW_MAXTITLE_LEN - 2] = '.';
-			m_title[SPRING_WINDOW_MAXTITLE_LEN - 1] = '.';
-		}
+		Scope<SpringWindow> window;
+
+#ifdef SE_WINDOWS
+		window = makeScope<SpringWindow_Win32>(desc);
+#elif GLFW3
+		window = makeDesc<SpringWindow_Glfw3>(desc);
+#else
+		spring::core::error("Can't create a window, no supported backend");
+		return nullptr;
+#endif
+
+		window->construct();
+		return window;
+
 	}
 }

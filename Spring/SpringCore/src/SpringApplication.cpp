@@ -10,8 +10,6 @@ namespace spring::core
     SpringApplication* SpringApplication::m_app = nullptr;
     SpringApplication::SpringApplication(SpringApplicationInfos infos)
     {
-        spdlog::set_pattern("%^%v%$");
-        spdlog::set_level(spdlog::level::trace);
 
         if (!!m_app)
         {
@@ -30,6 +28,10 @@ namespace spring::core
             freopen_s(&fp, "CONOUT$", "w", stderr);
             m_console = GetConsoleWindow();
         }
+
+        spdlog::set_pattern("%^%v%$");
+        spdlog::set_level(spdlog::level::trace);
+        //spdlog::default_logger()->flush_on(spdlog::level::debug);
     }
     SpringModule* SpringApplication::getModule(SpringModuleTypes type)
     {

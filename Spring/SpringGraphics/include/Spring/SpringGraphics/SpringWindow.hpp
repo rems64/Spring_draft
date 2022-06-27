@@ -1,57 +1,48 @@
 #pragma once
 
-constexpr int SPRING_WINDOW_MAXTITLE_LEN = 40;
+#include <Spring/SpringCore/SpringCommon.hpp>
 
-
-#if defined(SE_WINDOWS)
-#include <Windows.h>
-using nwin = HWND;
-
-#elif defined(SE_LINUX)
-#include <X11/Xlib.h>
-using nwin = Window;
+#ifdef SE_WINDOWS
+using spWinHandle = HWND;
+#elif GLFW3
+using spWinHandle = GLFWWindow*;
 #else
-#error("Spring isn't compatible with your operating system")
+#error "Can't create window type, unknown OS"
 #endif
-
-#include <Spring/SpringGraphics/SpringGraphicsResources.hpp>
 
 namespace spring::graphics
 {
-	struct SpringSurface
+	struct WindowDesc
 	{
-		nwin handle;
-		uint32_t width;
-		uint32_t height;
+		std::string title = "Spring window";
+		uint32_t width = 640;
+		uint32_t height = 480;
 	};
 
 	class SpringWindow
 	{
 	public:
-		virtual ~SpringWindow() = default;
+		SpringWindow(WindowDesc desc) : m_desc(desc) {};
+		virtual ~SpringWindow() {};
 
-		virtual bool create() = 0;
-		virtual nwin getHandle() = 0;
-		virtual SpringSurface getSurface() = 0;
+		virtual bool construct() = 0;
+		virtual spWinHandle getHandle() = 0;
+
+		virtual void close() { if(m_closeCallback) m_closeCallback(this); };
 		
-		void setTitle(const char* title);
-		const char* getTitle();
+		void setTitle(std::string title);
+		std::string getTitle();
 
-		void setName(const char* name);
-		const char* getName();
+		inline uint32_t getWidth() { return m_desc.width; };
+		inline uint32_t getHeight() { return m_desc.height; };
 
-		inline uint32_t getWidth() { return m_width; };
-		inline uint32_t getHeight() { return m_height; };
+		void setCloseCallback(void (*func)(SpringWindow*)) { m_closeCallback = func; };
 
-		inline SwapChain* getSwapChain() { return &m_swapchain; };
+		static Scope<SpringWindow> build(WindowDesc desc);
 
 	protected:
-		uint32_t m_width = 0;
-		uint32_t m_height = 0;
-		char* m_name;
-		char m_title[SPRING_WINDOW_MAXTITLE_LEN+1] = "Window Title";
-		bool m_fullscreen;
-
-		SwapChain m_swapchain;
+		WindowDesc m_desc;
+		bool m_fullscreen = false;
+		void (*m_closeCallback)(SpringWindow*);
 	};
 }

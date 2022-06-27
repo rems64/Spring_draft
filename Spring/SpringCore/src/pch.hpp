@@ -5,4 +5,5 @@
 #include <Windows.h>
 #endif
 
+#include <memory>
 //#include <spdlog/spdlog.h>

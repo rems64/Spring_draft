@@ -1,11 +1,12 @@
 #include <Spring/SpringCore/SpringModule.hpp>
 
-#include "SpringGraphicsDevice.hpp"
+#include <Spring/SpringCore/SpringCommon.hpp>
 
 namespace spring::graphics
 {
     class SpringGraphicsApi;
     class SpringWindow;
+    struct WindowDesc;
 
     class SpringGraphicsModule : public spring::core::SpringModule
     {
@@ -14,25 +15,13 @@ namespace spring::graphics
         virtual ~SpringGraphicsModule() override;
 
         // Windowing
-        SpringWindow* createWindow(const char* title);
-        
-        bool createSwapChain(SpringWindow* window);
-        Device* getDevice() { return m_device.get(); };
-
-        void tmpSetupRender();
-        void tmpFrame();
+        SpringWindow* createWindow(WindowDesc desc);
+        inline int32_t getWindowsCount() { return static_cast<uint32_t>(m_windows.size()); };
+        inline bool anyWindow() { return m_windows.size()>0; };
 
     protected:
-        SpringGraphicsApi* m_api;
-        std::unique_ptr<Device> m_device;
+        Scope<SpringGraphicsApi> m_api;
 
-        std::vector<std::shared_ptr<SpringWindow>> m_windows;
-
-        // TMP
-        CommandList cmd;
-        Shader vs;
-        Shader fs;
-        PipelineState pipelineState;
-        RenderPass renderPass;
+        std::vector<Scope<SpringWindow>> m_windows;
     };
 }

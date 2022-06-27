@@ -8,6 +8,7 @@
 #include <chrono>
 #include "SpringEditorApplication.hpp"
 
+#include <spdlog/spdlog.h>
 
 using namespace spring;
 
@@ -20,26 +21,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	graphics::SpringGraphicsModule* graphicsModule = app.registerModule<graphics::SpringGraphicsModule>();
 
-	graphics::SpringWindow* mainWindow = graphicsModule->createWindow("Spring Editor");
+	graphics::SpringWindow* mainWindow = graphicsModule->createWindow({ .title = "Spring Editor" });
 	if (!mainWindow)
-		return -1;
-	graphicsModule->createSwapChain(mainWindow);
+		return 42;
 	
-	
-	graphicsModule->tmpSetupRender();
+	spdlog::info("Starting...");
 
-	//app.mainLoop();
+	spdlog::warn("Any window : {}", graphicsModule->anyWindow());
 
-	MSG msg = { 0 };
-	while (msg.message != WM_QUIT)
+	while (true)
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		graphicsModule->tmpFrame();
 	};
 	//while(true) {}
 
+	spdlog::warn("Any window : {}", graphicsModule->anyWindow());
+
+	spdlog::debug("Keeping the terminal opened for you :)");
+	std::cin.get();
 	return 0;
 }

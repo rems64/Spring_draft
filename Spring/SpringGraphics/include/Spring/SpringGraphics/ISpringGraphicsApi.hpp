@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Spring/SpringCore/SpringCommon.hpp>
+
 namespace spring::graphics
 {
 	struct GraphicsApiProperties
@@ -21,6 +23,6 @@ namespace spring::graphics
 		virtual void init() = 0;
 		virtual void shutdown() = 0;
 
-		static SpringGraphicsApi* build();
+		static Scope<SpringGraphicsApi> build();
 	};
 }

@@ -21,7 +21,7 @@ namespace spring::graphics
 		void pickPhysicalDevice();
 		void createLogicalDevice();
 	private:
-		//vk::Instance m_instance;
+		vk::Instance m_instance;
 
 		std::vector<const char*> m_requiredExtensions;
 	};

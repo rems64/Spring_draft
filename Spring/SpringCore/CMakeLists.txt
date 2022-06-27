@@ -32,4 +32,4 @@ target_precompile_headers(SpringCore
 		src/pch.hpp
 )
 
-target_compile_features(SpringCore PRIVATE cxx_std_17)
+target_compile_features(SpringCore PRIVATE cxx_std_20)
