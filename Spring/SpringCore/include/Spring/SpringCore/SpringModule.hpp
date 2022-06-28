@@ -23,6 +23,9 @@ namespace spring::core
         SpringModule(SpringApplication* app);
         virtual ~SpringModule() = default;
 
+        virtual void update() = 0;
+        virtual bool canClose() = 0;
+
         SpringModuleTypes getType() const;
     
     protected:

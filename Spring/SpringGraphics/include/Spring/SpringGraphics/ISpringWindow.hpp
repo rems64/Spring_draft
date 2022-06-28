@@ -2,10 +2,12 @@
 
 #include <Spring/SpringCore/SpringCommon.hpp>
 
+struct GLFWwindow;
+
 #ifdef SE_WINDOWS
-using spWinHandle = HWND;
+using spWinHandle = GLFWwindow*; // HWND normally, just for temp testing
 #elif GLFW3
-using spWinHandle = GLFWWindow*;
+using spWinHandle = GLFWwindow*;
 #else
 #error "Can't create window type, unknown OS"
 #endif
@@ -29,6 +31,7 @@ namespace spring::graphics
 		virtual spWinHandle getHandle() = 0;
 
 		virtual void close() { if(m_closeCallback) m_closeCallback(this); };
+		virtual bool shouldClose() = 0;
 		
 		void setTitle(std::string title);
 		std::string getTitle();
@@ -38,8 +41,13 @@ namespace spring::graphics
 
 		void setCloseCallback(void (*func)(SpringWindow*)) { m_closeCallback = func; };
 
-		static Scope<SpringWindow> build(WindowDesc desc);
+		static SpringWindow* build(WindowDesc desc);
+		static void shutdown();
+		static void initialize();
 
+#ifdef SPRING_BUILD_VK
+		static std::vector<const char*> getRequiredExtensions() { return {}; };
+#endif
 	protected:
 		WindowDesc m_desc;
 		bool m_fullscreen = false;

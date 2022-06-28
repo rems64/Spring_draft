@@ -13,3 +13,4 @@
 #endif
 
 #include <algorithm>
+#include <spdlog/spdlog.h>

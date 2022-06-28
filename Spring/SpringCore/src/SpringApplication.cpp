@@ -48,14 +48,15 @@ namespace spring::core
 
     int SpringApplication::mainLoop()
     {
-        MSG msg = { 0 };
-        while (msg.message != WM_QUIT)
+        bool close = false;
+        while (!close)
         {
-            if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
+            close = true;
+            for (auto& module : m_modules)
+            {
+                module->update();
+                close &= module->canClose();
             }
-            //graphicsModule->tmpFrame();
         }
         return 0;
     }

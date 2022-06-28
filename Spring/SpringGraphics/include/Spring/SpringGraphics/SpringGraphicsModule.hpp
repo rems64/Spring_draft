@@ -14,10 +14,14 @@ namespace spring::graphics
         SpringGraphicsModule(spring::core::SpringApplication* app);
         virtual ~SpringGraphicsModule() override;
 
+        virtual void update() override;
+        virtual bool canClose() override;
+
         // Windowing
         SpringWindow* createWindow(WindowDesc desc);
         inline int32_t getWindowsCount() { return static_cast<uint32_t>(m_windows.size()); };
         inline bool anyWindow() { return m_windows.size()>0; };
+        inline SpringGraphicsApi* getApi() { return m_api.get(); };
 
     protected:
         Scope<SpringGraphicsApi> m_api;

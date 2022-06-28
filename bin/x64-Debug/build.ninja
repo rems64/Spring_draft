@@ -63,6 +63,36 @@ build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build CMakeFiles\install.util: CUSTOM_COMMAND all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build install: phony CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build CMakeFiles\install\local.util: CUSTOM_COMMAND all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build install\local: phony CMakeFiles\install\local.util
+
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # C:/Users/rfaye/source/repos/Spring/CMakeLists.txt
@@ -181,6 +211,36 @@ build lib\spdlog\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build lib\spdlog\rebuild_cache: phony lib\spdlog\CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build lib\spdlog\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build lib\spdlog\CMakeFiles\install.util: CUSTOM_COMMAND lib\spdlog\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\lib\spdlog && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build lib\spdlog\install: phony lib\spdlog\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build lib\spdlog\CMakeFiles\install\local.util: CUSTOM_COMMAND lib\spdlog\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\lib\spdlog && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build lib\spdlog\install\local: phony lib\spdlog\CMakeFiles\install\local.util
+
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # C:/Users/rfaye/source/repos/Spring/CMakeLists.txt
@@ -208,6 +268,36 @@ build Spring\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
   restat = 1
 
 build Spring\rebuild_cache: phony Spring\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build Spring\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build Spring\CMakeFiles\install.util: CUSTOM_COMMAND Spring\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build Spring\install: phony Spring\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build Spring\CMakeFiles\install\local.util: CUSTOM_COMMAND Spring\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build Spring\install\local: phony Spring\CMakeFiles\install\local.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -306,6 +396,36 @@ build Spring\SpringCore\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build Spring\SpringCore\rebuild_cache: phony Spring\SpringCore\CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build Spring\SpringCore\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build Spring\SpringCore\CMakeFiles\install.util: CUSTOM_COMMAND Spring\SpringCore\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringCore && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build Spring\SpringCore\install: phony Spring\SpringCore\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build Spring\SpringCore\CMakeFiles\install\local.util: CUSTOM_COMMAND Spring\SpringCore\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringCore && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build Spring\SpringCore\install\local: phony Spring\SpringCore\CMakeFiles\install\local.util
+
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # C:/Users/rfaye/source/repos/Spring/Spring/CMakeLists.txt
@@ -318,12 +438,12 @@ build Spring\SpringCore\rebuild_cache: phony Spring\SpringCore\CMakeFiles\rebuil
 #############################################
 # Order-only phony target for SpringGraphics
 
-build cmake_object_order_depends_target_SpringGraphics: phony || cmake_object_order_depends_target_SpringCore cmake_object_order_depends_target_spdlog
+build cmake_object_order_depends_target_SpringGraphics: phony || cmake_object_order_depends_target_SpringCore cmake_object_order_depends_target_glfw cmake_object_order_depends_target_spdlog
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx || cmake_object_order_depends_target_SpringGraphics
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YcC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
@@ -338,7 +458,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\.\cmake_pch.cxx.pch: p
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModule.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsModule.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
   TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
@@ -347,16 +467,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModu
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringWindow.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
-  OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
-  OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
-  TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
-  TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
-
-build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Win32.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringWindow_Win32.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
   TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
@@ -365,7 +476,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Win32
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Glfw.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringWindow_Glfw.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
   TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
@@ -374,7 +485,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Glfw.
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsApi_Vulkan.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsApi_Vulkan.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
   TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
@@ -383,7 +494,16 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsApi_
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\ISpringGraphicsApi.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\ISpringGraphicsApi.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
+  TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
+
+build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevice_Vulkan.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsDevice_Vulkan.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
+  DEFINES = -DSPDLOG_COMPILED_LIB
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
   OBJECT_FILE_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src
   TARGET_COMPILE_PDB = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\SpringGraphics.pdb
@@ -397,7 +517,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\ISpringGraphicsApi
 #############################################
 # Link the static library Spring\SpringGraphics\SpringGraphics.lib
 
-build Spring\SpringGraphics\SpringGraphics.lib: CXX_STATIC_LIBRARY_LINKER__SpringGraphics_Debug Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModule.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Win32.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Glfw.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsApi_Vulkan.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\ISpringGraphicsApi.cpp.obj || Spring\SpringCore\SpringCore.lib lib\spdlog\spdlogd.lib
+build Spring\SpringGraphics\SpringGraphics.lib: CXX_STATIC_LIBRARY_LINKER__SpringGraphics_Debug Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModule.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Glfw.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsApi_Vulkan.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\ISpringGraphicsApi.cpp.obj Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevice_Vulkan.cpp.obj || Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\lib\glfw\src\glfw3.lib lib\spdlog\spdlogd.lib
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -430,6 +550,395 @@ build Spring\SpringGraphics\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build Spring\SpringGraphics\rebuild_cache: phony Spring\SpringGraphics\CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build Spring\SpringGraphics\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build Spring\SpringGraphics\CMakeFiles\install.util: CUSTOM_COMMAND Spring\SpringGraphics\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\install: phony Spring\SpringGraphics\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build Spring\SpringGraphics\CMakeFiles\install\local.util: CUSTOM_COMMAND Spring\SpringGraphics\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\install\local: phony Spring\SpringGraphics\CMakeFiles\install\local.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/rfaye/source/repos/Spring/Spring/SpringGraphics/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for uninstall
+
+build Spring\SpringGraphics\lib\glfw\uninstall: phony Spring\SpringGraphics\lib\glfw\CMakeFiles\uninstall
+
+
+#############################################
+# Utility command for edit_cache
+
+build Spring\SpringGraphics\lib\glfw\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\edit_cache: phony Spring\SpringGraphics\lib\glfw\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build Spring\SpringGraphics\lib\glfw\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\rfaye\source\repos\Spring -BC:\Users\rfaye\source\repos\Spring\bin\x64-Debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\rebuild_cache: phony Spring\SpringGraphics\lib\glfw\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build Spring\SpringGraphics\lib\glfw\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build Spring\SpringGraphics\lib\glfw\CMakeFiles\install.util: CUSTOM_COMMAND Spring\SpringGraphics\lib\glfw\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\install: phony Spring\SpringGraphics\lib\glfw\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build Spring\SpringGraphics\lib\glfw\CMakeFiles\install\local.util: CUSTOM_COMMAND Spring\SpringGraphics\lib\glfw\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\install\local: phony Spring\SpringGraphics\lib\glfw\CMakeFiles\install\local.util
+
+
+#############################################
+# Custom command for Spring\SpringGraphics\lib\glfw\CMakeFiles\uninstall
+
+build Spring\SpringGraphics\lib\glfw\CMakeFiles\uninstall | ${cmake_ninja_workdir}Spring\SpringGraphics\lib\glfw\CMakeFiles\uninstall: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/lib/glfw/cmake_uninstall.cmake"
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/rfaye/source/repos/Spring/Spring/SpringGraphics/lib/glfw/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target glfw
+
+
+#############################################
+# Order-only phony target for glfw
+
+build cmake_object_order_depends_target_glfw: phony || Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\context.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\init.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\init.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\input.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\input.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\monitor.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\monitor.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\platform.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\platform.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\vulkan.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\vulkan.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\window.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\window.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\egl_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\egl_context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\osmesa_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\osmesa_context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_init.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\null_init.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_monitor.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\null_monitor.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_window.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\null_window.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_joystick.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\null_joystick.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_module.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\win32_module.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_time.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\win32_time.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_thread.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\win32_thread.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_init.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\win32_init.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_joystick.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\win32_joystick.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_monitor.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\win32_monitor.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_window.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\win32_window.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\wgl_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src\wgl_context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src -IC:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target glfw
+
+
+#############################################
+# Link the static library Spring\SpringGraphics\lib\glfw\src\glfw3.lib
+
+build Spring\SpringGraphics\lib\glfw\src\glfw3.lib: C_STATIC_LIBRARY_LINKER__glfw_Debug Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\context.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\init.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\input.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\monitor.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\platform.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\vulkan.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\window.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\egl_context.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\osmesa_context.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_init.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_monitor.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_window.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\null_joystick.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_module.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_time.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_thread.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_init.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_joystick.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_monitor.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\win32_window.c.obj Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\wgl_context.c.obj
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  LINK_FLAGS = /machine:x64
+  OBJECT_DIR = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = Spring\SpringGraphics\lib\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_FILE = Spring\SpringGraphics\lib\glfw\src\glfw3.lib
+  TARGET_PDB = Spring\SpringGraphics\lib\glfw\src\glfw3.pdb
+
+
+#############################################
+# Utility command for update_mappings
+
+build Spring\SpringGraphics\lib\glfw\src\update_mappings: phony Spring\SpringGraphics\lib\glfw\src\CMakeFiles\update_mappings
+
+
+#############################################
+# Utility command for edit_cache
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\src\edit_cache: phony Spring\SpringGraphics\lib\glfw\src\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\rfaye\source\repos\Spring -BC:\Users\rfaye\source\repos\Spring\bin\x64-Debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\src\rebuild_cache: phony Spring\SpringGraphics\lib\glfw\src\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build Spring\SpringGraphics\lib\glfw\src\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\install.util: CUSTOM_COMMAND Spring\SpringGraphics\lib\glfw\src\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\src\install: phony Spring\SpringGraphics\lib\glfw\src\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\install\local.util: CUSTOM_COMMAND Spring\SpringGraphics\lib\glfw\src\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\lib\glfw\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build Spring\SpringGraphics\lib\glfw\src\install\local: phony Spring\SpringGraphics\lib\glfw\src\CMakeFiles\install\local.util
+
+
+#############################################
+# Custom command for Spring\SpringGraphics\lib\glfw\src\CMakeFiles\update_mappings
+
+build Spring\SpringGraphics\lib\glfw\src\CMakeFiles\update_mappings | ${cmake_ninja_workdir}Spring\SpringGraphics\lib\glfw\src\CMakeFiles\update_mappings: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\src && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P C:/Users/rfaye/source/repos/Spring/Spring/SpringGraphics/lib/glfw/CMake/GenerateMappings.cmake mappings.h.in mappings.h"
+  DESC = Updating gamepad mappings from upstream repository
+
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # C:/Users/rfaye/source/repos/Spring/CMakeLists.txt
@@ -442,12 +951,12 @@ build Spring\SpringGraphics\rebuild_cache: phony Spring\SpringGraphics\CMakeFile
 #############################################
 # Order-only phony target for SpringEditor
 
-build cmake_object_order_depends_target_SpringEditor: phony || cmake_object_order_depends_target_SpringCore cmake_object_order_depends_target_SpringGraphics cmake_object_order_depends_target_spdlog
+build cmake_object_order_depends_target_SpringEditor: phony || cmake_object_order_depends_target_SpringCore cmake_object_order_depends_target_SpringGraphics cmake_object_order_depends_target_glfw cmake_object_order_depends_target_spdlog
 
 build SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.obj: CXX_COMPILER__SpringEditor_Debug C$:\Users\rfaye\source\repos\Spring\bin\x64-Debug\SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx | SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.hxx || cmake_object_order_depends_target_SpringEditor
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YcC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
   OBJECT_FILE_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
   TARGET_COMPILE_PDB = SpringEditor\CMakeFiles\SpringEditor.dir\
@@ -462,7 +971,7 @@ build SpringEditor\CMakeFiles\SpringEditor.dir\.\cmake_pch.cxx.pch: phony Spring
 build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj: CXX_COMPILER__SpringEditor_Debug C$:\Users\rfaye\source\repos\Spring\SpringEditor\src\SpringEditor.cpp | SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.hxx SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringEditor
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
   OBJECT_FILE_DIR = SpringEditor\CMakeFiles\SpringEditor.dir\src
   TARGET_COMPILE_PDB = SpringEditor\CMakeFiles\SpringEditor.dir\
@@ -471,7 +980,7 @@ build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj: CXX_COM
 build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditorApplication.cpp.obj: CXX_COMPILER__SpringEditor_Debug C$:\Users\rfaye\source\repos\Spring\SpringEditor\src\SpringEditorApplication.cpp | SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.hxx SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringEditor
   DEFINES = -DSPDLOG_COMPILED_LIB
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir/cmake_pch.hxx
-  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
+  INCLUDES = -IC:\Users\rfaye\source\repos\Spring\SpringEditor\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
   OBJECT_FILE_DIR = SpringEditor\CMakeFiles\SpringEditor.dir\src
   TARGET_COMPILE_PDB = SpringEditor\CMakeFiles\SpringEditor.dir\
@@ -485,10 +994,10 @@ build SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditorApplication.cpp.o
 #############################################
 # Link the executable SpringEditor\SpringEditor.exe
 
-build SpringEditor\SpringEditor.exe: CXX_EXECUTABLE_LINKER__SpringEditor_Debug SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.obj SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditorApplication.cpp.obj | Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib Spring\SpringCore\SpringCore.lib lib\spdlog\spdlogd.lib C$:\VulkanSDK\1.3.216.0\Lib\vulkan-1.lib || Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib lib\spdlog\spdlogd.lib
+build SpringEditor\SpringEditor.exe: CXX_EXECUTABLE_LINKER__SpringEditor_Debug SpringEditor\CMakeFiles\SpringEditor.dir\cmake_pch.cxx.obj SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditor.cpp.obj SpringEditor\CMakeFiles\SpringEditor.dir\src\SpringEditorApplication.cpp.obj | Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib Spring\SpringCore\SpringCore.lib lib\spdlog\spdlogd.lib Spring\SpringGraphics\lib\glfw\src\glfw3.lib C$:\VulkanSDK\1.3.216.0\Lib\vulkan-1.lib || Spring\SpringCore\SpringCore.lib Spring\SpringGraphics\SpringGraphics.lib Spring\SpringGraphics\lib\glfw\src\glfw3.lib lib\spdlog\spdlogd.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:windows
-  LINK_LIBRARIES = Spring\SpringCore\SpringCore.lib  Spring\SpringGraphics\SpringGraphics.lib  Spring\SpringCore\SpringCore.lib  lib\spdlog\spdlogd.lib  C:\VulkanSDK\1.3.216.0\Lib\vulkan-1.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = Spring\SpringCore\SpringCore.lib  Spring\SpringGraphics\SpringGraphics.lib  Spring\SpringCore\SpringCore.lib  lib\spdlog\spdlogd.lib  Spring\SpringGraphics\lib\glfw\src\glfw3.lib  C:\VulkanSDK\1.3.216.0\Lib\vulkan-1.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = SpringEditor\CMakeFiles\SpringEditor.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -520,6 +1029,36 @@ build SpringEditor\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build SpringEditor\rebuild_cache: phony SpringEditor\CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build SpringEditor\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build SpringEditor\CMakeFiles\install.util: CUSTOM_COMMAND SpringEditor\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\SpringEditor && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build SpringEditor\install: phony SpringEditor\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build SpringEditor\CMakeFiles\install\local.util: CUSTOM_COMMAND SpringEditor\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\rfaye\source\repos\Spring\bin\x64-Debug\SpringEditor && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build SpringEditor\install\local: phony SpringEditor\CMakeFiles\install\local.util
+
 # =============================================================================
 # Target aliases.
 
@@ -535,9 +1074,17 @@ build SpringGraphics: phony Spring\SpringGraphics\SpringGraphics.lib
 
 build SpringGraphics.lib: phony Spring\SpringGraphics\SpringGraphics.lib
 
+build glfw: phony Spring\SpringGraphics\lib\glfw\src\glfw3.lib
+
+build glfw3.lib: phony Spring\SpringGraphics\lib\glfw\src\glfw3.lib
+
 build spdlog: phony lib\spdlog\spdlogd.lib
 
 build spdlogd.lib: phony lib\spdlog\spdlogd.lib
+
+build uninstall: phony Spring\SpringGraphics\lib\glfw\uninstall
+
+build update_mappings: phony Spring\SpringGraphics\lib\glfw\src\update_mappings
 
 # =============================================================================
 # Folder targets.
@@ -568,7 +1115,21 @@ build Spring\SpringCore\all: phony Spring\SpringCore\SpringCore.lib
 #############################################
 # Folder: C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics
 
-build Spring\SpringGraphics\all: phony Spring\SpringGraphics\SpringGraphics.lib
+build Spring\SpringGraphics\all: phony Spring\SpringGraphics\SpringGraphics.lib Spring\SpringGraphics\lib\glfw\all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/lib/glfw
+
+build Spring\SpringGraphics\lib\glfw\all: phony Spring\SpringGraphics\lib\glfw\src\all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/lib/glfw/src
+
+build Spring\SpringGraphics\lib\glfw\src\all: phony Spring\SpringGraphics\lib\glfw\src\glfw3.lib
 
 # =============================================================================
 
@@ -591,14 +1152,14 @@ build lib\spdlog\all: phony lib\spdlog\spdlogd.lib
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ..\..\CMakeLists.txt ..\..\SpringEditor\CMakeLists.txt ..\..\Spring\CMakeLists.txt ..\..\Spring\SpringCore\CMakeLists.txt ..\..\Spring\SpringGraphics\CMakeLists.txt ..\..\lib\spdlog\CMakeLists.txt ..\..\lib\spdlog\cmake\ide.cmake ..\..\lib\spdlog\cmake\utils.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindVulkan.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.22.22011901-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ..\..\CMakeLists.txt ..\..\SpringEditor\CMakeLists.txt ..\..\Spring\CMakeLists.txt ..\..\Spring\SpringCore\CMakeLists.txt ..\..\Spring\SpringGraphics\CMakeLists.txt ..\..\Spring\SpringGraphics\lib\glfw\CMakeLists.txt ..\..\Spring\SpringGraphics\lib\glfw\CMake\cmake_uninstall.cmake.in ..\..\Spring\SpringGraphics\lib\glfw\CMake\glfw3.pc.in ..\..\Spring\SpringGraphics\lib\glfw\CMake\glfw3Config.cmake.in ..\..\Spring\SpringGraphics\lib\glfw\src\CMakeLists.txt ..\..\lib\spdlog\CMakeLists.txt ..\..\lib\spdlog\cmake\ide.cmake ..\..\lib\spdlog\cmake\utils.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeDependentOption.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindVulkan.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.22.22011901-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ..\..\CMakeLists.txt ..\..\SpringEditor\CMakeLists.txt ..\..\Spring\CMakeLists.txt ..\..\Spring\SpringCore\CMakeLists.txt ..\..\Spring\SpringGraphics\CMakeLists.txt ..\..\lib\spdlog\CMakeLists.txt ..\..\lib\spdlog\cmake\ide.cmake ..\..\lib\spdlog\cmake\utils.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindVulkan.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.22.22011901-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeSystem.cmake: phony
+build ..\..\CMakeLists.txt ..\..\SpringEditor\CMakeLists.txt ..\..\Spring\CMakeLists.txt ..\..\Spring\SpringCore\CMakeLists.txt ..\..\Spring\SpringGraphics\CMakeLists.txt ..\..\Spring\SpringGraphics\lib\glfw\CMakeLists.txt ..\..\Spring\SpringGraphics\lib\glfw\CMake\cmake_uninstall.cmake.in ..\..\Spring\SpringGraphics\lib\glfw\CMake\glfw3.pc.in ..\..\Spring\SpringGraphics\lib\glfw\CMake\glfw3Config.cmake.in ..\..\Spring\SpringGraphics\lib\glfw\src\CMakeLists.txt ..\..\lib\spdlog\CMakeLists.txt ..\..\lib\spdlog\cmake\ide.cmake ..\..\lib\spdlog\cmake\utils.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeDependentOption.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\FindVulkan.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.22.22011901-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.22.22011901-MSVC_2\CMakeSystem.cmake: phony
 
 
 #############################################

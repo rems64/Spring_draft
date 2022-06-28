@@ -1,6 +1,6 @@
-#include <Spring/SpringGraphics/SpringWindow.hpp>
+#include <Spring/SpringGraphics/ISpringWindow.hpp>
 
-#include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
+//#include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 
 namespace spring::graphics
@@ -15,14 +15,14 @@ namespace spring::graphics
 		m_desc.title = title;
 	}
 
-	Scope<SpringWindow> SpringWindow::build(WindowDesc desc)
+	SpringWindow* SpringWindow::build(WindowDesc desc)
 	{
-		Scope<SpringWindow> window;
+		SpringWindow* window;
 
 #ifdef SE_WINDOWS
-		window = makeScope<SpringWindow_Win32>(desc);
+		window = new SpringWindow_Glfw(desc); // BAAAAD
 #elif GLFW3
-		window = makeDesc<SpringWindow_Glfw3>(desc);
+		window = makeDesc<SpringWindow_Glfw>(desc);
 #else
 		spring::core::error("Can't create a window, no supported backend");
 		return nullptr;
@@ -31,5 +31,35 @@ namespace spring::graphics
 		window->construct();
 		return window;
 
+	}
+
+	void SpringWindow::initialize()
+	{
+#ifdef SE_WINDOWS
+		if (!glfwInit())
+			spdlog::error("Failed to initialize glfw");
+		return;
+#elif GLFW3
+		if (!glfwInit())
+			spdlog::error("Failed to initialize glfw");
+		return;
+#else
+		spring::core::error("Can't initialize windowing, no supported backend");
+		return;
+#endif
+	}
+
+	void SpringWindow::shutdown()
+	{
+#ifdef SE_WINDOWS
+		glfwTerminate();
+		return;
+#elif GLFW3
+		glfwTerminate();
+		return;
+#else
+		spring::core::error("Can't shutdown windowing, no supported backend");
+		return;
+#endif
 	}
 }

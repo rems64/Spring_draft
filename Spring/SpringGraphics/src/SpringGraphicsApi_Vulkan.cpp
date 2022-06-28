@@ -3,23 +3,17 @@
 #include <Spring/SpringCore/SpringCore.hpp>
 
 #include <spdlog/spdlog.h>
+#include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 
 namespace spring::graphics
 {
-    SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan()
+    SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan() : m_devices{}
     {
-#ifdef GLFW3
-        uint32_t glfwExtensionCount = 0;
-        const char** glfwExtensions;
-        glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-        for (uint32_t i = 0; i < glfwExtensionCount; i++)
-        {
-            m_requiredExtensions.push_back(glfwExtensions[i]);
-        }
-#endif
-
+       std::vector<const char*> windowExtensions = SpringWindow_Glfw::getRequiredExtensions();
+       std::copy(windowExtensions.begin(), windowExtensions.end(), std::back_inserter(m_requiredExtensions));
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         m_requiredExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+        m_validationLayers = { "VK_LAYER_KHRONOS_validation" };
 #endif
     }
 
@@ -43,23 +37,26 @@ namespace spring::graphics
 
 	void SpringGraphicsApi_Vulkan::init()
 	{
-		
+        createInstance();
+        setupDebugMessenger();
 	}
 
 	void SpringGraphicsApi_Vulkan::shutdown()
 	{
+        DestroyDebugUtilsMessengerEXT(m_instance, m_debugMessenger, nullptr);
 
+        vkDestroyInstance(m_instance, nullptr);
 	}
 
 	void SpringGraphicsApi_Vulkan::createInstance()
 	{
-        /*
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         if (!checkValidationLayerSupport()) {
             throw std::runtime_error("validation layers requested, but not available!");
         }
 #endif
-        vk::ApplicationInfo appInfo = {
+        VkApplicationInfo appInfo = {
+            .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,
             .pApplicationName = "SpringApplication",
             .applicationVersion = VK_MAKE_VERSION(1,0,0),
             .pEngineName = "No engine",
@@ -70,20 +67,20 @@ namespace spring::graphics
         //m_requiredExtensions = getRequiredExtensions();
 
         //std::cout << "Extensions required by glfw" << std::endl;
-        spdlog::info("Extensions required by glfw");
-        for (auto ext : requiredExtensions)
+        spdlog::info("Extensions required :");
+        for (auto ext : m_requiredExtensions)
         {
-            spdlog::info("{}", ext);
+            spdlog::info("  {}", ext);
         }
 
         uint32_t availableExtensionsCount;
         vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionsCount, nullptr);
         std::vector<VkExtensionProperties> availableExtensions(availableExtensionsCount);
         vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionsCount, availableExtensions.data());
-        for (auto reqExt : requiredExtensions)
+        for (auto reqExt : m_requiredExtensions)
         {
             bool found = false;
-            for (auto ext : availableExtensions)
+            for (VkExtensionProperties ext : availableExtensions)
             {
                 if (strcmp(ext.extensionName, reqExt))
                 {
@@ -94,7 +91,7 @@ namespace spring::graphics
             if (!found)
             {
                 spdlog::info("Missing extension {} which is required by glfw", reqExt);
-                ;                return;
+                return;
             }
         }
         //std::cout << "All required extensions where found" << std::endl;
@@ -105,59 +102,86 @@ namespace spring::graphics
             .sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
             .pApplicationInfo = &appInfo,
             .enabledLayerCount = 0,
-            .enabledExtensionCount = (uint32_t)requiredExtensions.size(),
-            .ppEnabledExtensionNames = requiredExtensions.data()
+            .enabledExtensionCount = (uint32_t)m_requiredExtensions.size(),
+            .ppEnabledExtensionNames = m_requiredExtensions.data()
         };
 
         VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
 
-        if (enableValidationLayers) {
-            createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-            createInfo.ppEnabledLayerNames = validationLayers.data();
+#ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
+        createInfo.enabledLayerCount = static_cast<uint32_t>(m_validationLayers.size());
+        createInfo.ppEnabledLayerNames = m_validationLayers.data();
 
-            populateDebugMessengerCreateInfo(debugCreateInfo);
-            createInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT*)&debugCreateInfo;
-        }
-        else {
-            createInfo.enabledLayerCount = 0;
-
-            createInfo.pNext = nullptr;
-        }
-
-        if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
+        populateDebugMessengerCreateInfo(debugCreateInfo);
+        createInfo.pNext = (VkDebugUtilsMessengerCreateInfoEXT*)&debugCreateInfo;
+#else
+        createInfo.enabledLayerCount = 0;
+        createInfo.pNext = nullptr;
+#endif
+        if (vkCreateInstance(&createInfo, nullptr, &m_instance) != VK_SUCCESS) {
             throw std::runtime_error("failed to create instance!");
         }
 	}
 
-    void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
+    GraphicsDevice* SpringGraphicsApi_Vulkan::createDevice(GraphicsDeviceDesc desc)
+	{
+        Scope<GraphicsDevice_Vulkan> device = makeScope<GraphicsDevice_Vulkan>(desc, this);
+        GraphicsDevice_Vulkan* devicePtr = device.get();
+        m_devices.emplace_back(std::move(device));
+        return devicePtr;
+	}
+
+#ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
+    void SpringGraphicsApi_Vulkan::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
         createInfo = {};
         createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
         createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-        createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-        createInfo.pfnUserCallback = debugCallback;
+        createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
+        createInfo.pfnUserCallback = SpringGraphicsApi_Vulkan::debugCallback;
     }
 
-    void setupDebugMessenger() {
-        if (!enableValidationLayers) return;
+    VKAPI_ATTR VkBool32 VKAPI_CALL SpringGraphicsApi_Vulkan::debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) {
+        switch (messageSeverity)
+        {
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
+            spdlog::error("[VALID.LAY] {}", pCallbackData->pMessage);
+            break;
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
+            spdlog::info("[VALID.LAY] {}", pCallbackData->pMessage);
+            break;
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
+            spdlog::warn("[VALID.LAY] {}", pCallbackData->pMessage);
+            break;
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
+            //spdlog::trace("[VALID.LAY] {}", pCallbackData->pMessage);
+            break;
+        default:
+            //spdlog::trace("[VALID.LAY] {}", pCallbackData->pMessage);
+            break;
+        }
 
+        return VK_FALSE;
+    }
+
+    void SpringGraphicsApi_Vulkan::setupDebugMessenger() {
         VkDebugUtilsMessengerCreateInfoEXT createInfo;
         populateDebugMessengerCreateInfo(createInfo);
 
-        auto res = CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger);
+        auto res = CreateDebugUtilsMessengerEXT(m_instance, &createInfo, nullptr, &m_debugMessenger);
         if (res != VK_SUCCESS) {
             spdlog::error("{}", res);
             throw std::runtime_error("failed to set up debug messenger!");
         }
     }
 
-    bool checkValidationLayerSupport() {
+    bool SpringGraphicsApi_Vulkan::checkValidationLayerSupport() {
         uint32_t layerCount;
         vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
 
         std::vector<VkLayerProperties> availableLayers(layerCount);
         vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
 
-        for (const char* layerName : validationLayers) {
+        for (const char* layerName : m_validationLayers) {
             bool layerFound = false;
 
             for (const auto& layerProperties : availableLayers) {
@@ -173,18 +197,26 @@ namespace spring::graphics
         }
 
         return true;
-        */
     }
 
-	void SpringGraphicsApi_Vulkan::setupDebugMessenger()
-	{
-	}
 
-	void SpringGraphicsApi_Vulkan::pickPhysicalDevice()
-	{
-	}
+    VkResult SpringGraphicsApi_Vulkan::CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger)
+    {
+        auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+        if (func != nullptr) {
+            return func(instance, pCreateInfo, pAllocator, pDebugMessenger);
+        }
+        else {
+            return VK_ERROR_EXTENSION_NOT_PRESENT;
+        }
+    }
 
-	void SpringGraphicsApi_Vulkan::createLogicalDevice()
-	{
-	}
+    void SpringGraphicsApi_Vulkan::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator)
+    {
+        auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+        if (func != nullptr) {
+            func(instance, debugMessenger, pAllocator);
+        }
+    }
+#endif
 }

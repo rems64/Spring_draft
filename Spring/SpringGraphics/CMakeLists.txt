@@ -5,9 +5,11 @@ set(SRCS
 	
 	"src/SpringGraphicsModule.cpp"
 	"src/SpringWindow.cpp"
-	"src/SpringWindow_Win32.cpp"
-	
-  "src/SpringWindow_Glfw.cpp" "src/SpringGraphicsApi_Vulkan.cpp" "src/ISpringGraphicsApi.cpp")
+#	"src/SpringWindow_Win32.cpp"
+	"src/SpringWindow_Glfw.cpp"
+	"src/SpringGraphicsApi_Vulkan.cpp"
+	"src/ISpringGraphicsApi.cpp"
+ "src/SpringGraphicsDevice_Vulkan.cpp")
 
 add_library(SpringGraphics ${SRCS})
 add_library(Spring::SpringGraphics ALIAS SpringGraphics)
@@ -27,14 +29,16 @@ target_precompile_headers(SpringGraphics
 		src/pch.hpp
 )
 
-find_package(Vulkan REQUIRED)
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/lib/glfw)
+add_subdirectory(lib/glfw)
 target_link_libraries(SpringGraphics glfw)
+
+
+find_package(Vulkan REQUIRED)
 
 target_link_libraries(SpringGraphics Spring::SpringCore)
 target_link_libraries(SpringGraphics Vulkan::Vulkan)

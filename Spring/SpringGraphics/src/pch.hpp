@@ -18,11 +18,11 @@
 
 #ifdef SPRING_BUILD_VK
 #define VULKAN_HPP_NO_CONSTRUCTORS
-#include <vulkan/vulkan.hpp>
-//#include <vulkan/vulkan.h>
+//#include <vulkan/vulkan.hpp>
+#include <vulkan/vulkan.h>
 #endif
 #ifdef SPRING_BUILD_GL
 #include <gl/GL.h>
 #endif
 
-//#include <spdlog/spdlog.h>
+#include <spdlog/spdlog.h>
