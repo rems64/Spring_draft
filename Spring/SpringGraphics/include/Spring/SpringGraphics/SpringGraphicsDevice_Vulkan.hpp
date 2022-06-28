@@ -11,7 +11,7 @@ namespace spring::graphics
 	{
 	public:
 		GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api);
-		//~GraphicsDevice_Vulkan();
+		~GraphicsDevice_Vulkan();
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain, SpringWindow* window) const override;
 

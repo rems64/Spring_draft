@@ -25,14 +25,14 @@ namespace spring::graphics
 	GraphicsDevice_Vulkan::GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api) : GraphicsDevice(desc, api)
 	{
 		m_api = static_cast<SpringGraphicsApi_Vulkan*>(api);
-		//m_instance = *m_api->getInstance();
-		//pickPhysicalDevice();
+		m_instance = *m_api->getInstance();
+		pickPhysicalDevice();
 	}
 
-	//GraphicsDevice_Vulkan::~GraphicsDevice_Vulkan()
-	//{
+	GraphicsDevice_Vulkan::~GraphicsDevice_Vulkan()
+	{
 
-	//}
+	}
 
 	bool GraphicsDevice_Vulkan::pickPhysicalDevice()
 	{
@@ -60,7 +60,7 @@ namespace spring::graphics
 			//}
 			//if (!supportExt || !swapChainAdequate)
 				//continue;
-			spdlog::info("  Device ({}) has {} available extensions, including required ones and is compatible with swapchain", properties.deviceName, extCount);
+			spdlog::info("  Device ({}) --> {} available extensions", properties.deviceName, extCount);
 			m_physicalDevice = pDevice;
 			//msaaSamples = getMaxUsableSampleCount();
 			return true;
