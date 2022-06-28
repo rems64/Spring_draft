@@ -39,7 +39,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		app.mainLoop();
 	}
 
-	spdlog::debug("Keeping the terminal opened for you :)");
+	spdlog::debug("Keeping the terminal open for you :)");
 	std::cin.get();
 	return 0;
 }
