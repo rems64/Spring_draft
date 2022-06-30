@@ -1,10 +1,17 @@
 #pragma once
 
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
+#define GLFW_INCLUDE_NONE
+#ifdef SPRING_BUILD_VK
+#define GLFW_INCLUDE_VULKAN
+#endif
 #include <GLFW/glfw3.h>
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
 
 namespace spring::graphics
 {
+	struct GraphicsSurface;
 	class SpringWindow_Glfw : public SpringWindow
 	{
 	public:
@@ -17,8 +24,11 @@ namespace spring::graphics
 
 		virtual void close() override;
 
+		virtual GraphicsSurface* getSurface(SpringGraphicsApi* api) override;
 #ifdef SPRING_BUILD_VK
 		static std::vector<const char*> getRequiredExtensions();
+	private:
+		VkSurfaceKHR surface;
 #endif
 	private:
 		GLFWwindow* m_window;

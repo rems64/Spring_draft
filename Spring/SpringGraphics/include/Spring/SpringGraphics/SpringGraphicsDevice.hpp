@@ -11,6 +11,7 @@ namespace spring::graphics
 	{
 		bool onlyDiscrete = false;
 		bool supportPresent = true;
+		std::vector<GraphicsSurface*> surfaces = {};
 	};
 
 
@@ -20,7 +21,7 @@ namespace spring::graphics
 		GraphicsDevice(GraphicsDeviceDesc& desc, SpringGraphicsApi* api) : m_desc(desc) {};
 		virtual ~GraphicsDevice() = default;
 
-		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain, SpringWindow* window) const = 0;
+		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) = 0;
 	protected:
 		GraphicsDeviceDesc m_desc;
 	};

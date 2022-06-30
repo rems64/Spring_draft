@@ -441,7 +441,7 @@ build Spring\SpringCore\install\local: phony Spring\SpringCore\CMakeFiles\instal
 build cmake_object_order_depends_target_SpringGraphics: phony || cmake_object_order_depends_target_SpringCore cmake_object_order_depends_target_glfw cmake_object_order_depends_target_spdlog
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\bin\x64-Debug\Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
+  DEFINES = -DSPDLOG_COMPILED_LIB -DSPRING_BUILD_VK
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YcC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -456,7 +456,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj: CXX
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\.\cmake_pch.cxx.pch: phony Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.obj
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModule.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsModule.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
+  DEFINES = -DSPDLOG_COMPILED_LIB -DSPRING_BUILD_VK
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -465,7 +465,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsModu
   TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringWindow.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
+  DEFINES = -DSPDLOG_COMPILED_LIB -DSPRING_BUILD_VK
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -474,7 +474,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow.cpp.o
   TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Glfw.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringWindow_Glfw.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
+  DEFINES = -DSPDLOG_COMPILED_LIB -DSPRING_BUILD_VK
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -483,7 +483,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringWindow_Glfw.
   TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsApi_Vulkan.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsApi_Vulkan.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
+  DEFINES = -DSPDLOG_COMPILED_LIB -DSPRING_BUILD_VK
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -492,7 +492,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsApi_
   TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\ISpringGraphicsApi.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\ISpringGraphicsApi.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
+  DEFINES = -DSPDLOG_COMPILED_LIB -DSPRING_BUILD_VK
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir
@@ -501,7 +501,7 @@ build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\ISpringGraphicsApi
   TARGET_PDB = Spring\SpringGraphics\SpringGraphics.pdb
 
 build Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\src\SpringGraphicsDevice_Vulkan.cpp.obj: CXX_COMPILER__SpringGraphics_Debug C$:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\src\SpringGraphicsDevice_Vulkan.cpp | Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.hxx Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir\cmake_pch.cxx.pch || cmake_object_order_depends_target_SpringGraphics
-  DEFINES = -DSPDLOG_COMPILED_LIB
+  DEFINES = -DSPDLOG_COMPILED_LIB -DSPRING_BUILD_VK
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20 /YuC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx /FpC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/./cmake_pch.cxx.pch /FIC:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/CMakeFiles/SpringGraphics.dir/cmake_pch.hxx
   INCLUDES = -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\include -I\src -IC:\Users\rfaye\source\repos\Spring\Spring\SpringGraphics\lib\glfw\include -IC:\Users\rfaye\source\repos\Spring\Spring\SpringCore\include -IC:\Users\rfaye\source\repos\Spring\lib\spdlog\include -external:I C:\VulkanSDK\1.3.216.0\Include -external:W0
   OBJECT_DIR = Spring\SpringGraphics\CMakeFiles\SpringGraphics.dir

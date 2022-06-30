@@ -7,7 +7,7 @@
 
 namespace spring::graphics
 {
-    SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan() : m_devices{}
+    SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan() : m_surfaces{}, m_devices{}
     {
        std::vector<const char*> windowExtensions = SpringWindow_Glfw::getRequiredExtensions();
        std::copy(windowExtensions.begin(), windowExtensions.end(), std::back_inserter(m_requiredExtensions));
@@ -19,7 +19,12 @@ namespace spring::graphics
 
 	SpringGraphicsApi_Vulkan::~SpringGraphicsApi_Vulkan()
 	{
-
+        m_devices.clear();
+        m_surfaces.clear();
+#ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
+        DestroyDebugUtilsMessengerEXT(m_instance, m_debugMessenger, nullptr);
+#endif
+        vkDestroyInstance(m_instance, nullptr);
 	}
 
 	const char* SpringGraphicsApi_Vulkan::getName()
@@ -38,14 +43,14 @@ namespace spring::graphics
 	void SpringGraphicsApi_Vulkan::init()
 	{
         createInstance();
+#ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         setupDebugMessenger();
+#endif
 	}
 
 	void SpringGraphicsApi_Vulkan::shutdown()
 	{
-        DestroyDebugUtilsMessengerEXT(m_instance, m_debugMessenger, nullptr);
-
-        vkDestroyInstance(m_instance, nullptr);
+        
 	}
 
 	void SpringGraphicsApi_Vulkan::createInstance()

@@ -29,6 +29,10 @@ target_precompile_headers(SpringGraphics
 		src/pch.hpp
 )
 
+target_compile_definitions(SpringGraphics PRIVATE
+	SPRING_BUILD_VK
+)
+
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)

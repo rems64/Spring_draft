@@ -1,5 +1,7 @@
 #pragma once
+#ifndef NDEBUG
 #define SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
+#endif
 
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
 #include <Spring/SpringGraphics/SpringGraphicsDevice_Vulkan.hpp>
@@ -8,6 +10,7 @@ namespace spring::graphics
 {
 	class SpringGraphicsApi_Vulkan : public SpringGraphicsApi
 	{
+		friend GraphicsDevice_Vulkan; // Mainly for compatibility with validation layers needed to be enabled in device prior v1.3
 	public:
 		SpringGraphicsApi_Vulkan();
 		~SpringGraphicsApi_Vulkan();
@@ -21,10 +24,11 @@ namespace spring::graphics
 		void createInstance();
 		inline const VkInstance* getInstance() { return &m_instance; };
 		virtual GraphicsDevice* createDevice(GraphicsDeviceDesc desc) override;
+		void registerSurface(Scope<GraphicsSurface>& surface) { m_surfaces.emplace_back(std::move(surface)); };
 	private:
 		VkInstance m_instance;
 		std::vector<Scope<GraphicsDevice_Vulkan>> m_devices;
-
+		std::vector<Scope<GraphicsSurface>> m_surfaces;
 		std::vector<const char*> m_requiredExtensions;
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
 		void setupDebugMessenger();
@@ -37,4 +41,5 @@ namespace spring::graphics
 		VkDebugUtilsMessengerEXT m_debugMessenger;
 #endif
 	};
+
 }

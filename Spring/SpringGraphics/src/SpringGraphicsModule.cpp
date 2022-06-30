@@ -21,7 +21,7 @@ namespace spring::graphics
         {
             win.~unique_ptr();
         }
-        m_api->shutdown();
+        m_api->~SpringGraphicsApi();
         SpringWindow::shutdown();
     }
 

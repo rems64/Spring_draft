@@ -14,6 +14,8 @@ using spWinHandle = GLFWwindow*;
 
 namespace spring::graphics
 {
+	class SpringGraphicsApi;
+	struct GraphicsSurface;
 	struct WindowDesc
 	{
 		std::string title = "Spring window";
@@ -45,6 +47,7 @@ namespace spring::graphics
 		static void shutdown();
 		static void initialize();
 
+		virtual GraphicsSurface* getSurface(SpringGraphicsApi* api) = 0;
 #ifdef SPRING_BUILD_VK
 		static std::vector<const char*> getRequiredExtensions() { return {}; };
 #endif

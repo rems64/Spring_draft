@@ -6,6 +6,7 @@
 #include <memory>
 #include <deque>
 #include <mutex>
+#include <set>
 #ifdef _WIN32
 #define NOMINMAX
 #include <Windows.h>
@@ -13,7 +14,7 @@
 #endif
 
 
-#define SPRING_BUILD_VK
+//#define SPRING_BUILD_VK
 #define SPRING_BUILD_GL
 
 #ifdef SPRING_BUILD_VK
