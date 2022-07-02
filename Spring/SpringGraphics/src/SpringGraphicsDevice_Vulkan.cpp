@@ -178,7 +178,7 @@ namespace spring::graphics
 		{
 			VkPhysicalDeviceProperties properties;
 			vkGetPhysicalDeviceProperties(pDevice, &properties);
-			if (properties.deviceType != VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU)
+			if (!(properties.deviceType == VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU || properties.deviceType == VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU))
 				continue;
 
 			uint32_t extCount;
@@ -203,6 +203,8 @@ namespace spring::graphics
 			//msaaSamples = getMaxUsableSampleCount();
 			return true;
 		}
+		if (!m_physicalDevice)
+			SPRING_ERROR("Can't find suitable physical device!");
 		return false;
 	}
 
