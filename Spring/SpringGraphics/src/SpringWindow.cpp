@@ -15,14 +15,14 @@ namespace spring::graphics
 		m_desc.title = title;
 	}
 
-	SpringWindow* SpringWindow::build(WindowDesc desc)
+	Ref<SpringWindow> SpringWindow::build(WindowDesc desc)
 	{
-		SpringWindow* window;
+		Ref<SpringWindow> window;
 
 #ifdef SE_WINDOWS
-		window = new SpringWindow_Glfw(desc); // BAAAAD
+		window = makeRef<SpringWindow_Glfw>(desc); // BAAAAD
 #elif GLFW3
-		window = makeDesc<SpringWindow_Glfw>(desc);
+		window = makeRef<SpringWindow_Glfw>(desc);
 #else
 		spring::core::error("Can't create a window, no supported backend");
 		return nullptr;
@@ -35,6 +35,7 @@ namespace spring::graphics
 
 	void SpringWindow::initialize()
 	{
+		SP_PROFILE_FUNCTION();
 #ifdef SE_WINDOWS
 		if (!glfwInit())
 			spdlog::error("Failed to initialize glfw");

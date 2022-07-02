@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Spring/SpringCore/SpringProfiler.hpp> // Temp solution
 
 template <typename T>
 using Scope = std::unique_ptr<T>;
@@ -19,3 +20,5 @@ constexpr Ref<T> makeRef(Args&& ... args)
 {
 	return std::make_shared<T>(std::forward<Args>(args)...);
 }
+
+#define SPRING_ERROR(text) {spdlog::error(text);throw std::runtime_error(text);}

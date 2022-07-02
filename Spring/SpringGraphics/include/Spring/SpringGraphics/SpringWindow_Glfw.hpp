@@ -23,8 +23,6 @@ namespace spring::graphics
 		virtual bool shouldClose() override;
 
 		virtual void close() override;
-
-		virtual GraphicsSurface* getSurface(SpringGraphicsApi* api) override;
 #ifdef SPRING_BUILD_VK
 		static std::vector<const char*> getRequiredExtensions();
 	private:

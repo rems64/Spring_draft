@@ -18,7 +18,7 @@
 #define SPRING_BUILD_GL
 
 #ifdef SPRING_BUILD_VK
-#define VULKAN_HPP_NO_CONSTRUCTORS
+//#define VULKAN_HPP_NO_CONSTRUCTORS
 //#include <vulkan/vulkan.hpp>
 #include <vulkan/vulkan.h>
 #endif

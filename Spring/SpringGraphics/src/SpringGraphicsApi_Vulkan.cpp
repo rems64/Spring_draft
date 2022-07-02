@@ -1,4 +1,5 @@
-#include <Spring/SpringGraphics/SpringGraphicsApi_Vulkan.hpp>
+//#include <Spring/SpringGraphics/SpringGraphicsApi_Vulkan.hpp>
+#include "SpringGraphicsApi_Vulkan.hpp"
 
 #include <Spring/SpringCore/SpringCore.hpp>
 
@@ -9,8 +10,9 @@ namespace spring::graphics
 {
     SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan() : m_surfaces{}, m_devices{}
     {
-       std::vector<const char*> windowExtensions = SpringWindow_Glfw::getRequiredExtensions();
-       std::copy(windowExtensions.begin(), windowExtensions.end(), std::back_inserter(m_requiredExtensions));
+        SP_PROFILE_FUNCTION();
+        std::vector<const char*> windowExtensions = SpringWindow_Glfw::getRequiredExtensions();
+        std::copy(windowExtensions.begin(), windowExtensions.end(), std::back_inserter(m_requiredExtensions));
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         m_requiredExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
         m_validationLayers = { "VK_LAYER_KHRONOS_validation" };
@@ -42,6 +44,8 @@ namespace spring::graphics
 
 	void SpringGraphicsApi_Vulkan::init()
 	{
+        SP_PROFILE_FUNCTION();
+
         createInstance();
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         setupDebugMessenger();
@@ -55,6 +59,8 @@ namespace spring::graphics
 
 	void SpringGraphicsApi_Vulkan::createInstance()
 	{
+        SP_PROFILE_FUNCTION();
+
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         if (!checkValidationLayerSupport()) {
             throw std::runtime_error("validation layers requested, but not available!");
@@ -128,6 +134,29 @@ namespace spring::graphics
         }
 	}
 
+    GraphicsSurface* SpringGraphicsApi_Vulkan::getSurface(SpringWindow* window)
+    {
+        Scope<GraphicsSurface> surface = makeScope<GraphicsSurface>();
+
+        Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
+        VkResult res = glfwCreateWindowSurface(m_instance, window->getHandle(), nullptr, &surface_internal->surface);
+        if (res != VK_SUCCESS)
+        {
+            const char* description;
+            int code = glfwGetError(&description);
+
+            if (description)
+                spdlog::error("code: {}, {}", code, description);
+            spdlog::error("Error while creating window surface! ({})", res);
+        }
+        surface_internal->relatedInstance = m_instance;
+        surface->internal_state = surface_internal;
+        GraphicsSurface* surfacePtr = surface.get();
+        registerSurface(surface);
+
+        return surfacePtr;
+    }
+
     GraphicsDevice* SpringGraphicsApi_Vulkan::createDevice(GraphicsDeviceDesc desc)
 	{
         Scope<GraphicsDevice_Vulkan> device = makeScope<GraphicsDevice_Vulkan>(desc, this);
@@ -169,6 +198,8 @@ namespace spring::graphics
     }
 
     void SpringGraphicsApi_Vulkan::setupDebugMessenger() {
+        SP_PROFILE_FUNCTION();
+
         VkDebugUtilsMessengerCreateInfoEXT createInfo;
         populateDebugMessengerCreateInfo(createInfo);
 

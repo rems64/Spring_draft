@@ -48,6 +48,7 @@ namespace spring::core
 
     int SpringApplication::mainLoop()
     {
+        SP_PROFILE_FUNCTION();
         bool close = false;
         while (!close)
         {

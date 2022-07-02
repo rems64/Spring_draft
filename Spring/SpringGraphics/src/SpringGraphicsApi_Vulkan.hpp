@@ -4,10 +4,21 @@
 #endif
 
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
-#include <Spring/SpringGraphics/SpringGraphicsDevice_Vulkan.hpp>
+#include "SpringGraphicsDevice_Vulkan.hpp"
 
 namespace spring::graphics
 {
+	struct GraphicsSurface_Vulkan
+	{
+		VkSurfaceKHR surface = VK_NULL_HANDLE;
+		VkInstance relatedInstance;
+
+		~GraphicsSurface_Vulkan()
+		{
+			vkDestroySurfaceKHR(relatedInstance, surface, nullptr);
+		}
+	};
+
 	class SpringGraphicsApi_Vulkan : public SpringGraphicsApi
 	{
 		friend GraphicsDevice_Vulkan; // Mainly for compatibility with validation layers needed to be enabled in device prior v1.3
@@ -21,6 +32,7 @@ namespace spring::graphics
 		virtual void init();
 		virtual void shutdown();
 
+		virtual GraphicsSurface* getSurface(SpringWindow* window) override;
 		void createInstance();
 		inline const VkInstance* getInstance() { return &m_instance; };
 		virtual GraphicsDevice* createDevice(GraphicsDeviceDesc desc) override;

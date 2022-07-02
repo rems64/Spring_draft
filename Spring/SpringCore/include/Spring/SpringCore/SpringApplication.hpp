@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Spring/SpringCore/SpringModule.hpp>
+#include <Spring/SpringCore/SpringCommon.hpp>
 
 namespace spring::core
 {
@@ -17,10 +18,10 @@ namespace spring::core
         virtual ~SpringApplication() = default;
 
         template<typename T>
-        T* registerModule()
+        Ref<T> registerModule()
         {
-            T* module = new T(this);
-            m_modules.push_back(std::unique_ptr<T>(module));
+            Ref<T> module = makeRef<T>(this);
+            m_modules.push_back(module);
             return module;
         }
         SpringModule* getModule(SpringModuleTypes type);
@@ -33,6 +34,6 @@ namespace spring::core
         static SpringApplication* m_app;
         HINSTANCE m_instance;
         HWND m_console;
-        std::vector<std::unique_ptr<SpringModule>> m_modules;
+        std::vector<Ref<SpringModule>> m_modules;
     };
 }

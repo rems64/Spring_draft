@@ -43,11 +43,10 @@ namespace spring::graphics
 
 		void setCloseCallback(void (*func)(SpringWindow*)) { m_closeCallback = func; };
 
-		static SpringWindow* build(WindowDesc desc);
+		static Ref<SpringWindow> build(WindowDesc desc);
 		static void shutdown();
 		static void initialize();
 
-		virtual GraphicsSurface* getSurface(SpringGraphicsApi* api) = 0;
 #ifdef SPRING_BUILD_VK
 		static std::vector<const char*> getRequiredExtensions() { return {}; };
 #endif

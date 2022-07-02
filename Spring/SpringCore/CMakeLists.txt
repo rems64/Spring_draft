@@ -9,7 +9,7 @@ set(SRCS
 	
 	"src/SpringMisc.cpp"
 	"src/SpringApplication.cpp"
- "src/SpringModule.cpp")
+ "src/SpringModule.cpp" "src/SpringProfiler.cpp")
 
 
 add_library(SpringCore STATIC ${SRCS})

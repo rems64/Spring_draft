@@ -10,6 +10,7 @@ namespace spring::graphics
 {
     SpringGraphicsModule::SpringGraphicsModule(core::SpringApplication* app) : SpringModule(app)
     {
+        SP_PROFILE_FUNCTION();
         SpringWindow::initialize();
         m_api = SpringGraphicsApi::build();
         m_api->init();
@@ -17,9 +18,10 @@ namespace spring::graphics
 
     SpringGraphicsModule::~SpringGraphicsModule()
     {
+        SP_PROFILE_FUNCTION();
         for (auto& win : m_windows)
         {
-            win.~unique_ptr();
+            win.~shared_ptr();
         }
         m_api->~SpringGraphicsApi();
         SpringWindow::shutdown();
@@ -27,7 +29,11 @@ namespace spring::graphics
 
     void SpringGraphicsModule::update()
     {
-        glfwPollEvents();
+        SP_PROFILE_FUNCTION();
+        {
+            SP_PROFILE_SCOPE("glfwPollEvents");
+            glfwPollEvents();
+        }
         bool deletion=false;
         for (auto& window : m_windows)
         {
@@ -49,12 +55,14 @@ namespace spring::graphics
 
     void closeCallback(SpringWindow* win)
     {
+        SP_PROFILE_FUNCTION();
         spdlog::info("Closing!");
     }
 
-    SpringWindow* SpringGraphicsModule::createWindow(WindowDesc desc)
+    Ref<SpringWindow> SpringGraphicsModule::createWindow(WindowDesc desc)
     {
-        SpringWindow* window = SpringWindow::build(desc);
+        SP_PROFILE_FUNCTION();
+        Ref<SpringWindow> window = SpringWindow::build(desc);
         window->setCloseCallback(closeCallback);
         m_windows.emplace_back(window);
 

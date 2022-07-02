@@ -15,8 +15,13 @@ namespace spring::graphics
 		VkInstance instance = VK_NULL_HANDLE;
 		VkDevice device = VK_NULL_HANDLE;
 
+		uint64_t framecount;
+
 		std::deque<std::pair<VkSurfaceKHR, uint64_t>> surfaces;
 		std::deque<std::pair<VkSwapchainKHR, uint64_t>> swapchains;
+		std::deque < std::pair<VkImageView, uint64_t>> imageviews;
+		std::deque<std::pair<VkRenderPass, uint64_t>> renderpasses;
+		std::deque<std::pair<VkFramebuffer, uint64_t>> framebuffers;
 
 		~AllocationHandler()
 		{
@@ -28,6 +33,33 @@ namespace spring::graphics
 		{
 			std::lock_guard<std::mutex> guard(updateLock);
 
+			while (!imageviews.empty())
+			{
+				if (imageviews.front().second + buffer >= frame)
+					break;
+				VkImageView imageview = imageviews.front().first;
+				imageviews.pop_front();
+				vkDestroyImageView(device, imageview, nullptr);
+			}
+
+			while (!framebuffers.empty())
+			{
+				if (framebuffers.front().second + buffer >= frame)
+					break;
+				VkFramebuffer framebuffer = framebuffers.front().first;
+				framebuffers.pop_front();
+				vkDestroyFramebuffer(device, framebuffer, nullptr);
+			}
+
+			while (!renderpasses.empty())
+			{
+				if (renderpasses.front().second + buffer >= frame)
+					break;
+				VkRenderPass renderpasse = renderpasses.front().first;
+				renderpasses.pop_front();
+				vkDestroyRenderPass(device, renderpasse, nullptr);
+			}
+			
 			while (!swapchains.empty())
 			{
 				if (swapchains.front().second + buffer >= frame) // Inserted in order, therefore all surfaces past this one can be discarded for now
@@ -48,6 +80,14 @@ namespace spring::graphics
 		}
 	};
 
+	struct FrameResource
+	{
+		VkFence fences[QueueTypes::Count] = {};
+
+		VkCommandPool initCommandPool = VK_NULL_HANDLE;
+		VkCommandBuffer initCommandBuffer = VK_NULL_HANDLE;
+	};
+
 	class GraphicsDevice_Vulkan : public GraphicsDevice
 	{
 	public:
@@ -56,7 +96,6 @@ namespace spring::graphics
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) override;
 
-		bool createSurface(VkSurfaceKHR* surface);
 		bool pickPhysicalDevice();
 		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 		bool createDevice();
@@ -65,6 +104,7 @@ namespace spring::graphics
 		AllocationHandler* getAllocationHandler() { return m_allocationHandler.get(); };
 
 	private:
+		static const uint32_t framesInFlight = 2;
 		SpringGraphicsApi_Vulkan* m_api;
 		VkInstance m_instance;
 
@@ -75,6 +115,7 @@ namespace spring::graphics
 		uint32_t transfertQueueFamily;
 		VkQueue m_graphicsQueue;
 		VkQueue m_presentQueue;
+		FrameResource m_frames[framesInFlight];
 
 		GraphicsDeviceDesc m_desc;
 		std::vector<const char*> m_deviceRequiredExtensions;

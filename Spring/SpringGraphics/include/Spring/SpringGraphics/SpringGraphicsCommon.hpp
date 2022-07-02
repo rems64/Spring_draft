@@ -11,13 +11,19 @@ namespace spring::graphics
 		inline bool isValid() { return internal_state.get() != nullptr; };
 	};
 
-
-	enum class QueueTypes
+	enum class Format
 	{
-		Graphics	= 1<<0,
-		Compute		= 1<<1,
-		Transfert	= 1<<2,
-		Protected	= 1<<3
+
+	};
+
+
+	enum QueueTypes
+	{
+		Graphics,
+		Compute,
+		Transfert,
+		Protected,
+		Count
 	};
 
 	struct QueueFamilyIndices {
@@ -30,6 +36,25 @@ namespace spring::graphics
 	{
 		uint32_t width;
 		uint32_t height;
+	};
+
+	struct RenderPassDesc
+	{
+		enum class Flags
+		{
+			EMPTY = 0,
+			ALLOW_UAV_WRITES = 1 << 0,
+		};
+		Flags flags = Flags::EMPTY;
+		//std::vector<RenderPassAttachment> attachments;
+	};
+
+	struct RenderPass : public GraphicsDeviceChild
+	{
+		size_t hash = 0;
+		RenderPassDesc desc;
+
+		constexpr const RenderPassDesc& GetDesc() const { return desc; }
 	};
 
 	struct SwapChainDesc
@@ -46,17 +71,4 @@ namespace spring::graphics
 
 		inline const SwapChainDesc& getDesc() const { return desc; };
 	};
-
-#ifdef SPRING_BUILD_VK
-	struct GraphicsSurface_Vulkan
-	{
-		VkSurfaceKHR surface = VK_NULL_HANDLE;
-		VkInstance relatedInstance;
-
-		~GraphicsSurface_Vulkan()
-		{
-			vkDestroySurfaceKHR(relatedInstance, surface, nullptr);
-		}
-	};
-#endif
 }

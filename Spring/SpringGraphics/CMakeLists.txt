@@ -29,8 +29,9 @@ target_precompile_headers(SpringGraphics
 		src/pch.hpp
 )
 
-target_compile_definitions(SpringGraphics PRIVATE
-	SPRING_BUILD_VK
+target_compile_definitions(SpringGraphics
+	PRIVATE	SPRING_BUILD_VK
+	PUBLIC SPRING_BUILD_VK
 )
 
 

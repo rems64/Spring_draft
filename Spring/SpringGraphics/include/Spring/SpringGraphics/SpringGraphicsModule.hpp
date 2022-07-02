@@ -18,7 +18,7 @@ namespace spring::graphics
         virtual bool canClose() override;
 
         // Windowing
-        SpringWindow* createWindow(WindowDesc desc);
+        Ref<SpringWindow> createWindow(WindowDesc desc);
         inline int32_t getWindowsCount() { return static_cast<uint32_t>(m_windows.size()); };
         inline bool anyWindow() { return m_windows.size()>0; };
         inline SpringGraphicsApi* getApi() { return m_api.get(); };
@@ -26,6 +26,6 @@ namespace spring::graphics
     protected:
         Scope<SpringGraphicsApi> m_api;
 
-        std::vector<Scope<SpringWindow>> m_windows;
+        std::vector<Ref<SpringWindow>> m_windows;
     };
 }
