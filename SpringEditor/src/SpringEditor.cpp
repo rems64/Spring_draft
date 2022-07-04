@@ -33,7 +33,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	
 	spdlog::info("Application exited successfully!");
 	spdlog::trace("");
-	spdlog::debug("Keeping the terminal open for you :)");
+#ifndef NDEBUG
+	spdlog::debug("Keeping the terminal open for you fellow debug user :)");
 	std::cin.get();
+#endif
 	return 0;
 }

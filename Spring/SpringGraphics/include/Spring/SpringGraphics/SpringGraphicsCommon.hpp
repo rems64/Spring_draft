@@ -71,4 +71,16 @@ namespace spring::graphics
 
 		inline const SwapChainDesc& getDesc() const { return desc; };
 	};
+
+	struct GraphicsPipelineDesc
+	{
+
+	};
+
+	struct GrqphicsPipeline : public GraphicsDeviceChild
+	{
+		GraphicsPipelineDesc desc;
+
+		inline const GraphicsPipelineDesc& getDesc() const { return desc; };
+	};
 }
