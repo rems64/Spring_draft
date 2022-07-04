@@ -15,6 +15,7 @@ namespace spring::graphics
         std::copy(windowExtensions.begin(), windowExtensions.end(), std::back_inserter(m_requiredExtensions));
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         m_requiredExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+        m_requiredExtensions.push_back("VK_EXT_validation_featuresq");
         m_validationLayers = { "VK_LAYER_KHRONOS_validation" };
 #endif
     }
@@ -88,12 +89,12 @@ namespace spring::graphics
         vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionsCount, nullptr);
         std::vector<VkExtensionProperties> availableExtensions(availableExtensionsCount);
         vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionsCount, availableExtensions.data());
-        for (auto reqExt : m_requiredExtensions)
+        for (std::vector<const char*>::iterator reqExt = m_requiredExtensions.begin(); reqExt != m_requiredExtensions.end();)
         {
             bool found = false;
             for (VkExtensionProperties ext : availableExtensions)
             {
-                if (strcmp(ext.extensionName, reqExt))
+                if (strcmp(ext.extensionName, *reqExt)==0)
                 {
                     found = true;
                     break;
@@ -101,12 +102,15 @@ namespace spring::graphics
             }
             if (!found)
             {
-                spdlog::info("Missing extension {} which is required by glfw", reqExt);
-                return;
+                spdlog::warn("Missing extension {} ", *reqExt);
+                reqExt = m_requiredExtensions.erase(reqExt);
+            }
+            else
+            {
+                reqExt++;
             }
         }
         //std::cout << "All required extensions where found" << std::endl;
-        spdlog::info("All required extensions where found");
 
         VkInstanceCreateInfo createInfo =
         {
@@ -114,8 +118,18 @@ namespace spring::graphics
             .pApplicationInfo = &appInfo,
             .enabledLayerCount = 0,
             .enabledExtensionCount = (uint32_t)m_requiredExtensions.size(),
-            .ppEnabledExtensionNames = m_requiredExtensions.data()
+            .ppEnabledExtensionNames = m_requiredExtensions.data(),
         };
+#ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
+        std::vector<VkValidationFeatureEnableEXT> validFeaturesEnabled = { VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT, VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT };
+        VkValidationFeaturesEXT validFeatures =
+        {
+            .sType = VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT,
+            .enabledValidationFeatureCount = (uint32_t)validFeaturesEnabled.size(),
+            .pEnabledValidationFeatures = validFeaturesEnabled.data()
+        };
+        createInfo.pNext = &validFeatures;
+#endif
 
         VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
 
@@ -170,7 +184,7 @@ namespace spring::graphics
         createInfo = {};
         createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
         createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-        createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
+        createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
         createInfo.pfnUserCallback = SpringGraphicsApi_Vulkan::debugCallback;
     }
 
