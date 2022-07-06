@@ -65,12 +65,19 @@ namespace spring::graphics
 		}
 	};
 
+	struct GraphicsPipeline_Vulkan
+	{
+		VkViewport viewport;
+		VkRect2D scissor;
+	};
+
 	struct SwapChainSupportDetails
 	{
 		VkSurfaceCapabilitiesKHR capabilities;
 		std::vector<VkSurfaceFormatKHR> formats;
 		std::vector<VkPresentModeKHR> presentModes;
 	};
+
 
 	GraphicsDevice_Vulkan::GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api) : GraphicsDevice(desc, api), m_deviceRequiredExtensions{}, m_desc(desc), m_allocationHandler(makeRef<AllocationHandler>())
 	{
@@ -632,6 +639,12 @@ namespace spring::graphics
 			}
 		}
 
+		return true;
+	}
+
+
+	bool GraphicsDevice_Vulkan::createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain)
+	{
 		return true;
 	}
 }

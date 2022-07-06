@@ -22,7 +22,7 @@ namespace spring::graphics
 		virtual ~GraphicsDevice() = default;
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) = 0;
-		virtual bool createGraphicsPipeline(GraphiscPipelineDesc& desc, GraphicsPipeline* swapchain) = 0;
+		virtual bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) = 0;
 	protected:
 		GraphicsDeviceDesc m_desc;
 	};

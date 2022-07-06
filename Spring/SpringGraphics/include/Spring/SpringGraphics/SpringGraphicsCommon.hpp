@@ -72,12 +72,46 @@ namespace spring::graphics
 		inline const SwapChainDesc& getDesc() const { return desc; };
 	};
 
-	struct GraphicsPipelineDesc
+	enum class PrimitiveTopology
 	{
-
+		Triangles,
+		LineList,
+		LineStrip,
+		Point
 	};
 
-	struct GrqphicsPipeline : public GraphicsDeviceChild
+	enum class FillMode
+	{
+		Fill,
+		Wireframe
+	};
+
+	enum class CullMode
+	{
+		None,
+		Front,
+		Back
+	};
+
+	struct RasterizerDesc
+	{
+		FillMode fill = FillMode::Fill;
+		CullMode cullmode = CullMode::None;
+		bool frontClockwise = true;
+		bool depthClampEnable = false;
+		bool discard = false;
+		float depthBias = 0.0f;
+		float depthBiasClamp = 0.0f;
+		float depthBiasSlopeFactor = 0.0f;
+	};
+
+	struct GraphicsPipelineDesc
+	{
+		PrimitiveTopology topology;
+		RasterizerDesc rasterizer;
+	};
+
+	struct GaphicsPipeline : public GraphicsDeviceChild
 	{
 		GraphicsPipelineDesc desc;
 

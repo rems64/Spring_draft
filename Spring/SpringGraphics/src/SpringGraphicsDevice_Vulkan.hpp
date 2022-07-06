@@ -95,6 +95,7 @@ namespace spring::graphics
 		virtual ~GraphicsDevice_Vulkan();
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) override;
+		virtual bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) override;
 
 		bool pickPhysicalDevice();
 		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
