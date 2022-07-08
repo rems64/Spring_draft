@@ -31,6 +31,23 @@ namespace spring::graphics
 		std::optional<uint32_t> presentFamily;
 	};
 
+	enum class ShaderStage
+	{
+		Vertex,
+		Fragment
+	};
+
+	struct ShaderDesc
+	{
+		ShaderStage stage;
+		const void* source;
+		size_t size;
+	};
+
+	struct Shader : public GraphicsDeviceChild
+	{
+		ShaderStage stage;
+	};
 
 	struct GraphicsSurface : public GraphicsDeviceChild
 	{

@@ -18,11 +18,12 @@ namespace spring::graphics
 	class GraphicsDevice
 	{
 	public:
-		GraphicsDevice(GraphicsDeviceDesc& desc, SpringGraphicsApi* api) : m_desc(desc) {};
+		GraphicsDevice(GraphicsDeviceDesc& desc, SpringGraphicsApi*) : m_desc(desc) {};
 		virtual ~GraphicsDevice() = default;
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) = 0;
 		virtual bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) = 0;
+		virtual bool createShader(ShaderDesc& desc, Shader* shader) = 0;
 	protected:
 		GraphicsDeviceDesc m_desc;
 	};

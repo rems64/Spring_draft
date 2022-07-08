@@ -18,6 +18,9 @@ SpringEditorApplication::SpringEditorApplication(spring::core::SpringApplication
 	res = m_mainDevice->createSwapChain(scdesc, m_swapchain.get());
 	if (!res)
 		SPRING_ERROR("Failed to create swap chain!");
+
+	//m_mainDevice->createShader(graphics::ShaderStage::Vertex, );
+	std::vector<char> shader = spring::core::readFile("shaders/test");
 }
 
 SpringEditorApplication::~SpringEditorApplication()

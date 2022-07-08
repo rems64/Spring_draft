@@ -15,7 +15,8 @@ namespace spring::graphics
         std::copy(windowExtensions.begin(), windowExtensions.end(), std::back_inserter(m_requiredExtensions));
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         m_requiredExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-        m_requiredExtensions.push_back("VK_EXT_validation_featuresq");
+        m_requiredExtensions.push_back(VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME);
+        //m_requiredExtensions.push_back("VK_EXT_validation_features");
         m_validationLayers = { "VK_LAYER_KHRONOS_validation" };
 #endif
     }
@@ -71,7 +72,7 @@ namespace spring::graphics
             .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,
             .pApplicationName = "SpringApplication",
             .applicationVersion = VK_MAKE_VERSION(1,0,0),
-            .pEngineName = "No engine",
+            .pEngineName = "SpringEngine",
             .engineVersion = VK_MAKE_VERSION(1,0,0),
             .apiVersion = VK_API_VERSION_1_3
         };
@@ -104,6 +105,7 @@ namespace spring::graphics
             {
                 spdlog::warn("Missing extension {} ", *reqExt);
                 reqExt = m_requiredExtensions.erase(reqExt);
+                //reqExt++;
             }
             else
             {

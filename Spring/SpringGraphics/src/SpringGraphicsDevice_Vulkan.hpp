@@ -15,8 +15,9 @@ namespace spring::graphics
 		VkInstance instance = VK_NULL_HANDLE;
 		VkDevice device = VK_NULL_HANDLE;
 
-		uint64_t framecount;
+		uint64_t framecount=0;
 
+		std::deque<std::pair<VkShaderModule, uint64_t>> shaderModules;
 		std::deque<std::pair<VkSurfaceKHR, uint64_t>> surfaces;
 		std::deque<std::pair<VkSwapchainKHR, uint64_t>> swapchains;
 		std::deque < std::pair<VkImageView, uint64_t>> imageviews;
@@ -32,6 +33,15 @@ namespace spring::graphics
 		void update(const uint64_t frame, const uint16_t buffer) // Frame is the current frame (or the frame when the deleting starts), buffer is a number of frames to keep alive from frame
 		{
 			std::lock_guard<std::mutex> guard(updateLock);
+
+			while (!shaderModules.empty())
+			{
+				if (shaderModules.front().second + buffer >= frame)
+					break;
+				VkShaderModule shaderModule = shaderModules.front().first;
+				shaderModules.pop_front();
+				vkDestroyShaderModule(device, shaderModule, nullptr);
+			}
 
 			while (!imageviews.empty())
 			{
@@ -96,6 +106,7 @@ namespace spring::graphics
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) override;
 		virtual bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) override;
+		virtual bool createShader(ShaderDesc& desc, Shader* shader) override;
 
 		bool pickPhysicalDevice();
 		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);

@@ -19,12 +19,13 @@
 
 using namespace spring;
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+//int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int nCmdShow)
 {
 	{
 		SP_START_PROFILING("Spring editor", "debugging.json");
 
-		SpringEditorApplication app({ .showConsole = true, .instance = hInstance});
+		SpringEditorApplication app({ .showConsole = nCmdShow==0, .instance = hInstance});
 
 		app.mainLoop();
 

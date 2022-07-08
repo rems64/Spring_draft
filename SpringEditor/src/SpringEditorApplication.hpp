@@ -9,7 +9,7 @@ class SpringEditorApplication : public spring::core::SpringApplication
 {
 public:
     SpringEditorApplication(spring::core::SpringApplicationInfos info);
-    virtual ~SpringEditorApplication() override;
+    virtual ~SpringEditorApplication();
 
 private:
     Ref<graphics::SpringGraphicsModule> m_graphicsModule;
@@ -17,4 +17,6 @@ private:
     graphics::GraphicsSurface* m_mainWindowSurface;
     graphics::GraphicsDevice* m_mainDevice;
     Ref<graphics::SwapChain> m_swapchain;
+    Ref<graphics::Shader> m_vertexShader;
+    Ref<graphics::Shader> m_fragmentShader;
 };

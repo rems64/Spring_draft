@@ -16,6 +16,12 @@ target_include_directories(SpringEditor
 		${CMAKE_CURRENT_SRC_DIR}/src
 )
 
+# Warnings as errors
+target_compile_options(SpringEditor PRIVATE
+  $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+
 #find_package(SpringCore 1.0 REQUIRED)
 target_link_libraries(SpringEditor SpringCore)
 target_link_libraries(SpringEditor SpringGraphics)

@@ -12,6 +12,22 @@
 
 namespace spring::graphics
 {
+	struct Shader_Vulkan
+	{
+		Ref<AllocationHandler> allocationHandler;
+
+		VkShaderModule shaderModule = VK_NULL_HANDLE;
+		VkPipelineShaderStageCreateInfo shaderStageInfo = {};
+
+		~Shader_Vulkan()
+		{
+			std::lock_guard<std::mutex> locker(allocationHandler->updateLock);
+
+			if (shaderModule != VK_NULL_HANDLE)
+				allocationHandler->shaderModules.push_back(std::make_pair(shaderModule, allocationHandler->framecount));
+		}
+	};
+
 	struct RenderPass_Vulkan
 	{
 		Ref<AllocationHandler> allocationHandler;
@@ -45,10 +61,10 @@ namespace spring::graphics
 		std::vector<VkImage> swapchainImages = {};
 		std::vector<VkImageView> swapchainImageViews = {};
 		std::vector<VkFramebuffer> swapchainFramebuffers = {};
-		VkFormat swapChainImageFormat;
-		VkExtent2D swapChainExtent;
+		VkFormat swapChainImageFormat = VkFormat::VK_FORMAT_B8G8R8A8_SRGB;
+		VkExtent2D swapChainExtent = {};
 
-		RenderPass renderpass;
+		RenderPass renderpass = {};
 
 		~SwapChain_Vulkan()
 		{
@@ -67,8 +83,8 @@ namespace spring::graphics
 
 	struct GraphicsPipeline_Vulkan
 	{
-		VkViewport viewport;
-		VkRect2D scissor;
+		VkViewport viewport = {};
+		VkRect2D scissor = {};
 	};
 
 	struct SwapChainSupportDetails
@@ -645,6 +661,45 @@ namespace spring::graphics
 
 	bool GraphicsDevice_Vulkan::createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain)
 	{
+		SP_PROFILE_FUNCTION();
+		return true;
+	}
+
+	bool GraphicsDevice_Vulkan::createShader(ShaderDesc& desc, Shader* shader)
+	{
+		SP_PROFILE_FUNCTION();
+		Ref<Shader_Vulkan> internal_state = makeRef<Shader_Vulkan>();
+		internal_state->allocationHandler = m_allocationHandler;
+		shader->internal_state = internal_state;
+		shader->stage = desc.stage;
+		
+		VkShaderModuleCreateInfo createInfo
+		{
+			.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+			.codeSize = desc.size,
+			.pCode = reinterpret_cast<const uint32_t*>(desc.source)
+		};
+
+		if (vkCreateShaderModule(m_device, &createInfo, nullptr, &internal_state->shaderModule) != VK_SUCCESS)
+			SPRING_ERROR("Failed to create shader module");
+
+		internal_state->shaderStageInfo =
+		{
+			.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
+			.module = internal_state->shaderModule,
+			.pName = "main"
+		};
+		switch (desc.stage)
+		{
+		case ShaderStage::Vertex:
+			internal_state->shaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+			break;
+		case ShaderStage::Fragment:
+			internal_state->shaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+			break;
+		default:
+			internal_state->shaderStageInfo.stage = VK_SHADER_STAGE_ALL;
+		}
 		return true;
 	}
 }

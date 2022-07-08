@@ -26,7 +26,7 @@ namespace spring::graphics
 	class SpringWindow
 	{
 	public:
-		SpringWindow(WindowDesc desc) : m_desc(desc) {};
+		SpringWindow(WindowDesc desc) : m_desc(desc), m_closeCallback(nullptr) {};
 		virtual ~SpringWindow() {};
 
 		virtual bool construct() = 0;

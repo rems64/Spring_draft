@@ -38,7 +38,7 @@ namespace spring::core
 			json << "\"ts\":" << result.start.count();
 			json << "}";
 
-			std::lock_guard lock(m_writingMutex);
+			std::lock_guard<std::mutex> lock(m_writingMutex);
 			if (m_started)
 			{
 				m_output << json.str();
