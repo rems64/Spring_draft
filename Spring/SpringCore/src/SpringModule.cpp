@@ -2,7 +2,7 @@
 
 namespace spring::core
 {
-	SpringModule::SpringModule(SpringApplication* app) : m_app(app), m_type(SpringModuleTypes::Core)
+	SpringModule::SpringModule(SpringApplication* app) : m_type(SpringModuleTypes::Core), m_app(app)
 	{
 	}
 

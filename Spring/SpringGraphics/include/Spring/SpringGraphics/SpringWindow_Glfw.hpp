@@ -15,8 +15,8 @@ namespace spring::graphics
 	class SpringWindow_Glfw : public SpringWindow
 	{
 	public:
-		SpringWindow_Glfw(WindowDesc desc);
-		~SpringWindow_Glfw();
+		explicit SpringWindow_Glfw(WindowDesc desc);
+		~SpringWindow_Glfw() override;
 
 		virtual bool construct() override;
 		virtual spWinHandle getHandle() override;

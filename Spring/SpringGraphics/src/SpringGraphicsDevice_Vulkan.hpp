@@ -101,7 +101,7 @@ namespace spring::graphics
 	class GraphicsDevice_Vulkan : public GraphicsDevice
 	{
 	public:
-		GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api);
+		GraphicsDevice_Vulkan(GraphicsDeviceDesc desc, SpringGraphicsApi* api);
 		~GraphicsDevice_Vulkan() override;
 
 		bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) override;

@@ -26,7 +26,7 @@ namespace spring::graphics
 	class SpringWindow
 	{
 	public:
-		SpringWindow(WindowDesc desc) : m_desc(desc), m_closeCallback(nullptr) {};
+		SpringWindow(const WindowDesc desc) : m_desc(desc), m_closeCallback(nullptr) {};
 		virtual ~SpringWindow() {};
 
 		virtual bool construct() = 0;
@@ -38,8 +38,8 @@ namespace spring::graphics
 		void setTitle(std::string title);
 		std::string getTitle();
 
-		inline uint32_t getWidth() { return m_desc.width; };
-		inline uint32_t getHeight() { return m_desc.height; };
+		uint32_t getWidth() const { return m_desc.width; };
+		uint32_t getHeight() const { return m_desc.height; };
 
 		void setCloseCallback(void (*func)(SpringWindow*)) { m_closeCallback = func; };
 

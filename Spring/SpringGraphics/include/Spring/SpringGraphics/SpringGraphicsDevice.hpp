@@ -18,7 +18,7 @@ namespace spring::graphics
 	class GraphicsDevice
 	{
 	public:
-		GraphicsDevice(GraphicsDeviceDesc& desc, SpringGraphicsApi*) : m_desc(desc) {};
+		GraphicsDevice(GraphicsDeviceDesc desc, SpringGraphicsApi*) : m_desc(std::move(desc)) {}
 		virtual ~GraphicsDevice() = default;
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) = 0;

@@ -18,8 +18,8 @@ namespace spring::graphics
 	class SpringGraphicsApi
 	{
 	public:
-		SpringGraphicsApi() {};
-		virtual ~SpringGraphicsApi() {};
+		SpringGraphicsApi() = default;
+		virtual ~SpringGraphicsApi() = default;
 
 		virtual const char* getName() = 0;
 		virtual GraphicsApiProperties getProperties() = 0;

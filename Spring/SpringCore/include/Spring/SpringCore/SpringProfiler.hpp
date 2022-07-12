@@ -25,6 +25,7 @@ namespace spring::core
 
 		void writeProfile(const ProfileResult& result)
 		{
+			std::lock_guard lock(m_writingMutex);
 			std::basic_stringstream<char> json;
 
 			json << std::setprecision(3) << std::fixed;
@@ -38,7 +39,6 @@ namespace spring::core
 			json << "\"ts\":" << result.start.count();
 			json << "}";
 
-			std::lock_guard<std::mutex> lock(m_writingMutex);
 			if (m_started)
 			{
 				m_output << json.str();

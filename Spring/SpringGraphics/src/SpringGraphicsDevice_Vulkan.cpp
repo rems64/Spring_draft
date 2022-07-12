@@ -26,7 +26,7 @@ namespace spring::graphics
 			std::lock_guard<std::mutex> locker(allocationHandler->updateLock);
 
 			if (shaderModule != VK_NULL_HANDLE)
-				allocationHandler->shaderModules.push_back(std::make_pair(shaderModule, allocationHandler->framecount));
+				allocationHandler->shaderModules.emplace_back(shaderModule, allocationHandler->framecount);
 		}
 	};
 
@@ -45,10 +45,10 @@ namespace spring::graphics
 			std::lock_guard locker(allocationHandler->updateLock);
 			uint64_t framecount = allocationHandler->framecount;
 			if (renderpass)
-				allocationHandler->renderpasses.push_back(std::make_pair(renderpass, framecount));
+				allocationHandler->renderpasses.emplace_back(renderpass, framecount);
 
 			if (framebuffer)
-				allocationHandler->framebuffers.push_back(std::make_pair(framebuffer, framecount));
+				allocationHandler->framebuffers.emplace_back(framebuffer, framecount);
 		}
 	};
 
@@ -77,7 +77,7 @@ namespace spring::graphics
 			}
 			for (auto& framebuffer : swapchainFramebuffers)
 			{
-				allocationHandler->framebuffers.push_back(std::make_pair(framebuffer, framecount));
+				allocationHandler->framebuffers.emplace_back(framebuffer, framecount);
 			}
 			allocationHandler->swapchains.emplace_back(swapchain, framecount);
 		}
@@ -97,8 +97,8 @@ namespace spring::graphics
 	};
 
 
-	GraphicsDevice_Vulkan::GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api) :
-		GraphicsDevice(desc, api), m_device(nullptr),
+	GraphicsDevice_Vulkan::GraphicsDevice_Vulkan(GraphicsDeviceDesc desc, SpringGraphicsApi* api) :
+		GraphicsDevice(std::move(desc), api), m_device(nullptr),
 		m_allocationHandler(makeRef<AllocationHandler>())
 	{
 		SP_PROFILE_FUNCTION();
@@ -749,6 +749,8 @@ namespace spring::graphics
 		case ShaderStage::Fragment:
 			internal_state->shaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
+		case ShaderStage::None:
+			return false;
 		}
 		return true;
 	}

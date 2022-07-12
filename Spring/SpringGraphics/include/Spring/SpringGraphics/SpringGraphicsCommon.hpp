@@ -8,7 +8,7 @@ namespace spring::graphics
 	struct GraphicsDeviceChild
 	{
 		Ref<void> internal_state;
-		inline bool isValid() { return internal_state.get() != nullptr; };
+		[[nodiscard]] bool isValid() const { return internal_state.get() != nullptr; }
 	};
 
 	enum class Format
@@ -34,7 +34,8 @@ namespace spring::graphics
 	enum class ShaderStage
 	{
 		Vertex,
-		Fragment
+		Fragment,
+		None
 	};
 
 	struct ShaderDesc
@@ -46,23 +47,23 @@ namespace spring::graphics
 
 	struct Shader : public GraphicsDeviceChild
 	{
-		ShaderStage stage;
+		ShaderStage stage = ShaderStage::None;
 	};
 
 	struct GraphicsSurface : public GraphicsDeviceChild
 	{
-		uint32_t width;
-		uint32_t height;
+		uint32_t width = 0;
+		uint32_t height = 0;
 	};
 
 	struct RenderPassDesc
 	{
 		enum class Flags
 		{
-			EMPTY = 0,
-			ALLOW_UAV_WRITES = 1 << 0,
+			Empty = 0,
+			Allow_Uav_Writes = 1 << 0,
 		};
-		Flags flags = Flags::EMPTY;
+		Flags flags = Flags::Empty;
 		//std::vector<RenderPassAttachment> attachments;
 	};
 
@@ -71,7 +72,7 @@ namespace spring::graphics
 		size_t hash = 0;
 		RenderPassDesc desc;
 
-		constexpr const RenderPassDesc& GetDesc() const { return desc; }
+		[[nodiscard]] constexpr const RenderPassDesc& GetDesc() const { return desc; }
 	};
 
 	struct SwapChainDesc
@@ -86,7 +87,7 @@ namespace spring::graphics
 	{
 		SwapChainDesc desc;
 
-		inline const SwapChainDesc& getDesc() const { return desc; };
+		[[nodiscard]] const SwapChainDesc& getDesc() const { return desc; }
 	};
 
 	enum class PrimitiveTopology
@@ -94,7 +95,8 @@ namespace spring::graphics
 		Triangles,
 		LineList,
 		LineStrip,
-		Point
+		Point,
+		None
 	};
 
 	enum class FillMode
@@ -124,14 +126,14 @@ namespace spring::graphics
 
 	struct GraphicsPipelineDesc
 	{
-		PrimitiveTopology topology;
-		RasterizerDesc rasterizer;
+		PrimitiveTopology topology = PrimitiveTopology::None;
+		RasterizerDesc rasterizer = {};
 	};
 
 	struct GaphicsPipeline : public GraphicsDeviceChild
 	{
 		GraphicsPipelineDesc desc;
 
-		inline const GraphicsPipelineDesc& getDesc() const { return desc; };
+		[[nodiscard]] const GraphicsPipelineDesc& getDesc() const { return desc; }
 	};
 }

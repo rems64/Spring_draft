@@ -2,8 +2,7 @@
 
 #include <Spring/SpringCore/SpringProfiler.hpp>
 
-#include <Spring/SpringGraphics/SpringGraphicsCommon.hpp>
-#include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
+
 
 #ifdef SPRING_BUILD_VK
 //#include <Spring/SpringGraphics/SpringGraphicsApi_Vulkan.hpp>

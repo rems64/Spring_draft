@@ -20,7 +20,7 @@ namespace spring::core
             spring::core::error("Failed to open file!");
             throw std::runtime_error("failed to open file!");
         }
-        size_t fileSize = (size_t)file.tellg();
+        const size_t fileSize = (size_t)file.tellg();
         std::vector<char> buffer(fileSize);
         file.seekg(0);
         file.read(buffer.data(), fileSize);

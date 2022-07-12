@@ -4,17 +4,17 @@
 
 namespace spring::graphics
 {
-	constexpr const char* getPhysicalDeviceTypeName(VkPhysicalDeviceType type)
+	constexpr const char* getPhysicalDeviceTypeName(const VkPhysicalDeviceType type)
 	{
-		switch (type)
+		switch (type)  // NOLINT(clang-diagnostic-switch-enum)
 		{
-		case VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_CPU:
+		case VK_PHYSICAL_DEVICE_TYPE_CPU:
 			return "CPU";
-		case VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU:
+		case VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU:
 			return "Discrete GPU";
-		case VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU:
+		case VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU:
 			return "Integrated GPU";
-		case VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU:
+		case VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU:
 			return "Virtual GPU";
 		default:
 			return "Other";
