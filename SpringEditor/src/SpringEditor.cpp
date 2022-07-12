@@ -1,31 +1,26 @@
 #include <Spring/SpringCore/SpringCore.hpp>
-#include <Spring/SpringGraphics/SpringGraphics.hpp>
 
 #include <cstdio>
 #include <memory>
 #include <iostream>
 #include <Windows.h>
-#include <chrono>
 #include "SpringEditorApplication.hpp"
 
 #include <spdlog/spdlog.h>
 
 
 // FOR TESTING ONLY
-#include <vulkan/vulkan.h>
-
-
 #include <Spring/SpringCore/SpringProfiler.hpp>
 
 using namespace spring;
 
 //int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int nCmdShow)
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ PWSTR, _In_ const int)
 {
 	{
 		SP_START_PROFILING("Spring editor", "debugging.json");
 
-		SpringEditorApplication app({ .showConsole = nCmdShow==0, .instance = hInstance});
+		SpringEditorApplication app({ .showConsole = true, .instance = hInstance});
 
 		app.mainLoop();
 

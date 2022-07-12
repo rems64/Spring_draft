@@ -1,5 +1,7 @@
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 
+#include <Spring/SpringCore/SpringProfiler.hpp>
+
 #include <Spring/SpringGraphics/SpringGraphicsCommon.hpp>
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
 

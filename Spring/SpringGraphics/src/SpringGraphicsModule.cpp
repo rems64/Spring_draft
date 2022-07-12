@@ -3,6 +3,8 @@
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
 
+#include <Spring/SpringCore/SpringProfiler.hpp>
+
 #include <spdlog/spdlog.h>
 #include <GLFW/glfw3.h>
 
@@ -69,4 +71,18 @@ namespace spring::graphics
         return window;
     }
 
+    uint32_t SpringGraphicsModule::getWindowsCount() const
+    {
+	    return static_cast<uint32_t>(m_windows.size());
+    }
+
+    bool SpringGraphicsModule::anyWindow() const
+    {
+	    return !m_windows.empty();
+    }
+
+    SpringGraphicsApi* SpringGraphicsModule::getApi() const
+    {
+	    return m_api.get();
+    }
 }

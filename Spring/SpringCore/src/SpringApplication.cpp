@@ -33,9 +33,10 @@ namespace spring::core
         spdlog::set_level(spdlog::level::trace);
         //spdlog::default_logger()->flush_on(spdlog::level::debug);
     }
-    SpringModule* SpringApplication::getModule(SpringModuleTypes type)
+
+    SpringModule* SpringApplication::getModule(const SpringModuleTypes type) const
     {
-        for (auto& module : m_modules)
+        for (const auto& module : m_modules)
         {
             if (module->getType() == type)
             {
@@ -46,6 +47,16 @@ namespace spring::core
         return nullptr;
     }
 
+    HINSTANCE SpringApplication::getNativeInstance() const
+    {
+	    return m_instance;
+    }
+
+    SpringApplication* SpringApplication::get()
+    {
+	    return m_app;
+    }
+
     int SpringApplication::mainLoop()
     {
         SP_PROFILE_FUNCTION();
@@ -53,7 +64,7 @@ namespace spring::core
         while (!close)
         {
             close = true;
-            for (auto& module : m_modules)
+            for (const auto& module : m_modules)
             {
                 module->update();
                 close &= module->canClose();

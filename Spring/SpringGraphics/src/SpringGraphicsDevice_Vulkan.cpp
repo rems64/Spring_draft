@@ -1,6 +1,8 @@
 //#include <Spring/SpringGraphics/SpringGraphicsDevice_Vulkan.hpp>
 #include "SpringGraphicsDevice_Vulkan.hpp"
 
+#include <Spring/SpringCore/SpringProfiler.hpp>
+
 #include <Spring/SpringGraphics/SpringGraphicsCommon.hpp>
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
 //#include <Spring/SpringGraphics/SpringGraphicsApi_Vulkan.hpp>
@@ -61,7 +63,7 @@ namespace spring::graphics
 		std::vector<VkImage> swapchainImages = {};
 		std::vector<VkImageView> swapchainImageViews = {};
 		std::vector<VkFramebuffer> swapchainFramebuffers = {};
-		VkFormat swapChainImageFormat = VkFormat::VK_FORMAT_B8G8R8A8_SRGB;
+		VkFormat swapChainImageFormat = VK_FORMAT_B8G8R8A8_SRGB;
 		VkExtent2D swapChainExtent = {};
 
 		RenderPass renderpass = {};
@@ -71,13 +73,13 @@ namespace spring::graphics
 			uint64_t framecount = allocationHandler->framecount;
 			for (auto& imageview : swapchainImageViews)
 			{
-				allocationHandler->imageviews.push_back(std::make_pair(imageview, framecount));
+				allocationHandler->imageviews.emplace_back(imageview, framecount);
 			}
 			for (auto& framebuffer : swapchainFramebuffers)
 			{
 				allocationHandler->framebuffers.push_back(std::make_pair(framebuffer, framecount));
 			}
-			allocationHandler->swapchains.push_back(std::make_pair(swapchain, framecount));
+			allocationHandler->swapchains.emplace_back(swapchain, framecount);
 		}
 	};
 
@@ -95,17 +97,19 @@ namespace spring::graphics
 	};
 
 
-	GraphicsDevice_Vulkan::GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api) : GraphicsDevice(desc, api), m_deviceRequiredExtensions{}, m_desc(desc), m_allocationHandler(makeRef<AllocationHandler>())
+	GraphicsDevice_Vulkan::GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api) :
+		GraphicsDevice(desc, api), m_device(nullptr),
+		m_allocationHandler(makeRef<AllocationHandler>())
 	{
 		SP_PROFILE_FUNCTION();
 
-		m_api = static_cast<SpringGraphicsApi_Vulkan*>(api);
+		m_api = dynamic_cast<SpringGraphicsApi_Vulkan*>(api);
 		m_instance = *m_api->getInstance();
 		m_allocationHandler->instance = m_instance;
 
 		if (m_desc.supportPresent)
 		{
-			if (m_desc.surfaces.size()<=0)
+			if (m_desc.surfaces.empty())
 			{
 				spdlog::error("No surface provided to device while it should support presentation!");
 				throw std::runtime_error("Invalid surface");
@@ -118,18 +122,19 @@ namespace spring::graphics
 		}
 		createDevice();
 		m_allocationHandler->device = m_device;
-		for (uint32_t frame=0; frame<framesInFlight; frame++)
+		for (uint32_t frame = 0; frame < framesInFlight; frame++)
 		{
-			for (uint32_t queueType = 0; queueType < QueueTypes::Count; queueType++)
+			for (uint32_t queueType = 0; queueType < Count; queueType++)
 			{
 				VkFenceCreateInfo fenceCreateInfo =
 				{
 					.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
 					.flags = VK_FENCE_CREATE_SIGNALED_BIT // For preventing waiting for a fence which never signals
 				};
-				if (vkCreateFence(m_device, &fenceCreateInfo, nullptr, &m_frames[frame].fences[queueType]) != VK_SUCCESS)
+				if (vkCreateFence(m_device, &fenceCreateInfo, nullptr, &m_frames[frame].fences[queueType]) !=
+					VK_SUCCESS)
 				{
-					SPRING_ERROR("Failed to create fence!");
+					SPRING_ERROR("Failed to create fence!")
 				}
 			}
 
@@ -145,7 +150,7 @@ namespace spring::graphics
 
 			if (vkCreateCommandPool(m_device, &poolInfo, nullptr, &m_frames[frame].initCommandPool) != VK_SUCCESS)
 			{
-				SPRING_ERROR("failed to create command pool!");
+				SPRING_ERROR("failed to create command pool!")
 			}
 
 			VkCommandBufferAllocateInfo allocInfo
@@ -157,7 +162,7 @@ namespace spring::graphics
 			};
 
 			if (vkAllocateCommandBuffers(m_device, &allocInfo, &m_frames[frame].initCommandBuffer) != VK_SUCCESS)
-				SPRING_ERROR("Failed to allocate command buffer");
+				SPRING_ERROR("Failed to allocate command buffer")
 
 			VkCommandBufferBeginInfo beginInfo
 			{
@@ -166,7 +171,7 @@ namespace spring::graphics
 			};
 
 			if (vkBeginCommandBuffer(m_frames[frame].initCommandBuffer, &beginInfo) != VK_SUCCESS)
-				SPRING_ERROR("Failed to begin command buffer!");
+				SPRING_ERROR("Failed to begin command buffer!")
 		}
 	}
 
@@ -176,7 +181,7 @@ namespace spring::graphics
 
 		for (auto& frame : m_frames)
 		{
-			for (int queue = 0; queue < QueueTypes::Count; ++queue)
+			for (int queue = 0; queue < Count; ++queue)
 			{
 				vkDestroyFence(m_device, frame.fences[queue], nullptr);
 			}
@@ -196,12 +201,14 @@ namespace spring::graphics
 		vkEnumeratePhysicalDevices(m_instance, &physicalDevicesCount, nullptr);
 		std::vector<VkPhysicalDevice> physicalDevices(physicalDevicesCount);
 		vkEnumeratePhysicalDevices(m_instance, &physicalDevicesCount, physicalDevices.data());
-		spdlog::info("There {} {} physical device{} available:", physicalDevicesCount>1?"are":"is", physicalDevicesCount, physicalDevicesCount>1?"s":"");
+		spdlog::info("There {} {} physical device{} available:", physicalDevicesCount > 1 ? "are" : "is",
+		             physicalDevicesCount, physicalDevicesCount > 1 ? "s" : "");
 		for (VkPhysicalDevice& pDevice : physicalDevices)
 		{
 			VkPhysicalDeviceProperties properties;
 			vkGetPhysicalDeviceProperties(pDevice, &properties);
-			if (!(properties.deviceType == VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU || properties.deviceType == VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU))
+			if (!(properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU || properties.deviceType ==
+				VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU))
 				continue;
 
 			uint32_t extCount;
@@ -215,19 +222,21 @@ namespace spring::graphics
 			std::vector<SwapChainSupportDetails> swapChainSupports{};
 			for (auto& surface : m_desc.surfaces)
 			{
-				Ref<GraphicsSurface_Vulkan> surface_vk = std::static_pointer_cast<GraphicsSurface_Vulkan>(surface->internal_state);
+				Ref<GraphicsSurface_Vulkan> surface_vk = std::static_pointer_cast<GraphicsSurface_Vulkan>(
+					surface->internal_state);
 				SwapChainSupportDetails swapChainSupport = querySwapChainSupport(pDevice, surface_vk.get());
 				swapChainAdequate &= !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
 			}
 			if (!supportExt || !swapChainAdequate)
 				continue;
-			spdlog::info("  Device \"{}\" ({}) --> {} available extensions", properties.deviceName, getPhysicalDeviceTypeName(properties.deviceType), extCount);
+			spdlog::info("  Device \"{}\" ({}) --> {} available extensions", properties.deviceName,
+			             getPhysicalDeviceTypeName(properties.deviceType), extCount);
 			m_physicalDevice = pDevice;
 			//msaaSamples = getMaxUsableSampleCount();
 			return true;
 		}
 		if (!m_physicalDevice)
-			SPRING_ERROR("Can't find suitable physical device!");
+			SPRING_ERROR("Can't find suitable physical device!")
 		return false;
 	}
 
@@ -243,14 +252,16 @@ namespace spring::graphics
 
 		std::set<std::string> requiredExtensions(m_deviceRequiredExtensions.begin(), m_deviceRequiredExtensions.end());
 
-		for (const auto& extension : availableExtensions) {
+		for (const auto& extension : availableExtensions)
+		{
 			requiredExtensions.erase(extension.extensionName);
 		}
 
 		return requiredExtensions.empty();
 	}
 
-	SwapChainSupportDetails GraphicsDevice_Vulkan::querySwapChainSupport(VkPhysicalDevice device, GraphicsSurface_Vulkan* surface)
+	SwapChainSupportDetails GraphicsDevice_Vulkan::querySwapChainSupport(
+		VkPhysicalDevice device, GraphicsSurface_Vulkan* surface)
 	{
 		SP_PROFILE_FUNCTION();
 
@@ -261,7 +272,8 @@ namespace spring::graphics
 		uint32_t formatCount;
 		vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface->surface, &formatCount, nullptr);
 
-		if (formatCount != 0) {
+		if (formatCount != 0)
+		{
 			details.formats.resize(formatCount);
 			vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface->surface, &formatCount, details.formats.data());
 		}
@@ -269,14 +281,21 @@ namespace spring::graphics
 		uint32_t presentModeCount;
 		vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface->surface, &presentModeCount, nullptr);
 
-		if (presentModeCount != 0) {
+		if (presentModeCount != 0)
+		{
 			details.presentModes.resize(presentModeCount);
-			vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface->surface, &presentModeCount, details.presentModes.data());
+			vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface->surface, &presentModeCount,
+			                                          details.presentModes.data());
 		}
 		return details;
 	}
 
-	QueueFamilyIndices GraphicsDevice_Vulkan::findQueueFamilies(VkPhysicalDevice device)
+	AllocationHandler* GraphicsDevice_Vulkan::getAllocationHandler() const
+	{
+		return m_allocationHandler.get();
+	}
+
+	QueueFamilyIndices GraphicsDevice_Vulkan::findQueueFamilies(VkPhysicalDevice device) const
 	{
 		SP_PROFILE_FUNCTION();
 
@@ -289,8 +308,10 @@ namespace spring::graphics
 		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
 		int i = 0;
-		for (const auto& queueFamily : queueFamilies) {
-			if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+		for (const auto& queueFamily : queueFamilies)
+		{
+			if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			{
 				indices.graphicsFamily = i;
 			}
 
@@ -299,10 +320,12 @@ namespace spring::graphics
 				if (m_desc.surfaces.size() <= 0)
 					spdlog::error("Shouldn't be here...");
 				VkBool32 presentSupport = false;
-				VkSurfaceKHR surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(m_desc.surfaces[0]->internal_state)->surface;
+				VkSurfaceKHR surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(
+					m_desc.surfaces[0]->internal_state)->surface;
 				vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
 
-				if (presentSupport) {
+				if (presentSupport)
+				{
 					indices.presentFamily = i;
 				}
 			}
@@ -317,13 +340,14 @@ namespace spring::graphics
 	{
 		SP_PROFILE_FUNCTION();
 
-		QueueFamilyIndices indices = findQueueFamilies(m_physicalDevice);
+		m_queueFamilies = findQueueFamilies(m_physicalDevice);
 
 		std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-		std::set<uint32_t> uniqueQueueFamilies = { indices.graphicsFamily.value(), indices.presentFamily.value() };
+		std::set<uint32_t> uniqueQueueFamilies = { m_queueFamilies.graphicsFamily.value(), m_queueFamilies.presentFamily.value()};
 
 		float queuePriority = 1.0f;
-		for (uint32_t queueFamily : uniqueQueueFamilies) {
+		for (uint32_t queueFamily : uniqueQueueFamilies)
+		{
 			VkDeviceQueueCreateInfo queueCreateInfo{};
 			queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
 			queueCreateInfo.queueFamilyIndex = queueFamily;
@@ -340,9 +364,9 @@ namespace spring::graphics
 		VkDeviceCreateInfo createInfo
 		{
 			.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
-			.queueCreateInfoCount = (uint32_t)queueCreateInfos.size(),
+			.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size()),
 			.pQueueCreateInfos = queueCreateInfos.data(),
-			.enabledExtensionCount = (uint32_t)m_deviceRequiredExtensions.size(),
+			.enabledExtensionCount = static_cast<uint32_t>(m_deviceRequiredExtensions.size()),
 			.ppEnabledExtensionNames = m_deviceRequiredExtensions.data(),
 			.pEnabledFeatures = &deviceFeatures,
 		};
@@ -354,12 +378,13 @@ namespace spring::graphics
 #else
 		createInfo.enabledLayerCount = 0;
 #endif
-		if (vkCreateDevice(m_physicalDevice, &createInfo, nullptr, &m_device) != VK_SUCCESS) {
+		if (vkCreateDevice(m_physicalDevice, &createInfo, nullptr, &m_device) != VK_SUCCESS)
+		{
 			throw std::runtime_error("failed to create logical device!");
 		}
 
-		vkGetDeviceQueue(m_device, indices.graphicsFamily.value(), 0, &m_graphicsQueue);
-		vkGetDeviceQueue(m_device, indices.presentFamily.value(), 0, &m_presentQueue);
+		vkGetDeviceQueue(m_device, m_queueFamilies.graphicsFamily.value(), 0, &m_graphicsQueue);
+		vkGetDeviceQueue(m_device, m_queueFamilies.presentFamily.value(), 0, &m_presentQueue);
 		return true;
 	}
 
@@ -367,8 +392,11 @@ namespace spring::graphics
 	{
 		SP_PROFILE_FUNCTION();
 
-		for (const auto& availableFormat : availableFormats) {
-			if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
+		for (const auto& availableFormat : availableFormats)
+		{
+			if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && availableFormat.colorSpace ==
+				VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+			{
 				return availableFormat;
 			}
 		}
@@ -380,8 +408,10 @@ namespace spring::graphics
 	{
 		SP_PROFILE_FUNCTION();
 
-		for (const auto& availablePresentMode : availablePresentModes) {
-			if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+		for (const auto& availablePresentMode : availablePresentModes)
+		{
+			if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR)
+			{
 				return availablePresentMode;
 			}
 		}
@@ -390,32 +420,36 @@ namespace spring::graphics
 		//return VK_PRESENT_MODE_IMMEDIATE_KHR;
 	}
 
-	VkFormat findSupportedFormat(VkPhysicalDevice physicalDevice, const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features) {
-		for (VkFormat format : candidates) {
+	VkFormat findSupportedFormat(VkPhysicalDevice physicalDevice, const std::vector<VkFormat>& candidates,
+	                             VkImageTiling tiling, VkFormatFeatureFlags features)
+	{
+		for (const VkFormat format : candidates)
+		{
 			VkFormatProperties props;
 			vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &props);
 
-			if (tiling == VK_IMAGE_TILING_LINEAR && (props.linearTilingFeatures & features) == features) {
+			if (tiling == VK_IMAGE_TILING_LINEAR && (props.linearTilingFeatures & features) == features)
 				return format;
-			}
-			else if (tiling == VK_IMAGE_TILING_OPTIMAL && (props.optimalTilingFeatures & features) == features) {
+			if (tiling == VK_IMAGE_TILING_OPTIMAL && (props.optimalTilingFeatures & features) == features)
 				return format;
-			}
 		}
 
 		throw std::runtime_error("failed to find supported format!");
 	}
 
-	VkFormat findDepthFormat(VkPhysicalDevice physicalDevice) {
+	VkFormat findDepthFormat(VkPhysicalDevice physicalDevice)
+	{
 		return findSupportedFormat(physicalDevice,
-			{ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
-			VK_IMAGE_TILING_OPTIMAL,
-			VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+		                           {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
+		                           VK_IMAGE_TILING_OPTIMAL,
+		                           VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
 		);
 	}
 
-	VkImageView createImageView(VkDevice device, VkImage image, VkFormat format, VkImageAspectFlags aspectFlags, uint32_t mipLevels) {
-		VkImageViewCreateInfo viewInfo
+	VkImageView createImageView(VkDevice device, VkImage image, VkFormat format, VkImageAspectFlags aspectFlags,
+	                            uint32_t mipLevels)
+	{
+		const VkImageViewCreateInfo viewInfo
 		{
 			.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
 			.image = image,
@@ -432,7 +466,8 @@ namespace spring::graphics
 		};
 
 		VkImageView imageView;
-		if (vkCreateImageView(device, &viewInfo, nullptr, &imageView) != VK_SUCCESS) {
+		if (vkCreateImageView(device, &viewInfo, nullptr, &imageView) != VK_SUCCESS)
+		{
 			throw std::runtime_error("failed to create texture image view!");
 		}
 
@@ -455,11 +490,13 @@ namespace spring::graphics
 		if (desc.hasSurface && internal_state->surface == VK_NULL_HANDLE)
 		{
 			internal_state->hasSurface = true;
-			internal_state->surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.surface->internal_state)->surface;
+			internal_state->surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.surface->internal_state)->
+				surface;
 		}
 
 		// Swapchain support
-		SwapChainSupportDetails swapChainSupport = querySwapChainSupport(m_physicalDevice, std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.surface->internal_state).get());
+		SwapChainSupportDetails swapChainSupport = querySwapChainSupport(
+			m_physicalDevice, std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.surface->internal_state).get());
 
 		VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
 		VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
@@ -469,21 +506,25 @@ namespace spring::graphics
 		{
 			extent = swapChainSupport.capabilities.currentExtent;
 		}
-		else {
+		else
+		{
 			extent = {
-				static_cast<uint32_t>(desc.surface->width),
-				static_cast<uint32_t>(desc.surface->height)
+				(desc.surface->width),
+				(desc.surface->height)
 			};
 
-			extent.width = std::clamp(extent.width, swapChainSupport.capabilities.minImageExtent.width, swapChainSupport.capabilities.maxImageExtent.width);
-			extent.height = std::clamp(extent.height, swapChainSupport.capabilities.minImageExtent.height, swapChainSupport.capabilities.maxImageExtent.height);
+			extent.width = std::clamp(extent.width, swapChainSupport.capabilities.minImageExtent.width,
+			                          swapChainSupport.capabilities.maxImageExtent.width);
+			extent.height = std::clamp(extent.height, swapChainSupport.capabilities.minImageExtent.height,
+			                           swapChainSupport.capabilities.maxImageExtent.height);
 		}
 
 		uint32_t imageCount = swapChainSupport.capabilities.minImageCount + 1;
-		if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount) {
+		if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount)
+		{
 			imageCount = swapChainSupport.capabilities.maxImageCount;
 		}
-		desc.hasSurface;
+		//desc.hasSurface;
 		VkSwapchainCreateInfoKHR createInfo
 		{
 			.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
@@ -497,14 +538,16 @@ namespace spring::graphics
 		};
 
 		QueueFamilyIndices indices = findQueueFamilies(m_physicalDevice);
-		uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
+		uint32_t queueFamilyIndices[] = {indices.graphicsFamily.value(), indices.presentFamily.value()};
 
-		if (indices.graphicsFamily != indices.presentFamily) {
+		if (indices.graphicsFamily != indices.presentFamily)
+		{
 			createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
 			createInfo.queueFamilyIndexCount = 2;
 			createInfo.pQueueFamilyIndices = queueFamilyIndices;
 		}
-		else {
+		else
+		{
 			createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
 			createInfo.queueFamilyIndexCount = 0;
 			createInfo.pQueueFamilyIndices = nullptr;
@@ -514,22 +557,27 @@ namespace spring::graphics
 		createInfo.presentMode = presentMode;
 		createInfo.clipped = VK_TRUE;
 		createInfo.oldSwapchain = internal_state->swapchain;
-		if (vkCreateSwapchainKHR(m_device, &createInfo, nullptr, &internal_state->swapchain) != VK_SUCCESS) {
+		if (vkCreateSwapchainKHR(m_device, &createInfo, nullptr, &internal_state->swapchain) != VK_SUCCESS)
+		{
 			throw std::runtime_error("failed to create swap chain!");
 		}
 
 		// Get images
 		vkGetSwapchainImagesKHR(m_device, internal_state->swapchain, &imageCount, nullptr);
 		internal_state->swapchainImages.resize(imageCount);
-		vkGetSwapchainImagesKHR(m_device, internal_state->swapchain, &imageCount, internal_state->swapchainImages.data());
+		vkGetSwapchainImagesKHR(m_device, internal_state->swapchain, &imageCount,
+		                        internal_state->swapchainImages.data());
 		internal_state->swapChainImageFormat = surfaceFormat.format;
 		internal_state->swapChainExtent = extent;
 
 		// Create imageviews
 		internal_state->swapchainImageViews.resize(internal_state->swapchainImages.size());
 
-		for (uint32_t i = 0; i < internal_state->swapchainImages.size(); i++) {
-			internal_state->swapchainImageViews[i] = createImageView(m_device, internal_state->swapchainImages[i], internal_state->swapChainImageFormat, VK_IMAGE_ASPECT_COLOR_BIT, 1);
+		for (uint32_t i = 0; i < internal_state->swapchainImages.size(); i++)
+		{
+			internal_state->swapchainImageViews[i] = createImageView(m_device, internal_state->swapchainImages[i],
+			                                                         internal_state->swapChainImageFormat,
+			                                                         VK_IMAGE_ASPECT_COLOR_BIT, 1);
 		}
 
 		// Create renderpass
@@ -612,7 +660,7 @@ namespace spring::graphics
 
 		//std::array<VkAttachmentDescription, 3> attachments = { colorAttachment, depthAttachment, colorAttachmentResolve };
 		//std::array<VkAttachmentDescription, 2> attachments = { colorAttachment, depthAttachment };
-		std::array<VkAttachmentDescription, 1> attachments = { colorAttachment };
+		std::array<VkAttachmentDescription, 1> attachments = {colorAttachment};
 
 		VkRenderPassCreateInfo renderPassInfo
 		{
@@ -628,14 +676,16 @@ namespace spring::graphics
 		renderpass_internal->allocationHandler = m_allocationHandler;
 		internal_state->renderpass.internal_state = renderpass_internal;
 		// TODO : Attachments
-		if (vkCreateRenderPass(m_device, &renderPassInfo, nullptr, &renderpass_internal->renderpass) != VK_SUCCESS) {
+		if (vkCreateRenderPass(m_device, &renderPassInfo, nullptr, &renderpass_internal->renderpass) != VK_SUCCESS)
+		{
 			throw std::runtime_error("failed to create render pass!");
 		}
 
 		internal_state->swapchainFramebuffers.resize(internal_state->swapchainImageViews.size());
 
-		for (size_t i = 0; i < internal_state->swapchainImageViews.size(); i++) {
-			std::vector<VkImageView> attachments = {
+		for (size_t i = 0; i < internal_state->swapchainImageViews.size(); i++)
+		{
+			std::vector<VkImageView> framebufferAttachments = {
 				internal_state->swapchainImageViews[i]
 			};
 
@@ -643,14 +693,16 @@ namespace spring::graphics
 			{
 				.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO,
 				.renderPass = renderpass_internal->renderpass,
-				.attachmentCount = (uint32_t)attachments.size(),
-				.pAttachments = attachments.data(),
+				.attachmentCount = static_cast<uint32_t>(attachments.size()),
+				.pAttachments = framebufferAttachments.data(),
 				.width = internal_state->swapChainExtent.width,
 				.height = internal_state->swapChainExtent.height,
 				.layers = 1
 			};
 
-			if (vkCreateFramebuffer(m_device, &framebufferInfo, nullptr, &internal_state->swapchainFramebuffers[i]) != VK_SUCCESS) {
+			if (vkCreateFramebuffer(m_device, &framebufferInfo, nullptr, &internal_state->swapchainFramebuffers[i]) !=
+				VK_SUCCESS)
+			{
 				throw std::runtime_error("failed to create framebuffer!");
 			}
 		}
@@ -668,12 +720,12 @@ namespace spring::graphics
 	bool GraphicsDevice_Vulkan::createShader(ShaderDesc& desc, Shader* shader)
 	{
 		SP_PROFILE_FUNCTION();
-		Ref<Shader_Vulkan> internal_state = makeRef<Shader_Vulkan>();
+		const Ref<Shader_Vulkan> internal_state = makeRef<Shader_Vulkan>();
 		internal_state->allocationHandler = m_allocationHandler;
 		shader->internal_state = internal_state;
 		shader->stage = desc.stage;
-		
-		VkShaderModuleCreateInfo createInfo
+
+		const VkShaderModuleCreateInfo createInfo
 		{
 			.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
 			.codeSize = desc.size,
@@ -681,7 +733,7 @@ namespace spring::graphics
 		};
 
 		if (vkCreateShaderModule(m_device, &createInfo, nullptr, &internal_state->shaderModule) != VK_SUCCESS)
-			SPRING_ERROR("Failed to create shader module");
+			SPRING_ERROR("Failed to create shader module")
 
 		internal_state->shaderStageInfo =
 		{
@@ -697,8 +749,6 @@ namespace spring::graphics
 		case ShaderStage::Fragment:
 			internal_state->shaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
 			break;
-		default:
-			internal_state->shaderStageInfo.stage = VK_SHADER_STAGE_ALL;
 		}
 		return true;
 	}

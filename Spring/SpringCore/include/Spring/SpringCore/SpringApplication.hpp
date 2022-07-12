@@ -11,6 +11,9 @@ namespace spring::core
         HINSTANCE instance;
     };
 
+    /**
+     * \brief Main class, responsible of managing the lifetime of the app
+     */
     class SpringApplication
     {
     public:
@@ -18,16 +21,15 @@ namespace spring::core
         virtual ~SpringApplication() = default;
 
         template<typename T>
-        Ref<T> registerModule()
-        {
-            Ref<T> module = makeRef<T>(this);
-            m_modules.push_back(module);
-            return module;
-        }
-        SpringModule* getModule(SpringModuleTypes type);
-        static SpringApplication* get() { return m_app; };
-        HINSTANCE getNativeInstance() { return m_instance; };
+        Ref<T> registerModule();
+        [[nodiscard]] SpringModule* getModule(SpringModuleTypes type) const;
+        [[nodiscard]] HINSTANCE getNativeInstance() const;
+        static SpringApplication* get();
 
+        /**
+         * \brief Application main loop, handles update for each module
+         * \return 0 if no error occured
+         */
         virtual int mainLoop();
 
     protected:
@@ -36,4 +38,12 @@ namespace spring::core
         HWND m_console;
         std::vector<Ref<SpringModule>> m_modules;
     };
+
+    template <typename T>
+    Ref<T> SpringApplication::registerModule()
+    {
+	    Ref<T> module = makeRef<T>(this);
+	    m_modules.push_back(module);
+	    return module;
+    }
 }

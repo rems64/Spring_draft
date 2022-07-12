@@ -25,14 +25,14 @@ namespace spring::core
 
 		void writeProfile(const ProfileResult& result)
 		{
-			std::stringstream json;
+			std::basic_stringstream<char> json;
 
 			json << std::setprecision(3) << std::fixed;
 			json << ",{";
-			json << "\"cat\":\"function\",";
+			json << R"("cat":"function",)";
 			json << "\"dur\":" << (result.elapsedTime.count()) << ',';
-			json << "\"name\":\"" << result.name << "\",";
-			json << "\"ph\":\"X\",";
+			json << R"("name":")" << result.name << "\",";
+			json << R"("ph":"X",)";
 			json << "\"pid\":0,";
 			json << "\"tid\":" << result.threadID << ",";
 			json << "\"ts\":" << result.start.count();
@@ -54,7 +54,7 @@ namespace spring::core
 
 	private:
 		Profiler()
-			: m_started(false), m_sessionsName("Default session name")
+			: m_sessionsName("Default session name"), m_started(false)
 		{
 		}
 
@@ -72,7 +72,7 @@ namespace spring::core
 	class InstrumentationTimer
 	{
 	public:
-		InstrumentationTimer(const char* name)
+		explicit InstrumentationTimer(const char* name)
 			: m_name(name), m_stopped(false)
 		{
 			m_startTimepoint = std::chrono::steady_clock::now();
@@ -86,9 +86,9 @@ namespace spring::core
 
 		void stop()
 		{
-			auto endTimepoint = std::chrono::steady_clock::now();
-			auto highResStart = std::chrono::duration<double, std::micro>{ m_startTimepoint.time_since_epoch() };
-			auto elapsedTime = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch() - std::chrono::time_point_cast<std::chrono::microseconds>(m_startTimepoint).time_since_epoch();
+			const auto endTimepoint = std::chrono::steady_clock::now();
+			const auto highResStart = std::chrono::duration<double, std::micro>{ m_startTimepoint.time_since_epoch() };
+			const auto elapsedTime = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch() - std::chrono::time_point_cast<std::chrono::microseconds>(m_startTimepoint).time_since_epoch();
 
 			Profiler::get().writeProfile({ m_name, highResStart, elapsedTime, std::this_thread::get_id() });
 
@@ -145,7 +145,6 @@ namespace spring::core
 
 #define SP_START_PROFILING(name, path) do {} while(0)
 #define SP_END_PROFILING() do {} while(0)
-#define _SP_PROFILE_SCOPE_LINE(name, line) do {} while(0)
 #define SP_PROFILE_SCOPE_LINE(name, line) do {} while(0)
 #define SP_PROFILE_SCOPE(name) do {} while(0)
 #define SP_PROFILE_FUNCTION() do {} while(0)

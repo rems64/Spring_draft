@@ -27,7 +27,7 @@ namespace spring::graphics
 		~AllocationHandler()
 		{
 			update(std::numeric_limits<uint64_t>::max(), 0);
-		};
+		}
 
 
 		void update(const uint64_t frame, const uint16_t buffer) // Frame is the current frame (or the frame when the deleting starts), buffer is a number of frames to keep alive from frame
@@ -102,34 +102,31 @@ namespace spring::graphics
 	{
 	public:
 		GraphicsDevice_Vulkan(GraphicsDeviceDesc& desc, SpringGraphicsApi* api);
-		virtual ~GraphicsDevice_Vulkan();
+		~GraphicsDevice_Vulkan() override;
 
-		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) override;
-		virtual bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) override;
-		virtual bool createShader(ShaderDesc& desc, Shader* shader) override;
+		bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) override;
+		bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) override;
+		bool createShader(ShaderDesc& desc, Shader* shader) override;
 
 		bool pickPhysicalDevice();
-		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) const;
 		bool createDevice();
 		bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 		SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device, GraphicsSurface_Vulkan* surface);
-		AllocationHandler* getAllocationHandler() { return m_allocationHandler.get(); };
+		AllocationHandler* getAllocationHandler() const;
 
 	private:
-		static const uint32_t framesInFlight = 2;
+		static constexpr uint32_t framesInFlight = 2;
 		SpringGraphicsApi_Vulkan* m_api;
 		VkInstance m_instance;
 
-		VkPhysicalDevice m_physicalDevice;
+		VkPhysicalDevice m_physicalDevice{};
 		VkDevice m_device;
-		uint32_t graphicsQueueFamily;
-		uint32_t computeQueueFamily;
-		uint32_t transfertQueueFamily;
-		VkQueue m_graphicsQueue;
-		VkQueue m_presentQueue;
+		QueueFamilyIndices m_queueFamilies{};
+		VkQueue m_graphicsQueue{};
+		VkQueue m_presentQueue{};
 		FrameResource m_frames[framesInFlight];
 
-		GraphicsDeviceDesc m_desc;
 		std::vector<const char*> m_deviceRequiredExtensions;
 		
 		Ref<AllocationHandler> m_allocationHandler;

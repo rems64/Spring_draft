@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spring/SpringCore/SpringProfiler.hpp> // Temp solution
+//#include <Spring/SpringCore/SpringProfiler.hpp> // Temp solution
 
 template <typename T>
 using Scope = std::unique_ptr<T>;
