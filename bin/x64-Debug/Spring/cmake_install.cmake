@@ -36,6 +36,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringCore/cmake_install.cmake")
   include("C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/cmake_install.cmake")
+  include("C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringAudio/cmake_install.cmake")
 
 endif()
 

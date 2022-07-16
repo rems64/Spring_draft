@@ -29,7 +29,7 @@ namespace spring::core
             m_console = GetConsoleWindow();
         }
 
-        spdlog::set_pattern("%^%v%$");
+        spdlog::set_pattern("%^[%R] %v%$");
         spdlog::set_level(spdlog::level::trace);
         //spdlog::default_logger()->flush_on(spdlog::level::debug);
     }

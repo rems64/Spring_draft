@@ -21,7 +21,7 @@ namespace spring::graphics
 	{
 		Ref<SpringWindow> window;
 
-#ifdef SE_WINDOWS
+#ifdef SP_WINDOWS
 		window = makeRef<SpringWindow_Glfw>(desc); // BAAAAD
 #elif GLFW3
 		window = makeRef<SpringWindow_Glfw>(desc);
@@ -38,7 +38,7 @@ namespace spring::graphics
 	void SpringWindow::initialize()
 	{
 		SP_PROFILE_FUNCTION();
-#ifdef SE_WINDOWS
+#ifdef SP_WINDOWS
 		if (!glfwInit())
 			spdlog::error("Failed to initialize glfw");
 		return;
@@ -54,7 +54,7 @@ namespace spring::graphics
 
 	void SpringWindow::shutdown()
 	{
-#ifdef SE_WINDOWS
+#ifdef SP_WINDOWS
 		glfwTerminate();
 		return;
 #elif GLFW3

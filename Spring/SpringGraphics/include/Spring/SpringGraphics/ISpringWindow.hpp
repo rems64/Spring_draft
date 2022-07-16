@@ -4,7 +4,8 @@
 
 struct GLFWwindow;
 
-#ifdef SE_WINDOWS
+
+#ifdef SP_WINDOWS
 using spWinHandle = GLFWwindow*; // HWND normally, just for temp testing
 #elif GLFW3
 using spWinHandle = GLFWwindow*;

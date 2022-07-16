@@ -2,6 +2,7 @@
 
 #include <Spring/SpringCore/SpringCore.hpp>
 #include <Spring/SpringGraphics/SpringGraphics.hpp>
+#include <Spring/SpringAudio/SpringAudio.hpp>
 
 /**
  * \brief Editor application class, manages the app through it's lifetime
@@ -17,6 +18,7 @@ public:
 
 private:
     Ref<spring::graphics::SpringGraphicsModule> m_graphicsModule;
+    Ref<spring::audio::SpringAudioModule> m_audioModule;
     Ref<spring::graphics::SpringWindow> m_mainWindow;
     spring::graphics::GraphicsSurface* m_mainWindowSurface;
     spring::graphics::GraphicsDevice* m_mainDevice;

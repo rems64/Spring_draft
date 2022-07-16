@@ -2,3 +2,4 @@
 
 add_subdirectory (SpringCore)
 add_subdirectory (SpringGraphics)
+add_subdirectory (SpringAudio)

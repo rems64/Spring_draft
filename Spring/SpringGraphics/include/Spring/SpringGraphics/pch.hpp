@@ -1,14 +1,6 @@
 #pragma once
 
-#ifdef _WIN32
-#define SE_WINDOWS
-#else
-#define SE_LINUX
-#endif
-
-#ifdef SE_WINDOWS
-#define NOMINMAX
-#include <Windows.h>
+#ifdef SP_WINDOWS
 #define VK_USE_PLATFORM_WIN32_KHR
 #endif
 

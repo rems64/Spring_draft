@@ -26,10 +26,11 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ PWSTR, _I
 
 		SP_END_PROFILING();
 	}
-	
+
+	printf("\n");
 	spdlog::info("Application exited successfully!");
-	spdlog::trace("");
 #ifndef NDEBUG
+	printf("\n");
 	spdlog::debug("Keeping the terminal open for you fellow debug user :)");
 	std::cin.get();
 #endif

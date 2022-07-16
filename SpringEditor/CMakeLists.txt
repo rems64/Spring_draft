@@ -25,5 +25,6 @@ target_compile_options(SpringEditor PRIVATE
 #find_package(SpringCore 1.0 REQUIRED)
 target_link_libraries(SpringEditor SpringCore)
 target_link_libraries(SpringEditor SpringGraphics)
+target_link_libraries(SpringEditor SpringAudio)
 
 target_compile_features(SpringEditor PRIVATE cxx_std_17)

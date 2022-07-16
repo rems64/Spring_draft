@@ -1,0 +1,24 @@
+#include <Spring/SpringAudio/SpringAudioModule.hpp>
+
+#include "Spring/SpringCore/SpringProfiler.hpp"
+
+namespace spring::audio
+{
+	SpringAudioModule::SpringAudioModule(core::SpringApplication* app) : SpringModule(app)
+	{
+		SP_PROFILE_FUNCTION();
+		spdlog::info("Initiliazing Spring Audio");
+		m_api = ISpringAudioApi::build();
+	}
+
+	SpringAudioModule::~SpringAudioModule() = default;
+
+	void SpringAudioModule::update()
+	{
+	}
+
+	bool SpringAudioModule::canClose()
+	{
+		return true;
+	}
+}

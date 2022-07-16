@@ -39,6 +39,12 @@ C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/lib/glfw/
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/lib/glfw/src/CMakeFiles/list_install_components.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/lib/glfw/src/CMakeFiles/install.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringGraphics/lib/glfw/src/CMakeFiles/install/local.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringAudio/CMakeFiles/SpringAudio.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringAudio/CMakeFiles/edit_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringAudio/CMakeFiles/rebuild_cache.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringAudio/CMakeFiles/list_install_components.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringAudio/CMakeFiles/install.dir
+C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/Spring/SpringAudio/CMakeFiles/install/local.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/SpringEditor.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/edit_cache.dir
 C:/Users/rfaye/source/repos/Spring/bin/x64-Debug/SpringEditor/CMakeFiles/rebuild_cache.dir

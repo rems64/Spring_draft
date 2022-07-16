@@ -1,17 +1,7 @@
-#include <Spring/SpringCore/SpringMisc.hpp>
+#include <Spring/SpringCore/SpringCommon.hpp>
 
 namespace spring::core
 {
-    void info(const char* message, const char* title)
-    {
-        MessageBoxA(nullptr, message, title, MB_OK);
-    }
-
-    void error(const char* message, const char* title)
-    {
-        MessageBoxA(nullptr, message, title, MB_OK | MB_ICONERROR);
-    }
-
     std::vector<char> readFile(const std::string& filename)
     {
         std::ifstream file(filename, std::ios::ate | std::ios::binary);
