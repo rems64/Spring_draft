@@ -2,3 +2,5 @@
 .vscode/
 bin/
 build/
+.ninja
+.log
