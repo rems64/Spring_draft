@@ -8,14 +8,18 @@
 
 namespace spring::graphics
 {
-    SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan() : m_surfaces{}, m_devices{}
+    SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan() : /*m_surfaces{}, */m_devices{}
     {
         SP_PROFILE_FUNCTION();
-        std::vector<const char*> windowExtensions = SpringWindow_Glfw::getRequiredExtensions();
-        std::copy(windowExtensions.begin(), windowExtensions.end(), std::back_inserter(m_requiredExtensions));
+        m_requiredExtensions = { VK_KHR_SURFACE_EXTENSION_NAME };
+
+	// Enable surface extensions depending on os
+#if defined(SP_WIN32)
+	    m_requiredExtensions.push_back(VK_KHR_WIN32_SURFACE_EXTENSION_NAME);
+#endif
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         m_requiredExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-        m_requiredExtensions.push_back(VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME);
+        //m_requiredExtensions.push_back(VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME);
         //m_requiredExtensions.push_back("VK_EXT_validation_features");
         m_validationLayers = { "VK_LAYER_KHRONOS_validation" };
 #endif
@@ -27,7 +31,9 @@ namespace spring::graphics
         DestroyDebugUtilsMessengerEXT(m_instance, m_debugMessenger, nullptr);
 #endif
         m_devices.clear();
-        m_surfaces.clear();
+        //m_surfaces.clear();
+        vkGetInstanceProcAddr(m_instance, "name");
+
         vkDestroyInstance(m_instance, nullptr);
 	}
 
@@ -74,7 +80,7 @@ namespace spring::graphics
             .applicationVersion = VK_MAKE_VERSION(1,0,0),
             .pEngineName = "SpringEngine",
             .engineVersion = VK_MAKE_VERSION(1,0,0),
-            .apiVersion = VK_API_VERSION_1_3
+            .apiVersion = VK_API_VERSION_1_2
         };
 
         //m_requiredExtensions = getRequiredExtensions();
@@ -93,7 +99,7 @@ namespace spring::graphics
         for (std::vector<const char*>::iterator reqExt = m_requiredExtensions.begin(); reqExt != m_requiredExtensions.end();)
         {
             bool found = false;
-            for (VkExtensionProperties ext : availableExtensions)
+            for (const VkExtensionProperties& ext : availableExtensions)
             {
                 if (strcmp(ext.extensionName, *reqExt)==0)
                 {
@@ -150,28 +156,28 @@ namespace spring::graphics
         }
 	}
 
-    GraphicsSurface* SpringGraphicsApi_Vulkan::getSurface(SpringWindow* window)
-    {
-        Scope<GraphicsSurface> surface = makeScope<GraphicsSurface>();
+    //GraphicsSurface* SpringGraphicsApi_Vulkan::getSurface(SpringWindow* window)
+    //{
+    //    Scope<GraphicsSurface> surface = makeScope<GraphicsSurface>();
 
-        Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
-        VkResult res = glfwCreateWindowSurface(m_instance, window->getHandle(), nullptr, &surface_internal->surface);
-        if (res != VK_SUCCESS)
-        {
-            const char* description;
-            int code = glfwGetError(&description);
+    //    Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
+    //    VkResult res = glfwCreateWindowSurface(m_instance, window->getHandle(), nullptr, &surface_internal->surface);
+    //    if (res != VK_SUCCESS)
+    //    {
+    //        const char* description;
+    //        int code = glfwGetError(&description);
 
-            if (description)
-                spdlog::error("code: {}, {}", code, description);
-            spdlog::error("Error while creating window surface! ({})", res);
-        }
-        surface_internal->relatedInstance = m_instance;
-        surface->internal_state = surface_internal;
-        GraphicsSurface* surfacePtr = surface.get();
-        registerSurface(surface);
+    //        if (description)
+    //            spdlog::error("code: {}, {}", code, description);
+    //        spdlog::error("Error while creating window surface! ({})", res);
+    //    }
+    //    surface_internal->relatedInstance = m_instance;
+    //    surface->internal_state = surface_internal;
+    //    GraphicsSurface* surfacePtr = surface.get();
+    //    registerSurface(surface);
 
-        return surfacePtr;
-    }
+    //    return surfacePtr;
+    //}
 
     GraphicsDevice* SpringGraphicsApi_Vulkan::createDevice(GraphicsDeviceDesc desc)
 	{

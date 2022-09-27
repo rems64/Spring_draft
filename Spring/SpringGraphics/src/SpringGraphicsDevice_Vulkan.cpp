@@ -8,9 +8,7 @@
 //#include <Spring/SpringGraphics/SpringGraphicsApi_Vulkan.hpp>
 #include "SpringGraphicsApi_Vulkan.hpp"
 #include <Spring/SpringGraphics/SpringGraphicsVulkanUtils.hpp>
-#ifdef SE_WINDOWS
-#include <GLFW/glfw3.h>
-#endif
+
 
 namespace spring::graphics
 {
@@ -104,8 +102,8 @@ namespace spring::graphics
 		SP_PROFILE_FUNCTION();
 
 		m_api = dynamic_cast<SpringGraphicsApi_Vulkan*>(api);
-		m_instance = *m_api->getInstance();
-		m_allocationHandler->instance = m_instance;
+		m_instance = m_api->getInstance();
+		m_allocationHandler->instance = *m_instance;
 
 		if (m_desc.supportPresent)
 		{
@@ -181,7 +179,7 @@ namespace spring::graphics
 
 		for (auto& frame : m_frames)
 		{
-			for (int queue = 0; queue < Count; ++queue)
+			for (int queue = 0; queue < QueueTypes::Count; ++queue)
 			{
 				vkDestroyFence(m_device, frame.fences[queue], nullptr);
 			}
@@ -189,7 +187,6 @@ namespace spring::graphics
 		}
 
 		m_allocationHandler->update(std::numeric_limits<uint64_t>::max(), 0);
-
 		vkDestroyDevice(m_device, nullptr);
 	}
 
@@ -198,9 +195,9 @@ namespace spring::graphics
 		SP_PROFILE_FUNCTION();
 
 		uint32_t physicalDevicesCount;
-		vkEnumeratePhysicalDevices(m_instance, &physicalDevicesCount, nullptr);
+		vkEnumeratePhysicalDevices(*m_instance, &physicalDevicesCount, nullptr);
 		std::vector<VkPhysicalDevice> physicalDevices(physicalDevicesCount);
-		vkEnumeratePhysicalDevices(m_instance, &physicalDevicesCount, physicalDevices.data());
+		vkEnumeratePhysicalDevices(*m_instance, &physicalDevicesCount, physicalDevices.data());
 		spdlog::info("There {} {} physical device{} available:", physicalDevicesCount > 1 ? "are" : "is",
 		             physicalDevicesCount, physicalDevicesCount > 1 ? "s" : "");
 		for (VkPhysicalDevice& pDevice : physicalDevices)

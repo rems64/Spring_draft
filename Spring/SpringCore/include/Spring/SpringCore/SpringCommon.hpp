@@ -1,10 +1,11 @@
 #pragma once
 
-#ifdef _WIN32
-#define SP_WINDOWS
+#if defined(_WIN32)
+#define SP_WIN32
+#elif defined(__linux__) || defined(__FreeBSD__)
+#define SP_LINUX
 #endif
-
-#ifdef SP_WINDOWS
+#ifdef SP_WIN32
 #define NOMINMAX
 #include <Windows.h>
 using spNativeHandle = HWND; // HWND normally, just for temp testing

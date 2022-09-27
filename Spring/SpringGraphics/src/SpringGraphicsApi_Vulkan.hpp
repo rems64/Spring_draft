@@ -1,6 +1,6 @@
 #pragma once
 #ifndef NDEBUG
-#define SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
+//#define SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
 #endif
 
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
@@ -32,15 +32,15 @@ namespace spring::graphics
 		virtual void init();
 		virtual void shutdown();
 
-		virtual GraphicsSurface* getSurface(SpringWindow* window) override;
+		//virtual GraphicsSurface* getSurface(SpringWindow* window) override;
 		void createInstance();
 		inline const VkInstance* getInstance() { return &m_instance; };
 		virtual GraphicsDevice* createDevice(GraphicsDeviceDesc desc) override;
-		void registerSurface(Scope<GraphicsSurface>& surface) { m_surfaces.emplace_back(std::move(surface)); };
+		//void registerSurface(Scope<GraphicsSurface>& surface) { m_surfaces.emplace_back(std::move(surface)); };
 	private:
 		VkInstance m_instance;
 		std::vector<Scope<GraphicsDevice_Vulkan>> m_devices;
-		std::vector<Scope<GraphicsSurface>> m_surfaces;
+		//std::vector<Scope<GraphicsSurface>> m_surfaces;
 		std::vector<const char*> m_requiredExtensions;
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
 		void setupDebugMessenger();

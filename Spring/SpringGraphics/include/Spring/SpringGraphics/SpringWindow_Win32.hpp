@@ -1,6 +1,8 @@
+#if defined(_WIN32)
+
 #pragma once
 
-#include <Spring/SpringGraphics/SpringWindow.hpp>
+#include <Spring/SpringGraphics/ISpringWindow.hpp>
 
 namespace spring::graphics
 {
@@ -8,10 +10,11 @@ namespace spring::graphics
 	{
 	public:
 		SpringWindow_Win32(WindowDesc desc);
-		virtual ~SpringWindow_Win32() override;
+		~SpringWindow_Win32() override;
 
 		virtual bool construct() override;
 		virtual spWinHandle getHandle() override;
+		virtual bool shouldClose() override;
 
 		virtual void close() override;
 
@@ -19,7 +22,10 @@ namespace spring::graphics
 
 	protected:
 		HWND m_window;
+		bool m_pendingDestroy = false;
 	};
 
 	LRESULT CALLBACK winProcDispatch(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 }
+
+#endif

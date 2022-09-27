@@ -15,7 +15,7 @@ namespace spring::graphics
 	    explicit SpringGraphicsModule(spring::core::SpringApplication* app);
         ~SpringGraphicsModule() override;
 
-        void update() override;
+        void update(bool closeRequired) override;
         bool canClose() override;
 
         // Windowing

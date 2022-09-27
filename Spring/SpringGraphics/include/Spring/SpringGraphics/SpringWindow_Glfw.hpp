@@ -1,3 +1,4 @@
+#ifdef SP_LINUX
 #pragma once
 
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
@@ -32,3 +33,4 @@ namespace spring::graphics
 		GLFWwindow* m_window;
 	};
 }
+#endif

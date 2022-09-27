@@ -8,7 +8,7 @@
 namespace spring::core
 {
     SpringApplication* SpringApplication::m_app = nullptr;
-    SpringApplication::SpringApplication(SpringApplicationInfos infos)
+    SpringApplication::SpringApplication(SpringApplicationInfos infos): m_console(NULL)
     {
 
         if (!!m_app)
@@ -52,6 +52,11 @@ namespace spring::core
 	    return m_instance;
     }
 
+    void SpringApplication::shutdown()
+    {
+        shutdowning = true;
+    }
+
     SpringApplication* SpringApplication::get()
     {
 	    return m_app;
@@ -60,16 +65,29 @@ namespace spring::core
     int SpringApplication::mainLoop()
     {
         SP_PROFILE_FUNCTION();
+#if defined(SP_WIN32)
+        MSG msg;
+        bool systemClose = false;
         bool close = false;
         while (!close)
         {
-            close = true;
+		    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+			    TranslateMessage(&msg);
+			    DispatchMessage(&msg);
+			    if (msg.message == WM_QUIT) {
+				    systemClose = true;
+				    break;
+			    }
+		    }
+            bool modulesClose = true;
             for (const auto& module : m_modules)
             {
-                module->update();
-                close &= module->canClose();
+                module->update(systemClose || shutdowning);
+                modulesClose &= module->canClose();
             }
+            close = (modulesClose && systemClose) || modulesClose;
         }
+#endif
         return 0;
     }
 }

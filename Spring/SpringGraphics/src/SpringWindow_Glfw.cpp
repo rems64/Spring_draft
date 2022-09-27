@@ -1,3 +1,5 @@
+#ifdef SP_LINUX
+
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 
 #include <Spring/SpringCore/SpringProfiler.hpp>
@@ -69,3 +71,5 @@ namespace spring::graphics
 		return reqExt;
 	}
 }
+
+#endif

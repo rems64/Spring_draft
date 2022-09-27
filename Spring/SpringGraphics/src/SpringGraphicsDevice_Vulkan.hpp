@@ -118,7 +118,7 @@ namespace spring::graphics
 	private:
 		static constexpr uint32_t framesInFlight = 2;
 		SpringGraphicsApi_Vulkan* m_api;
-		VkInstance m_instance;
+		const VkInstance* m_instance;
 
 		VkPhysicalDevice m_physicalDevice{};
 		VkDevice m_device;

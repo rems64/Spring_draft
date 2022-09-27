@@ -5,11 +5,12 @@ set(SRCS
 	
 	"src/SpringGraphicsModule.cpp"
 	"src/SpringWindow.cpp"
-#	"src/SpringWindow_Win32.cpp"
+	"src/SpringWindow_Win32.cpp"
 	"src/SpringWindow_Glfw.cpp"
 	"src/SpringGraphicsApi_Vulkan.cpp"
 	"src/ISpringGraphicsApi.cpp"
- "src/SpringGraphicsDevice_Vulkan.cpp")
+	"src/SpringGraphicsDevice_Vulkan.cpp"
+)
 
 add_library(SpringGraphics ${SRCS})
 add_library(Spring::SpringGraphics ALIAS SpringGraphics)

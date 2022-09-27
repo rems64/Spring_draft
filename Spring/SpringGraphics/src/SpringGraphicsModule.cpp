@@ -5,6 +5,8 @@
 
 #include <Spring/SpringCore/SpringProfiler.hpp>
 
+#include <Spring/SpringCore/SpringApplication.hpp>
+
 #include <spdlog/spdlog.h>
 #include <GLFW/glfw3.h>
 
@@ -25,28 +27,31 @@ namespace spring::graphics
         {
             win.~shared_ptr();
         }
-        m_api->~SpringGraphicsApi();
         SpringWindow::shutdown();
     }
 
-    void SpringGraphicsModule::update()
+    void SpringGraphicsModule::update(bool closeRequired)
     {
+        if (closeRequired)
+            shouldClose = true;
+#if defined(SP_LINUX)
         SP_PROFILE_FUNCTION();
         {
             SP_PROFILE_SCOPE("glfwPollEvents");
             glfwPollEvents();
         }
+#endif
         bool deletion=false;
         for (auto& window : m_windows)
         {
-            if (window->shouldClose())
+            if (shouldClose || (window && window->shouldClose()))
             {
                 deletion = true;
-                window->close();
+                window = nullptr;
             }
         }
-        if(deletion)
-            m_windows.~vector();
+        if (deletion && !anyWindow())
+            m_app->shutdown();
         return;
     }
 
@@ -58,7 +63,7 @@ namespace spring::graphics
     void closeCallback(SpringWindow* win)
     {
         SP_PROFILE_FUNCTION();
-        spdlog::info("Closing!");
+        spdlog::info("Closing window \"{0}!\"", win->getTitle().c_str());
     }
 
     Ref<SpringWindow> SpringGraphicsModule::createWindow(WindowDesc desc)
@@ -78,7 +83,9 @@ namespace spring::graphics
 
     bool SpringGraphicsModule::anyWindow() const
     {
-	    return !m_windows.empty();
+        for (auto& w : m_windows)
+            if (w) { return true; };
+	    return false;
     }
 
     SpringGraphicsApi* SpringGraphicsModule::getApi() const

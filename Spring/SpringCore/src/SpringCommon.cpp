@@ -12,7 +12,7 @@ namespace spring::core
         MessageBoxA(nullptr, message, title, MB_OK | MB_ICONERROR);
     }
 
-#ifdef SP_WINDOWS
+#ifdef SP_WIN32
     spNativeLib loadLibrary(const char* name)
     {
         return LoadLibraryA(name);

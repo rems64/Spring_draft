@@ -23,7 +23,7 @@ namespace spring::core
         SpringModule(SpringApplication* app);
         virtual ~SpringModule() = default;
 
-        virtual void update() = 0;
+        virtual void update(bool closeRequired) = 0;
         virtual bool canClose() = 0;
 
         SpringModuleTypes getType() const;
@@ -31,5 +31,6 @@ namespace spring::core
     protected:
         SpringModuleTypes m_type;
         SpringApplication* m_app;
+        bool shouldClose = false;
     };
 }

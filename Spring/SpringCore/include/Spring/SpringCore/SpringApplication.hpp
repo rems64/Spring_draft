@@ -24,6 +24,7 @@ namespace spring::core
         Ref<T> registerModule();
         [[nodiscard]] SpringModule* getModule(SpringModuleTypes type) const;
         [[nodiscard]] HINSTANCE getNativeInstance() const;
+        [[nodiscard]] void shutdown();
         static SpringApplication* get();
 
         /**
@@ -37,6 +38,7 @@ namespace spring::core
         HINSTANCE m_instance;
         HWND m_console;
         std::vector<Ref<SpringModule>> m_modules;
+        bool shutdowning = false;
     };
 
     template <typename T>

@@ -5,9 +5,9 @@
 struct GLFWwindow;
 
 
-#ifdef SP_WINDOWS
-using spWinHandle = GLFWwindow*; // HWND normally, just for temp testing
-#elif GLFW3
+#ifdef SP_WIN32
+using spWinHandle = HWND*;
+#elif SP_LINUX
 using spWinHandle = GLFWwindow*;
 #else
 #error "Can't create window type, unknown OS"
@@ -22,6 +22,7 @@ namespace spring::graphics
 		std::string title = "Spring window";
 		uint32_t width = 640;
 		uint32_t height = 480;
+		bool fullscreen = false;
 	};
 
 	class SpringWindow
@@ -53,7 +54,6 @@ namespace spring::graphics
 #endif
 	protected:
 		WindowDesc m_desc;
-		bool m_fullscreen = false;
 		void (*m_closeCallback)(SpringWindow*);
 	};
 }
