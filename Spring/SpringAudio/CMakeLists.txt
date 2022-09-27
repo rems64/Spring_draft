@@ -5,7 +5,7 @@ set(SRCS
 	"src/SpringAudioApi.cpp"
 	"src/SpringAudioApi_NativeWindows.cpp"
 
-)
+ "src/SpringAudioDevice_NativeWindows.cpp")
 
 add_library(SpringAudio ${SRCS})
 add_library(Spring::SpringAudio ALIAS SpringAudio)

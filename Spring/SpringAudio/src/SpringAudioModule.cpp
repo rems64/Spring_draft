@@ -13,12 +13,14 @@ namespace spring::audio
 
 	SpringAudioModule::~SpringAudioModule() = default;
 
-	void SpringAudioModule::update()
+	void SpringAudioModule::update(bool closeRequired)
 	{
+		if(closeRequired)
+			shouldClose = true;
 	}
 
 	bool SpringAudioModule::canClose()
 	{
-		return true;
+		return shouldClose; // TODO
 	}
 }

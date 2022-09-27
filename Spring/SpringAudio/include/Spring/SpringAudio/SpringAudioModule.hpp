@@ -11,7 +11,7 @@ namespace spring::audio
 		explicit SpringAudioModule(core::SpringApplication* app);
 		~SpringAudioModule() override;
 
-		void update() override;
+		void update(bool closeRequired) override;
 		bool canClose() override;
 	protected:
 		Scope<ISpringAudioApi> m_api;

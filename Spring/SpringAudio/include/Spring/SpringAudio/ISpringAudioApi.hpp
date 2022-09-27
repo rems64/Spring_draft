@@ -4,17 +4,21 @@
 
 namespace spring::audio
 {
+	class Device;
+	enum class DeviceNature
+	{
+		Capture,
+		Rendering
+	};
+	struct DeviceDesc
+	{
+		DeviceNature nature=DeviceNature::Rendering;
+	};
+
 	class ISpringAudioApi
 	{
 	public:
-		//ISpringAudioApi() = default;
-
-		//ISpringAudioApi(ISpringAudioApi&) = delete;
-		//ISpringAudioApi(ISpringAudioApi&&) = delete;
-		//ISpringAudioApi& operator=(const ISpringAudioApi&) = delete;
-		//ISpringAudioApi& operator=(const ISpringAudioApi&&) = delete;
-
-		//virtual ~ISpringAudioApi() = 0;
+		virtual Scope<audio::Device> createDevice(DeviceDesc& desc) = 0;
 
 		static Scope<ISpringAudioApi> build();
 	};
