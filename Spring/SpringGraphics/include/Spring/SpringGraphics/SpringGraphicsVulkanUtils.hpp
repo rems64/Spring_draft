@@ -22,4 +22,6 @@ namespace spring::graphics
 	}
 }
 
+#define VK_CALL(x) (x)
+
 #endif

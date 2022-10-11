@@ -4,6 +4,7 @@
 
 namespace spring::graphics
 {
+	class SpringWindow;
 	// Structure from Wicked engine : https://github.com/turanszkij/WickedEngine
 	struct GraphicsDeviceChild
 	{
@@ -79,8 +80,8 @@ namespace spring::graphics
 	{
 		uint32_t width = 640;
 		uint32_t height = 480;
-		bool hasSurface = true;
-		GraphicsSurface* surface = nullptr;
+		bool presentWindow = true;
+		SpringWindow* window = nullptr;
 	};
 
 	struct SwapChain : public GraphicsDeviceChild

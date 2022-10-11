@@ -14,6 +14,8 @@ namespace spring::graphics
 
 		virtual bool construct() override;
 		virtual spWinHandle getHandle() override;
+		virtual bool buildSurface(SpringGraphicsApi* api) override;
+		virtual GraphicsSurface* getSurface() const override;
 		virtual bool shouldClose() override;
 
 		virtual void close() override;
@@ -21,7 +23,8 @@ namespace spring::graphics
 		LRESULT CALLBACK windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	protected:
-		HWND m_window;
+		HWND m_window = NULL;
+		HINSTANCE m_hInst = NULL;
 		bool m_pendingDestroy = false;
 	};
 

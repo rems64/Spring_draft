@@ -27,7 +27,7 @@ namespace spring::graphics
 		virtual void init() = 0;
 		virtual void shutdown() = 0;
 
-		//virtual GraphicsSurface* getSurface(SpringWindow* window) = 0;
+		virtual GraphicsSurface* getSurface(SpringWindow* window) = 0;
 
 		virtual GraphicsDevice* createDevice(GraphicsDeviceDesc desc) = 0;
 

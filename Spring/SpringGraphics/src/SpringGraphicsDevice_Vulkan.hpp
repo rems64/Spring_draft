@@ -112,7 +112,7 @@ namespace spring::graphics
 		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) const;
 		bool createDevice();
 		bool checkDeviceExtensionSupport(VkPhysicalDevice device);
-		SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device, GraphicsSurface_Vulkan* surface);
+		SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR& surface);
 		AllocationHandler* getAllocationHandler() const;
 
 	private:

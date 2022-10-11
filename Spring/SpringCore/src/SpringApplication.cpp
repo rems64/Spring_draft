@@ -19,13 +19,15 @@ namespace spring::core
         m_instance = infos.instance;
         if (infos.showConsole)
         {
-            FILE* fp;
 
             AllocConsole();
-            SetConsoleTitle("Spring console");
+            AttachConsole(GetCurrentProcessId());
+            
+            FILE* fp;
             freopen_s(&fp, "CONIN$", "r", stdin);
             freopen_s(&fp, "CONOUT$", "w", stdout);
             freopen_s(&fp, "CONOUT$", "w", stderr);
+            SetConsoleTitle("Spring console");
             m_console = GetConsoleWindow();
         }
 

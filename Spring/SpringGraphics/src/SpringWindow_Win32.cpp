@@ -3,6 +3,13 @@
 #include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
 
 #include <Spring/SpringCore/SpringApplication.hpp>
+#include <Spring/SpringGraphics/SpringGraphicsModule.hpp>
+#include <Spring/SpringGraphics/SpringGraphicsCommon.hpp>
+
+#if defined(SPRING_BUILD_VK)
+#include <Spring/SpringGraphics/SpringGraphicsVulkanUtils.hpp>
+#include "SpringGraphicsApi_Vulkan.hpp"
+#endif
 
 namespace spring::graphics
 {
@@ -14,7 +21,6 @@ namespace spring::graphics
 
 	SpringWindow_Win32::~SpringWindow_Win32()
 	{
-
 	}
 
 	bool SpringWindow_Win32::construct()
@@ -22,10 +28,10 @@ namespace spring::graphics
 		const LPCSTR CLASS_NAME = "Sample Window Class";
 		WNDCLASS wc = { };
 
-		HINSTANCE hInst = spring::core::SpringApplication::get()->getNativeInstance();
+		m_hInst = spring::core::SpringApplication::get()->getNativeInstance();
 
 		wc.lpfnWndProc = winProcDispatch;
-		wc.hInstance = hInst;
+		wc.hInstance = m_hInst;
 		wc.lpszClassName = CLASS_NAME;
 		RegisterClass(&wc);
 
@@ -91,7 +97,7 @@ namespace spring::graphics
 			windowRect.bottom - windowRect.top,
 			NULL,
 			NULL,
-			hInst,
+			m_hInst,
 			NULL);
 
 		if (m_window == NULL)
@@ -119,6 +125,37 @@ namespace spring::graphics
 		return &m_window;
 	}
 
+	bool SpringWindow_Win32::buildSurface(SpringGraphicsApi* api)
+	{
+		if(!m_surface)
+		{
+			const VkInstance* inst = dynamic_cast<SpringGraphicsApi_Vulkan*>(api)->getInstance();
+			m_surface = makeRef<GraphicsSurface>();
+			Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
+			surface_internal->relatedInstance = *inst;
+			VkWin32SurfaceCreateInfoKHR createInfo =
+			{
+				.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR,
+				.hinstance = m_hInst,
+				.hwnd = m_window,
+			};
+			VK_CALL(vkCreateWin32SurfaceKHR(*inst, &createInfo, nullptr, &surface_internal->surface));
+			m_surface->internal_state = surface_internal;
+			m_surface->width = m_desc.width;
+			m_surface->height = m_desc.height;
+		}
+
+		return true;
+	}
+
+	GraphicsSurface* SpringWindow_Win32::getSurface() const
+	{
+		if(!m_surface)
+			core::error("Surface not initialized");
+			//buildSurface(dynamic_cast<SpringGraphicsModule*>(core::SpringApplication::get()->getModule(core::SpringModuleTypes::Graphics))->getApi());
+		return m_surface.get();
+	}
+
 	bool SpringWindow_Win32::shouldClose()
 	{
 		return m_pendingDestroy;
@@ -139,8 +176,7 @@ namespace spring::graphics
 			int width = LOWORD(lParam);  // Macro to get the low-order word.
 			int height = HIWORD(lParam); // Macro to get the high-order word.
 
-			// Respond to the message:
-			std::cout << "Resizing window with width(" << width << ") height(" << height << ")\n";
+			// std::cout << "Resizing window with width(" << width << ") height(" << height << ")\n";
 			break;
 		}
 		case WM_DESTROY:
@@ -153,8 +189,8 @@ namespace spring::graphics
 
 	LRESULT CALLBACK winProcDispatch(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
-		//std::cout << "Global win proc -> dispatching\n";
-		//SpringWindow_Win32* win = reinterpret_cast<SpringWindow_Win32*>(GetWindowLongPtr(hwnd, 0));
+		// std::cout << "Global win proc -> dispatching\n";
+		// SpringWindow_Win32* win = reinterpret_cast<SpringWindow_Win32*>(GetWindowLongPtr(hwnd, 0));
 		SpringWindow_Win32* win = reinterpret_cast<SpringWindow_Win32*>(GetPropW(hwnd, L"SPRING"));
 		return win->windowProc(hwnd, uMsg, wParam, lParam);
 	}

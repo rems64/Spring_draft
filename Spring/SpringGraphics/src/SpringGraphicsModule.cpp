@@ -8,7 +8,6 @@
 #include <Spring/SpringCore/SpringApplication.hpp>
 
 #include <spdlog/spdlog.h>
-#include <GLFW/glfw3.h>
 
 namespace spring::graphics
 {
@@ -25,7 +24,7 @@ namespace spring::graphics
         SP_PROFILE_FUNCTION();
         for (auto& win : m_windows)
         {
-            win.~shared_ptr();
+            win.reset();
         }
         SpringWindow::shutdown();
     }

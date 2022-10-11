@@ -33,6 +33,8 @@ namespace spring::graphics
 
 		virtual bool construct() = 0;
 		virtual spWinHandle getHandle() = 0;
+		virtual bool buildSurface(SpringGraphicsApi* api) = 0;
+		virtual GraphicsSurface* getSurface() const = 0;
 
 		virtual void close() { if(m_closeCallback) m_closeCallback(this); };
 		virtual bool shouldClose() = 0;
@@ -55,5 +57,6 @@ namespace spring::graphics
 	protected:
 		WindowDesc m_desc;
 		void (*m_closeCallback)(SpringWindow*);
+		Ref<GraphicsSurface> m_surface;
 	};
 }

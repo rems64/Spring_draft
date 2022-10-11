@@ -107,10 +107,14 @@ namespace spring::graphics
 
 		if (m_desc.supportPresent)
 		{
-			if (m_desc.surfaces.empty())
+			if (m_desc.drawingWindows.empty())
 			{
 				spdlog::error("No surface provided to device while it should support presentation!");
 				throw std::runtime_error("Invalid surface");
+			}
+			for (const auto& win : m_desc.drawingWindows)
+			{
+				win->buildSurface(m_api);
 			}
 			m_deviceRequiredExtensions.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
 		}
@@ -217,13 +221,13 @@ namespace spring::graphics
 			if (!supportExt)
 				continue;
 			std::vector<SwapChainSupportDetails> swapChainSupports{};
-			for (auto& surface : m_desc.surfaces)
-			{
-				Ref<GraphicsSurface_Vulkan> surface_vk = std::static_pointer_cast<GraphicsSurface_Vulkan>(
-					surface->internal_state);
-				SwapChainSupportDetails swapChainSupport = querySwapChainSupport(pDevice, surface_vk.get());
-				swapChainAdequate &= !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
-			}
+			//for (auto& surface : m_desc.surfaces)
+			//{
+			//	Ref<GraphicsSurface_Vulkan> surface_vk = std::static_pointer_cast<GraphicsSurface_Vulkan>(
+			//		surface->internal_state);
+			//	SwapChainSupportDetails swapChainSupport = querySwapChainSupport(pDevice, surface_vk.get());
+			//	swapChainAdequate &= !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
+			//}
 			if (!supportExt || !swapChainAdequate)
 				continue;
 			spdlog::info("  Device \"{}\" ({}) --> {} available extensions", properties.deviceName,
@@ -258,30 +262,30 @@ namespace spring::graphics
 	}
 
 	SwapChainSupportDetails GraphicsDevice_Vulkan::querySwapChainSupport(
-		VkPhysicalDevice device, GraphicsSurface_Vulkan* surface)
+		VkPhysicalDevice device, VkSurfaceKHR& surface)
 	{
 		SP_PROFILE_FUNCTION();
 
 		SwapChainSupportDetails details = {};
 
-		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface->surface, &details.capabilities);
+		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities);
 
 		uint32_t formatCount;
-		vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface->surface, &formatCount, nullptr);
+		vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
 
 		if (formatCount != 0)
 		{
 			details.formats.resize(formatCount);
-			vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface->surface, &formatCount, details.formats.data());
+			vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
 		}
 
 		uint32_t presentModeCount;
-		vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface->surface, &presentModeCount, nullptr);
+		vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
 
 		if (presentModeCount != 0)
 		{
 			details.presentModes.resize(presentModeCount);
-			vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface->surface, &presentModeCount,
+			vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount,
 			                                          details.presentModes.data());
 		}
 		return details;
@@ -314,12 +318,12 @@ namespace spring::graphics
 
 			if (m_desc.supportPresent)
 			{
-				if (m_desc.surfaces.size() <= 0)
-					spdlog::error("Shouldn't be here...");
-				VkBool32 presentSupport = false;
-				VkSurfaceKHR surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(
-					m_desc.surfaces[0]->internal_state)->surface;
-				vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+				//if (m_desc.surfaces.size() <= 0)
+				//	spdlog::error("Shouldn't be here...");
+				VkBool32 presentSupport = true; // TODO
+				//VkSurfaceKHR surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(
+				//	m_desc.surfaces[0]->internal_state)->surface;
+				//vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
 
 				if (presentSupport)
 				{
@@ -484,16 +488,17 @@ namespace spring::graphics
 		swapchain->desc = desc;
 		swapchain->internal_state = internal_state;
 
-		if (desc.hasSurface && internal_state->surface == VK_NULL_HANDLE)
+		if (desc.presentWindow && internal_state->surface == VK_NULL_HANDLE)
 		{
 			internal_state->hasSurface = true;
-			internal_state->surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.surface->internal_state)->
-				surface;
+			internal_state->surface = std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.window->getSurface()->internal_state)->surface;
 		}
 
-		// Swapchain support
-		SwapChainSupportDetails swapChainSupport = querySwapChainSupport(
-			m_physicalDevice, std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.surface->internal_state).get());
+		//Swapchain support
+		//SwapChainSupportDetails swapChainSupport = querySwapChainSupport(
+			//m_physicalDevice, std::static_pointer_cast<GraphicsSurface_Vulkan>(desc.window->get->internal_state).get());
+		SwapChainSupportDetails swapChainSupport = querySwapChainSupport(m_physicalDevice, internal_state->surface);
+		//SwapChainSupportDetails swapChainSupport = querySwapChainSupport(m_physicalDevice, VK_NULL_HANDLE);
 
 		VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
 		VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
@@ -506,8 +511,8 @@ namespace spring::graphics
 		else
 		{
 			extent = {
-				(desc.surface->width),
-				(desc.surface->height)
+				desc.width,
+				desc.height
 			};
 
 			extent.width = std::clamp(extent.width, swapChainSupport.capabilities.minImageExtent.width,

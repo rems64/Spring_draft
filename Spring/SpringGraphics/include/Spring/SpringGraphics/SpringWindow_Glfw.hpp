@@ -21,6 +21,8 @@ namespace spring::graphics
 
 		virtual bool construct() override;
 		virtual spWinHandle getHandle() override;
+		virtual bool buildSurface(SpringGraphicsApi* api) override { return false; };
+		virtual GraphicsSurface* getSurface() const override { return nullptr; };
 		virtual bool shouldClose() override;
 
 		virtual void close() override;

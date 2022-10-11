@@ -11,7 +11,8 @@ namespace spring::graphics
 	{
 		bool onlyDiscrete = false;
 		bool supportPresent = true;
-		std::vector<GraphicsSurface*> surfaces = {};
+		std::vector<Ref<SpringWindow>> drawingWindows;
+		//std::vector<GraphicsSurface*> surfaces = {};
 	};
 
 

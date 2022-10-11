@@ -5,6 +5,7 @@
 
 #include <spdlog/spdlog.h>
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
+#include <Spring/SpringGraphics/ISpringWindow.hpp>
 
 namespace spring::graphics
 {
@@ -31,6 +32,7 @@ namespace spring::graphics
         DestroyDebugUtilsMessengerEXT(m_instance, m_debugMessenger, nullptr);
 #endif
         m_devices.clear();
+        m_surfaces.clear();
         //m_surfaces.clear();
         vkGetInstanceProcAddr(m_instance, "name");
 
@@ -156,30 +158,39 @@ namespace spring::graphics
         }
 	}
 
-    //GraphicsSurface* SpringGraphicsApi_Vulkan::getSurface(SpringWindow* window)
-    //{
-    //    Scope<GraphicsSurface> surface = makeScope<GraphicsSurface>();
+    GraphicsSurface* SpringGraphicsApi_Vulkan::getSurface(SpringWindow* window)
+    {
+        Scope<GraphicsSurface> surface = makeScope<GraphicsSurface>();
 
-    //    Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
-    //    VkResult res = glfwCreateWindowSurface(m_instance, window->getHandle(), nullptr, &surface_internal->surface);
-    //    if (res != VK_SUCCESS)
-    //    {
-    //        const char* description;
-    //        int code = glfwGetError(&description);
+        Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
+#if defined(SP_WIN32)
+        VkWin32SurfaceCreateInfoKHR surfaceCreateInfo = {};
+	    surfaceCreateInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+	    surfaceCreateInfo.hinstance = spring::core::SpringApplication::get()->getNativeInstance();
+	    surfaceCreateInfo.hwnd = (HWND)window->getHandle();
+	    VkResult err = vkCreateWin32SurfaceKHR(m_instance, &surfaceCreateInfo, nullptr, &surface_internal->surface);
 
-    //        if (description)
-    //            spdlog::error("code: {}, {}", code, description);
-    //        spdlog::error("Error while creating window surface! ({})", res);
-    //    }
-    //    surface_internal->relatedInstance = m_instance;
-    //    surface->internal_state = surface_internal;
-    //    GraphicsSurface* surfacePtr = surface.get();
-    //    registerSurface(surface);
+#elif defined(SP_LINUX)
+        VkResult res = glfwCreateWindowSurface(m_instance, window->getHandle(), nullptr, &surface_internal->surface);
+        if (res != VK_SUCCESS)
+        {
+            const char* description;
+            int code = glfwGetError(&description);
 
-    //    return surfacePtr;
-    //}
+            if (description)
+                spdlog::error("code: {}, {}", code, description);
+            spdlog::error("Error while creating window surface! ({})", res);
+        }
+#endif
+        surface_internal->relatedInstance = m_instance;
+        surface->internal_state = surface_internal;
+        GraphicsSurface* surfacePtr = surface.get();
+        registerSurface(surface);
 
-    GraphicsDevice* SpringGraphicsApi_Vulkan::createDevice(GraphicsDeviceDesc desc)
+        return surfacePtr;
+    }
+
+    GraphicsDevice* SpringGraphicsApi_Vulkan::createDevice(GraphicsDeviceDesc desc = {})
 	{
         Scope<GraphicsDevice_Vulkan> device = makeScope<GraphicsDevice_Vulkan>(desc, this);
         GraphicsDevice_Vulkan* devicePtr = device.get();

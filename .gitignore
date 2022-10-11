@@ -4,3 +4,4 @@ bin/
 build/
 .ninja
 .log
+TODOLIST.md
