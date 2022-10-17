@@ -106,7 +106,7 @@ namespace spring::graphics
 
 		bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) override;
 		bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) override;
-		bool createShader(ShaderDesc& desc, Shader* shader) override;
+		bool createShader(ShaderDesc desc, Shader* shader) override;
 
 		bool pickPhysicalDevice();
 		QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) const;

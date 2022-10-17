@@ -14,8 +14,8 @@
 #endif
 
 
-//#define SPRING_BUILD_VK
-#define SPRING_BUILD_GL
+#define SPRING_BUILD_VK
+//#define SPRING_BUILD_GL
 
 #ifdef SPRING_BUILD_VK
 //#define VULKAN_HPP_NO_CONSTRUCTORS

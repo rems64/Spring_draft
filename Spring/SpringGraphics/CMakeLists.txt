@@ -48,6 +48,8 @@ find_package(Vulkan REQUIRED)
 
 target_link_libraries(SpringGraphics Spring::SpringCore)
 target_link_libraries(SpringGraphics Vulkan::Vulkan)
+target_link_libraries(SpringGraphics utfconv)
+target_link_libraries(SpringGraphics Dwmapi)
 # target_link_libraries(SpringGraphics ${Vulkan_LIBRARY})
 
 

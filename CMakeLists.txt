@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 project(SpringAll)
 
 add_subdirectory(lib/spdlog)
+add_subdirectory(lib/utfconv)
 
 add_subdirectory (Spring)
 add_subdirectory (SpringEditor)

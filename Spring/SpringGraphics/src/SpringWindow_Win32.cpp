@@ -1,11 +1,14 @@
 #if defined(_WIN32)
 
+#include <dwmapi.h>
+
 #include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
 
 #include <Spring/SpringCore/SpringApplication.hpp>
 #include <Spring/SpringGraphics/SpringGraphicsModule.hpp>
 #include <Spring/SpringGraphics/SpringGraphicsCommon.hpp>
 
+#include <utfconv.h>
 #if defined(SPRING_BUILD_VK)
 #include <Spring/SpringGraphics/SpringGraphicsVulkanUtils.hpp>
 #include "SpringGraphicsApi_Vulkan.hpp"
@@ -25,15 +28,32 @@ namespace spring::graphics
 
 	bool SpringWindow_Win32::construct()
 	{
-		const LPCSTR CLASS_NAME = "Sample Window Class";
-		WNDCLASS wc = { };
+		DWORD lightMode = FALSE;
+		DWORD pcbData = sizeof(lightMode);
+		BOOL darkMode = false;
+		if (RegGetValueW(HKEY_CURRENT_USER,
+						L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\\",
+						L"AppsUseLightTheme",
+						RRF_RT_REG_DWORD,
+						NULL,
+						&lightMode,
+						&pcbData) == ERROR_SUCCESS) {
+			darkMode = !lightMode;
+		}
+		COLORREF bgColor = RGB(255, 255, 255);
+		if(darkMode)
+			bgColor = RGB(30, 30, 30);
+
+		const LPCWSTR CLASS_NAME = L"SpringWindow";
+		WNDCLASSW wc = {};
 
 		m_hInst = spring::core::SpringApplication::get()->getNativeInstance();
 
+		wc.hbrBackground = CreateSolidBrush(bgColor);
 		wc.lpfnWndProc = winProcDispatch;
 		wc.hInstance = m_hInst;
 		wc.lpszClassName = CLASS_NAME;
-		RegisterClass(&wc);
+		RegisterClassW(&wc);
 
 		int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 		int screenHeight = GetSystemMetrics(SM_CYSCREEN);
@@ -44,14 +64,14 @@ namespace spring::graphics
 		{
 			if ((m_desc.width != (uint32_t)screenWidth) && (m_desc.height != (uint32_t)screenHeight))
 			{
-				DEVMODE dmScreenSettings{};
+				DEVMODEW dmScreenSettings{};
 				//memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
 				dmScreenSettings.dmSize       = sizeof(dmScreenSettings);
 				dmScreenSettings.dmPelsWidth  = m_desc.width;
 				dmScreenSettings.dmPelsHeight = m_desc.height;
 				dmScreenSettings.dmBitsPerPel = 32;
 				dmScreenSettings.dmFields     = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
-				if (ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL)
+				if (ChangeDisplaySettingsW(&dmScreenSettings, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL)
 				{
 					if (MessageBox(NULL, "Fullscreen Mode not supported!\n Switch to window mode?", "Error", MB_YESNO | MB_ICONEXCLAMATION) == IDYES)
 					{
@@ -87,9 +107,12 @@ namespace spring::graphics
 		windowRect.right = m_desc.fullscreen ? (long)screenWidth : (long)m_desc.width;
 		windowRect.bottom = m_desc.fullscreen ? (long)screenHeight : (long)m_desc.height;
 		
-		m_window = CreateWindowEx(0,
+		std::wstring widestr = std::wstring(this->m_desc.title.begin(), this->m_desc.title.end());
+		
+		wchar_t *title_16 = alloc_utf16_from_8((char *)this->m_desc.title.c_str(), 0);
+		m_window = CreateWindowExW(0,
 			CLASS_NAME,
-			this->m_desc.title.c_str(),
+			title_16,
 			dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
 			0,
 			0,
@@ -117,6 +140,9 @@ namespace spring::graphics
 		//SetWindowLongPtr(m_window, 0, reinterpret_cast<LONG_PTR>(this));
 		SetPropW(m_window, L"SPRING", this);
 		ShowWindow(m_window, SW_SHOWNORMAL);
+
+		refreshTheme();
+
 		return true;
 	}
 
@@ -167,24 +193,54 @@ namespace spring::graphics
 		m_pendingDestroy = true;
 	}
 
+	void SpringWindow_Win32::refreshTheme()
+	{
+		DWORD lightMode = FALSE;
+		DWORD pcbData = sizeof(lightMode);
+		BOOL darkMode = false;
+		if (RegGetValueW(HKEY_CURRENT_USER,
+						L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\\",
+						L"AppsUseLightTheme",
+						RRF_RT_REG_DWORD,
+						NULL,
+						&lightMode,
+						&pcbData) == ERROR_SUCCESS) {
+			darkMode = !lightMode;
+		}
+
+		// https://developer.blender.org/rBddbac88c08ef
+		/* 20 == DWMWA_USE_IMMERSIVE_DARK_MODE in Windows 11 SDK.  This value was undocumented for
+			* Windows 10 versions 2004 and later, supported for Windows 11 Build 22000 and later. */
+		DwmSetWindowAttribute(m_window, 20, &(darkMode), sizeof(darkMode));
+
+	}
+
 	LRESULT CALLBACK SpringWindow_Win32::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
-		switch (uMsg)
-		{
-		case WM_SIZE:
-		{
-			int width = LOWORD(lParam);  // Macro to get the low-order word.
-			int height = HIWORD(lParam); // Macro to get the high-order word.
+		char* str;
+		switch (uMsg) {
+			case WM_SIZE: {
+				int width = LOWORD(lParam);  // Macro to get the low-order word.
+				int height = HIWORD(lParam); // Macro to get the high-order word.
 
-			// std::cout << "Resizing window with width(" << width << ") height(" << height << ")\n";
-			break;
-		}
-		case WM_DESTROY:
-			close();
-			break;
+				// std::cout << "Resizing window with width(" << width << ") height(" << height << ")\n";
+				break;
+			}
+			case WM_DESTROY: {
+				close();
+				break;
+			}
+			case WM_SETTINGCHANGE: {
+				// 694321936456
+				if((lParam != NULL) && (wcscmp((LPCWSTR)lParam, L"ImmersiveColorSet") == 0))
+				{
+					refreshTheme();
+				}
+				break;
+			}
 		}
 
-		return DefWindowProc(hwnd, uMsg, wParam, lParam);
+		return DefWindowProcW(hwnd, uMsg, wParam, lParam);
 	}
 
 	LRESULT CALLBACK winProcDispatch(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

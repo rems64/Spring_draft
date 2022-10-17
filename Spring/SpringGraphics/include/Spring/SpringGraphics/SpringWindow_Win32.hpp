@@ -23,6 +23,8 @@ namespace spring::graphics
 		LRESULT CALLBACK windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	protected:
+		virtual void refreshTheme() override;
+	protected:
 		HWND m_window = NULL;
 		HINSTANCE m_hInst = NULL;
 		bool m_pendingDestroy = false;

@@ -55,6 +55,8 @@ namespace spring::graphics
 		static std::vector<const char*> getRequiredExtensions() { return {}; };
 #endif
 	protected:
+		virtual void refreshTheme() = 0;
+	protected:
 		WindowDesc m_desc;
 		void (*m_closeCallback)(SpringWindow*);
 		Ref<GraphicsSurface> m_surface;

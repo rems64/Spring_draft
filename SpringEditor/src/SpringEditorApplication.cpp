@@ -6,7 +6,7 @@
 
 using namespace spring;
 
-SpringEditorApplication::SpringEditorApplication(const spring::core::SpringApplicationInfos infos) : SpringApplication(infos), m_swapChain(makeRef<graphics::SwapChain>())
+SpringEditorApplication::SpringEditorApplication(const spring::core::SpringApplicationInfos infos) : SpringApplication(infos), m_swapChain(makeRef<graphics::SwapChain>()), m_graphicsPipeline(makeRef<graphics::GaphicsPipeline>()), m_vertexShader(makeRef<graphics::Shader>())
 //SpringEditorApplication::SpringEditorApplication(const spring::core::SpringApplicationInfos infos) : SpringApplication(infos)
 {
 	m_graphicsModule = registerModule<spring::graphics::SpringGraphicsModule>();
@@ -25,6 +25,11 @@ SpringEditorApplication::SpringEditorApplication(const spring::core::SpringAppli
 	if (!res)
 		SPRING_ERROR("Failed to create swap chain!")
 
-	//m_mainDevice->createShader(graphics::ShaderStage::Vertex, );
-	//std::vector<char> shader = spring::core::readFile("shaders/test");
+	std::vector<char> shader = spring::core::readFile("../../../DevShaders/ColoredTriangle/vert.spv");
+	m_mainDevice->createShader({ .stage = graphics::ShaderStage::Vertex, .source = reinterpret_cast<const uint32_t*>(shader.data()), .size = shader.size() }, m_vertexShader.get());
+
+	graphics::GraphicsPipelineDesc pipelineDesc = {};
+	m_mainDevice->createGraphicsPipeline(pipelineDesc, m_graphicsPipeline.get());
+
+
 }

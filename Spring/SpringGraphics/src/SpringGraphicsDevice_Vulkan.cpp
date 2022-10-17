@@ -719,7 +719,7 @@ namespace spring::graphics
 		return true;
 	}
 
-	bool GraphicsDevice_Vulkan::createShader(ShaderDesc& desc, Shader* shader)
+	bool GraphicsDevice_Vulkan::createShader(ShaderDesc desc, Shader* shader)
 	{
 		SP_PROFILE_FUNCTION();
 		const Ref<Shader_Vulkan> internal_state = makeRef<Shader_Vulkan>();

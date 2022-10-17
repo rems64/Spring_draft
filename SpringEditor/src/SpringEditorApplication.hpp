@@ -25,4 +25,5 @@ private:
     Ref<spring::graphics::SwapChain> m_swapChain;
     Ref<spring::graphics::Shader> m_vertexShader;
     Ref<spring::graphics::Shader> m_fragmentShader;
+    Ref<spring::graphics::GaphicsPipeline> m_graphicsPipeline;
 };

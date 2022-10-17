@@ -28,6 +28,8 @@ namespace spring::graphics
 		virtual void close() override;
 #ifdef SPRING_BUILD_VK
 		static std::vector<const char*> getRequiredExtensions();
+	protected:
+		virtual void refreshTheme() override = 0;
 	private:
 		VkSurfaceKHR surface;
 #endif

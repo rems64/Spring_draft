@@ -24,7 +24,7 @@ namespace spring::graphics
 
 		virtual bool createSwapChain(SwapChainDesc& desc, SwapChain* swapchain) = 0;
 		virtual bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GaphicsPipeline* swapchain) = 0;
-		virtual bool createShader(ShaderDesc& desc, Shader* shader) = 0;
+		virtual bool createShader(ShaderDesc desc, Shader* shader) = 0;
 	protected:
 		GraphicsDeviceDesc m_desc;
 	};

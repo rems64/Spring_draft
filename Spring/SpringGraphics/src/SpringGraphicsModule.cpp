@@ -7,7 +7,7 @@
 
 #include <Spring/SpringCore/SpringApplication.hpp>
 
-#include <spdlog/spdlog.h>
+//#include <spdlog/spdlog.h>
 
 namespace spring::graphics
 {

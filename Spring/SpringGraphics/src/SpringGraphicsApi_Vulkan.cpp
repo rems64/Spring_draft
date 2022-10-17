@@ -3,7 +3,7 @@
 
 #include <Spring/SpringCore/SpringCore.hpp>
 
-#include <spdlog/spdlog.h>
+//#include <spdlog/spdlog.h>
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
 
