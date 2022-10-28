@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(springgraphics VERSION 1.0.0 LANGUAGES CXX)
+project(SpringGraphics VERSION 1.0.0 LANGUAGES CXX)
 
 set(SRCS
 	
@@ -10,11 +10,11 @@ set(SRCS
 	"src/SpringGraphicsApi_Vulkan.cpp"
 	"src/ISpringGraphicsApi.cpp"
 	"src/SpringGraphicsDevice_Vulkan.cpp"
-)
+		)
 
 
 add_library(SpringGraphics ${SRCS})
-add_library(Spring::SpringGraphics ALIAS SpringGraphics)
+#add_library(Spring::SpringGraphics ALIAS SpringGraphics)
 
 target_include_directories(SpringGraphics
 	PUBLIC
@@ -35,6 +35,13 @@ target_compile_definitions(SpringGraphics
 	PRIVATE	SPRING_BUILD_VK
 	PUBLIC SPRING_BUILD_VK
 )
+
+# Warnings as errors
+target_compile_options(SpringGraphics PRIVATE
+		$<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+		$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+		)
+
 
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)

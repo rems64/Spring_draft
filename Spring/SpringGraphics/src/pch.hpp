@@ -14,7 +14,7 @@
 #endif
 
 
-#define SPRING_BUILD_VK
+//#define SPRING_BUILD_VK
 //#define SPRING_BUILD_GL
 
 #ifdef SPRING_BUILD_VK

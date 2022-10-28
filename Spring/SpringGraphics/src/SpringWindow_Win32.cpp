@@ -5,6 +5,7 @@
 #include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
 
 #include <Spring/SpringCore/SpringApplication.hpp>
+#include <Spring/SpringCore/SpringCommon.hpp>
 #include <Spring/SpringGraphics/SpringGraphicsModule.hpp>
 #include <Spring/SpringGraphics/SpringGraphicsCommon.hpp>
 
@@ -217,11 +218,10 @@ namespace spring::graphics
 
 	LRESULT CALLBACK SpringWindow_Win32::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
-		char* str;
 		switch (uMsg) {
 			case WM_SIZE: {
-				int width = LOWORD(lParam);  // Macro to get the low-order word.
-				int height = HIWORD(lParam); // Macro to get the high-order word.
+				//int width = LOWORD(lParam);  // Macro to get the low-order word.
+				//int height = HIWORD(lParam); // Macro to get the high-order word.
 
 				// std::cout << "Resizing window with width(" << width << ") height(" << height << ")\n";
 				break;

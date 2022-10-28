@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mmdeviceapi.h>
+#include <Spring/SpringCore/SpringPlatform.hpp>
 #include <Spring/SpringAudio/ISpringAudioApi.hpp>
 
 namespace spring::audio

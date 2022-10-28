@@ -1,7 +1,5 @@
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
 
-#include <Spring/SpringCore/SpringProfiler.hpp>
-
 //#include <Spring/SpringGraphics/SpringGraphicsApi_Vulkan.hpp>
 #include "SpringGraphicsApi_Vulkan.hpp"
 

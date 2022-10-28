@@ -1,18 +1,18 @@
 #pragma once
 
-#include <Spring/SpringCore/SpringCommon.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
 
 namespace spring::audio
 {
 	class Device;
 	enum class DeviceNature
 	{
-		Capture,
-		Rendering
+		Input,
+		Output
 	};
 	struct DeviceDesc
 	{
-		DeviceNature nature=DeviceNature::Rendering;
+		DeviceNature nature=DeviceNature::Output;
 	};
 
 	class ISpringAudioApi

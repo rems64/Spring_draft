@@ -1,14 +1,15 @@
 #pragma once
 
+#include <Spring/SpringCore/SpringCore.hpp>
+#include <Spring/SpringCore/SpringPlatform.hpp>
 #include <Spring/SpringCore/SpringModule.hpp>
-#include <Spring/SpringCore/SpringCommon.hpp>
 
 namespace spring::core
 {
     struct SpringApplicationInfos
     {
         bool showConsole;
-        HINSTANCE instance;
+        spNativeInstance instance;
     };
 
     /**

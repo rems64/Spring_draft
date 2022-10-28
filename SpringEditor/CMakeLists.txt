@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(springeditor VERSION 1.0.0 LANGUAGES CXX)
+project(SpringEditor VERSION 1.0.0 LANGUAGES CXX)
 
 set(SRCS
 	"src/SpringEditor.cpp"
@@ -18,7 +18,7 @@ target_include_directories(SpringEditor
 
 # Warnings as errors
 target_compile_options(SpringEditor PRIVATE
-  $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+  $<$<CXX_COMPILER_ID:MSVC>:/W3 /WX>
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
 )
 
@@ -28,3 +28,9 @@ target_link_libraries(SpringEditor SpringGraphics)
 target_link_libraries(SpringEditor SpringAudio)
 
 target_compile_features(SpringEditor PRIVATE cxx_std_17)
+
+
+set_target_properties(SpringEditor PROPERTIES OUTPUT_NAME SpringEditor_${CMAKE_BUILD_TYPE})
+
+set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR} CACHE PATH "install here" FORCE)
+install(TARGETS SpringEditor)

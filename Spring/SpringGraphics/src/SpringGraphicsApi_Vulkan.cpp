@@ -1,9 +1,7 @@
-//#include <Spring/SpringGraphics/SpringGraphicsApi_Vulkan.hpp>
+#include <Spring/SpringCore/SpringApplication.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
 #include "SpringGraphicsApi_Vulkan.hpp"
 
-#include <Spring/SpringCore/SpringCore.hpp>
-
-//#include <spdlog/spdlog.h>
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
 
@@ -169,7 +167,8 @@ namespace spring::graphics
 	    surfaceCreateInfo.hinstance = spring::core::SpringApplication::get()->getNativeInstance();
 	    surfaceCreateInfo.hwnd = (HWND)window->getHandle();
 	    VkResult err = vkCreateWin32SurfaceKHR(m_instance, &surfaceCreateInfo, nullptr, &surface_internal->surface);
-
+        if(err)
+            spdlog::error("Failed to create win32 surface");
 #elif defined(SP_LINUX)
         VkResult res = glfwCreateWindowSurface(m_instance, window->getHandle(), nullptr, &surface_internal->surface);
         if (res != VK_SUCCESS)
@@ -204,10 +203,11 @@ namespace spring::graphics
         createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
         createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
         createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
-        createInfo.pfnUserCallback = SpringGraphicsApi_Vulkan::debugCallback;
+        createInfo.pfnUserCallback = reinterpret_cast<PFN_vkDebugUtilsMessengerCallbackEXT>(SpringGraphicsApi_Vulkan::debugCallback);
     }
 
     VKAPI_ATTR VkBool32 VKAPI_CALL SpringGraphicsApi_Vulkan::debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) {
+        pUserData; messageType;
         switch (messageSeverity)
         {
         case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:

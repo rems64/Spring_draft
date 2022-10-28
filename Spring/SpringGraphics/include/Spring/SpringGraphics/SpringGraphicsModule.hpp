@@ -1,7 +1,7 @@
 #pragma once
 #include <Spring/SpringCore/SpringModule.hpp>
 
-#include <Spring/SpringCore/SpringCommon.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
 
 namespace spring::graphics
 {

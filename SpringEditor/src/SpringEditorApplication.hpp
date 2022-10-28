@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spring/SpringCore/SpringCore.hpp>
+#include <Spring/SpringCore/SpringApplication.hpp>
 #include <Spring/SpringGraphics/SpringGraphics.hpp>
 #include <Spring/SpringAudio/SpringAudio.hpp>
 
@@ -12,7 +12,7 @@ class SpringEditorApplication final : public spring::core::SpringApplication
 public:
 	/**
 	 * @brief Construct app, initialize graphics module
-	 * @param infos the needed informations for creating the app, can be default
+	 * @param infos the needed pieces of information for creating the app
 	 */
 	explicit SpringEditorApplication(const spring::core::SpringApplicationInfos infos);
 

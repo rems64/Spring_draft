@@ -1,6 +1,6 @@
 #pragma once
 #ifndef NDEBUG
-//#define SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
+#define SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
 #endif
 
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
@@ -48,7 +48,7 @@ namespace spring::graphics
 		static void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 		static VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
 		static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
-		static VkBool32 debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
+		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
 		std::vector<const char*> m_validationLayers;
 		VkDebugUtilsMessengerEXT m_debugMessenger;
 #endif

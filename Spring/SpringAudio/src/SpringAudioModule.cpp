@@ -1,7 +1,5 @@
 #include <Spring/SpringAudio/SpringAudioModule.hpp>
 
-#include "Spring/SpringCore/SpringProfiler.hpp"
-
 namespace spring::audio
 {
 	SpringAudioModule::SpringAudioModule(core::SpringApplication* app) : SpringModule(app)

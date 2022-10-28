@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Spring/SpringCore/SpringCommon.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
 
 struct GLFWwindow;
 

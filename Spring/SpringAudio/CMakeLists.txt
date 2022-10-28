@@ -1,11 +1,10 @@
 project(springaudio VERSION 1.0.0 LANGUAGES CXX)
 
 set(SRCS
-	"src/SpringAudioModule.cpp"
-	"src/SpringAudioApi.cpp"
-	"src/SpringAudioApi_NativeWindows.cpp"
-
- "src/SpringAudioDevice_NativeWindows.cpp")
+		"src/SpringAudioModule.cpp"
+		"src/SpringAudioApi.cpp"
+		"src/SpringAudioApi_NativeWindows.cpp"
+		"src/SpringAudioDevice_NativeWindows.cpp")
 
 add_library(SpringAudio ${SRCS})
 add_library(Spring::SpringAudio ALIAS SpringAudio)

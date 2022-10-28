@@ -1,10 +1,11 @@
 #include "SpringAudioApi_NativeWindows.hpp"
 
 #include <Spring/SpringAudio/SpringAudioDevice.hpp>
+#include <Spring/SpringCore/SpringPlatform.hpp>
+#include <Spring/SpringCore/SpringCommon.hpp>
 
 #include <mmdeviceapi.h>
 #include <Audioclient.h>
-//#include <audiopolicy.h>
 #include <combaseapi.h>
 
 constexpr CLSID gClsid_MmDeviceEnumerator = __uuidof(MMDeviceEnumerator);
@@ -16,7 +17,7 @@ namespace spring::audio
 {
 	SpringAudioApi_NativeWindows::SpringAudioApi_NativeWindows() : m_deviceEnumerator(nullptr)
 	{
-        m_mmDeviceApi = core::loadLibrary("Mmdevapi.dll");
+        m_mmDeviceApi = spring::core::loadLibrary("Mmdevapi");
 		if (!m_mmDeviceApi)
 			SPRING_ERROR("Failed to load Mmdevapi.dll")
 
@@ -25,7 +26,8 @@ namespace spring::audio
 	        SPRING_ERROR("Failed to initialize COM for Spring Audio")
 
         hr = CoCreateInstance(gClsid_MmDeviceEnumerator, nullptr, CLSCTX_ALL, gIid_ImmDeviceEnumerator, reinterpret_cast<void**>(&m_deviceEnumerator));
-		spdlog::trace("{0:x}", hr);
+        if (hr)
+            spdlog::warn("Error ({:#08x}) in CoCreateInstance", hr);
 
 		spdlog::info("Successfully initialized native windows audio!");
 	}

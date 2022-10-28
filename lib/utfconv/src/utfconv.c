@@ -124,7 +124,7 @@ int conv_utf_16_to_8(const wchar_t *in16, char *out8, size_t size8)
 
   for (; out8 < out8end && (u = *in16); in16++, out8++) {
     if (u < 0x0080) {
-      *out8 = u;
+      *out8 = (char)u;
     }
     else if (u < 0x0800) {
       if (out8 + 1 >= out8end) {

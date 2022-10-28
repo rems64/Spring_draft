@@ -1,7 +1,8 @@
 #include <Spring/SpringCore/SpringApplication.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
+#include <Spring/SpringCore/SpringCommon.hpp>
 
 #include <Spring/SpringCore/SpringMisc.hpp>
-#include <Spring/SpringCore/SpringCore.hpp>
 
 #include <spdlog/spdlog.h>
 
