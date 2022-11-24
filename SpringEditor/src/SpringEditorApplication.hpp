@@ -14,7 +14,9 @@ public:
 	 * @brief Construct app, initialize graphics module
 	 * @param infos the needed pieces of information for creating the app
 	 */
-	explicit SpringEditorApplication(const spring::core::SpringApplicationInfos infos);
+	explicit SpringEditorApplication(spring::core::SpringApplicationInfos infos);
+
+    int mainLoopCall() override;
 
 private:
     Ref<spring::graphics::SpringGraphicsModule> m_graphicsModule;
@@ -25,5 +27,8 @@ private:
     Ref<spring::graphics::SwapChain> m_swapChain;
     Ref<spring::graphics::Shader> m_vertexShader;
     Ref<spring::graphics::Shader> m_fragmentShader;
-    Ref<spring::graphics::GaphicsPipeline> m_graphicsPipeline;
+    Ref<spring::graphics::GraphicsPipeline> m_graphicsPipeline;
+    Ref<spring::graphics::CommandBuffer> m_commandBuffer;
+    Ref<spring::graphics::CommandList> m_commandList;
+    Ref<spring::graphics::Buffer> m_vertexBuffer;
 };

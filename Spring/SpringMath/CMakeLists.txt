@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 project(Spring VERSION 1.0.0 LANGUAGES CXX)
 
 set(SRCS
-        include/Spring/SpringMath/SpringVector3d.hpp
-        )
+        include/Spring/SpringMath/SpringVector3.hpp
+        src/SpringVector3.cpp)
 
 
 add_library(SpringMath ${SRCS})
@@ -19,7 +19,7 @@ target_include_directories(SpringMath
 
 target_precompile_headers(SpringMath
         PUBLIC
-        include/Spring/SpringGraphics/pch.hpp
+        include/Spring/SpringMath/pch.hpp
         PRIVATE
         src/pch.hpp
         )

@@ -1,6 +1,6 @@
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
 
-#include <Spring/SpringCore/SpringProfiler.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
 
 #if defined(SP_WIN32)
 #include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
@@ -24,9 +24,9 @@ namespace spring::graphics
 	{
 		Ref<SpringWindow> window;
 
-#ifdef SP_WIN32
+#if defined(SP_WIN32)
 		window = makeRef<SpringWindow_Win32>(desc);
-#elif SP_LINUX
+#elif defined(SP_LINUX)
 		window = makeRef<SpringWindow_Glfw>(desc);
 #else
 		spring::core::error("Can't create a window, no supported backend");
@@ -41,11 +41,11 @@ namespace spring::graphics
 	void SpringWindow::initialize()
 	{
 		SP_PROFILE_FUNCTION();
-#ifdef SP_WIN32
+#if defined(SP_WIN32)
 		if (!true)
 			spdlog::error("Failed to initialize glfw");
 		return;
-#elif SP_LINUX
+#elif defined(SP_LINUX)
 		if (!glfwInit())
 			spdlog::error("Failed to initialize glfw");
 		return;
@@ -57,9 +57,9 @@ namespace spring::graphics
 
 	void SpringWindow::shutdown()
 	{
-#ifdef SP_WIN32
+#if defined(SP_WIN32)
 		return;
-#elif SP_LINUX
+#elif defined(SP_LINUX)
 		glfwTerminate();
 		return;
 #else

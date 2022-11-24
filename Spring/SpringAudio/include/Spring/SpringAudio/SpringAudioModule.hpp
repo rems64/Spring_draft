@@ -10,7 +10,7 @@ namespace spring::audio
 	{
 	public:
 		explicit SpringAudioModule(core::SpringApplication* app);
-		~SpringAudioModule() override;
+		~SpringAudioModule() override = default;
 
 		void update(bool closeRequired) override;
 		bool canClose() override;

@@ -33,4 +33,6 @@ namespace spring::graphics
 	LRESULT CALLBACK winProcDispatch(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 }
 
+#else
+#error "Should not be included in a non-windows build"
 #endif

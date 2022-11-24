@@ -6,3 +6,4 @@ build/
 .log
 .idea
 TODOLIST.md
+lib/spdlog/

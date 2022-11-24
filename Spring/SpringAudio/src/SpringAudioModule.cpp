@@ -1,4 +1,5 @@
 #include <Spring/SpringAudio/SpringAudioModule.hpp>
+#include <Spring/SpringCore/SpringLog.hpp>
 
 namespace spring::audio
 {
@@ -9,7 +10,7 @@ namespace spring::audio
 		m_api = ISpringAudioApi::build();
 	}
 
-	SpringAudioModule::~SpringAudioModule() = default;
+	//SpringAudioModule::~SpringAudioModule() = default;
 
 	void SpringAudioModule::update(bool closeRequired)
 	{

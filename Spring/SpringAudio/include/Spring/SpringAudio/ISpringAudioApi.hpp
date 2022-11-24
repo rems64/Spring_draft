@@ -19,6 +19,7 @@ namespace spring::audio
 	{
 	public:
 		virtual Scope<audio::Device> createDevice(DeviceDesc& desc) = 0;
+        virtual ~ISpringAudioApi() = default;
 
 		static Scope<ISpringAudioApi> build();
 	};

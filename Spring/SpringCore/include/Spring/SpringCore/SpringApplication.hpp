@@ -24,8 +24,8 @@ namespace spring::core
         template<typename T>
         Ref<T> registerModule();
         [[nodiscard]] SpringModule* getModule(SpringModuleTypes type) const;
-        [[nodiscard]] HINSTANCE getNativeInstance() const;
-        [[nodiscard]] void shutdown();
+        [[nodiscard]] spNativeInstance getNativeInstance() const;
+        void shutdown();
         static SpringApplication* get();
 
         /**
@@ -33,11 +33,11 @@ namespace spring::core
          * \return 0 if no error occured
          */
         virtual int mainLoop();
+        virtual int mainLoopCall() {return 0x0;};
 
     protected:
         static SpringApplication* m_app;
-        HINSTANCE m_instance;
-        HWND m_console;
+        spNativeInstance m_instance;
         std::vector<Ref<SpringModule>> m_modules;
         bool shutdowning = false;
     };

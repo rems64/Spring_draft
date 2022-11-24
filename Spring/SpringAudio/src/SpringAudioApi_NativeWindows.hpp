@@ -11,7 +11,6 @@ namespace spring::audio
 	{
 	public:
 		SpringAudioApi_NativeWindows();
-		~SpringAudioApi_NativeWindows() = default;
 
 		Scope<audio::Device> createDevice(DeviceDesc& desc) override;
 

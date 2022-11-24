@@ -7,10 +7,10 @@
 #include <deque>
 #include <mutex>
 #include <set>
+#include <unordered_map>
 #ifdef _WIN32
 #define NOMINMAX
 #include <Windows.h>
-#define VK_USE_PLATFORM_WIN32_KHR
 #endif
 
 
@@ -20,7 +20,8 @@
 #ifdef SPRING_BUILD_VK
 //#define VULKAN_HPP_NO_CONSTRUCTORS
 //#include <vulkan/vulkan.hpp>
-#include <vulkan/vulkan.h>
+//#include <vulkan/vulkan.h>
+#include <volk.h>
 #endif
 #ifdef SPRING_BUILD_GL
 #include <gl/GL.h>

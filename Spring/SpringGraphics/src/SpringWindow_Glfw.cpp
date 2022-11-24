@@ -1,9 +1,7 @@
-#ifdef SP_LINUX
+#include <Spring/SpringCore/SpringCore.hpp>
+#if defined(SP_LINUX)
 
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
-
-#include <Spring/SpringCore/SpringProfiler.hpp>
-
 
 
 #ifdef SPRING_BUILD_VK
@@ -50,7 +48,7 @@ namespace spring::graphics
 		SP_PROFILE_FUNCTION();
 
 		return glfwWindowShouldClose(m_window);
-	};
+	}
 
 	std::vector<const char*> SpringWindow_Glfw::getRequiredExtensions()
 	{
@@ -70,6 +68,31 @@ namespace spring::graphics
 
 		return reqExt;
 	}
-}
 
+	bool SpringWindow_Glfw::buildSurface(SpringGraphicsApi* api)
+	{
+		if(!m_surface)
+		{
+			const VkInstance* inst = dynamic_cast<SpringGraphicsApi_Vulkan*>(api)->getInstance();
+			m_surface = makeRef<GraphicsSurface>();
+			Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
+			surface_internal->relatedInstance = *inst;
+
+			glfwCreateWindowSurface(*inst, m_window, NULL, &surface_internal->surface);
+			m_surface->internal_state = surface_internal;
+			m_surface->width = m_desc.width;
+			m_surface->height = m_desc.height;
+		}
+
+		return true;
+
+	}
+
+	GraphicsSurface* SpringWindow_Glfw::getSurface() const
+	{
+		return m_surface.get();
+	}
+}
+#else
+#error "Should not be processed in a non-linux build"
 #endif

@@ -39,8 +39,9 @@ constexpr Ref<T> makeRef(Args&& ... args)
 #include "SpringProfiler.hpp"
 #define SP_START_PROFILING(name, path) spring::core::Profiler::get().beginProfiling(name, path)
 #define SP_END_PROFILING() spring::core::Profiler::get().endProfiling()
-//#define _SP_PROFILE_SCOPE_LINE(name, line) constexpr auto fixedName##line = spring::core::InstrumentorUtils::CleanupOutputString(name, "__cdecl ");\
-//																			spring::core::InstrumentationTimer timer##line(fixedName##line.Data)
+/*#define _SP_PROFILE_SCOPE_LINE(name, line) constexpr auto fixedName##line = spring::core::InstrumentorUtils::CleanupOutputString(name, "__cdecl ");\
+																			spring::core::InstrumentationTimer timer##line(fixedName##line.Data)
+*/
 #define _SP_PROFILE_SCOPE_LINE(name, line) spring::core::InstrumentationTimer timer##line(name)
 #define SP_PROFILE_SCOPE_LINE(name, line) _SP_PROFILE_SCOPE_LINE(name, line)
 #define SP_PROFILE_SCOPE(name) SP_PROFILE_SCOPE_LINE(name, __LINE__)

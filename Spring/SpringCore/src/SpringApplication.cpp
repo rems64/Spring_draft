@@ -9,7 +9,7 @@
 namespace spring::core
 {
     SpringApplication* SpringApplication::m_app = nullptr;
-    SpringApplication::SpringApplication(SpringApplicationInfos infos): m_console(NULL)
+    SpringApplication::SpringApplication(SpringApplicationInfos infos) : m_modules()
     {
 
         if (!!m_app)
@@ -18,6 +18,7 @@ namespace spring::core
         }
         m_app = this;
         m_instance = infos.instance;
+#if defined(SP_WIN32)
         if (infos.showConsole)
         {
 
@@ -29,8 +30,9 @@ namespace spring::core
             freopen_s(&fp, "CONOUT$", "w", stdout);
             freopen_s(&fp, "CONOUT$", "w", stderr);
             SetConsoleTitle("Spring console");
-            m_console = GetConsoleWindow();
+            //m_console = GetConsoleWindow();
         }
+#endif
 
         spdlog::set_pattern("%^[%R] %v%$");
         spdlog::set_level(spdlog::level::trace);
@@ -50,7 +52,7 @@ namespace spring::core
         return nullptr;
     }
 
-    HINSTANCE SpringApplication::getNativeInstance() const
+    spNativeInstance SpringApplication::getNativeInstance() const
     {
 	    return m_instance;
     }
@@ -82,6 +84,7 @@ namespace spring::core
 				    break;
 			    }
 		    }
+            mainLoopCall();
             bool modulesClose = true;
             for (const auto& module : m_modules)
             {

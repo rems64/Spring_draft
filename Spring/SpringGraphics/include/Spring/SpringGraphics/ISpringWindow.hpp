@@ -5,9 +5,9 @@
 struct GLFWwindow;
 
 
-#ifdef SP_WIN32
+#if defined(SP_WIN32)
 using spWinHandle = HWND*;
-#elif SP_LINUX
+#elif defined(SP_LINUX)
 using spWinHandle = GLFWwindow*;
 #else
 #error "Can't create window type, unknown OS"

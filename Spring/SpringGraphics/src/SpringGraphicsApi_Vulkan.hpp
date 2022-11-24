@@ -21,7 +21,7 @@ namespace spring::graphics
 
 	class SpringGraphicsApi_Vulkan : public SpringGraphicsApi
 	{
-		friend GraphicsDevice_Vulkan; // Mainly for compatibility with validation layers needed to be enabled in device prior v1.3
+		friend GraphicsDevice_Vulkan; // Mainly for compatibility with validation layers needing to be enabled in device prior v1.3
 	public:
 		SpringGraphicsApi_Vulkan();
 		~SpringGraphicsApi_Vulkan();

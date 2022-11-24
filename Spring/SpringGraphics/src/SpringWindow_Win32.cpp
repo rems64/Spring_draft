@@ -252,4 +252,6 @@ namespace spring::graphics
 	}
 }
 
+#else
+#error "Should not be processed in a non-windows build"
 #endif

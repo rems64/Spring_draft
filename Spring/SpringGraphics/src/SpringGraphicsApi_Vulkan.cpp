@@ -10,7 +10,7 @@ namespace spring::graphics
     SpringGraphicsApi_Vulkan::SpringGraphicsApi_Vulkan() : /*m_surfaces{}, */m_devices{}
     {
         SP_PROFILE_FUNCTION();
-        m_requiredExtensions = { VK_KHR_SURFACE_EXTENSION_NAME };
+        m_requiredExtensions = { VK_KHR_SURFACE_EXTENSION_NAME, VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME };
 
 	// Enable surface extensions depending on os
 #if defined(SP_WIN32)
@@ -54,6 +54,10 @@ namespace spring::graphics
 	{
         SP_PROFILE_FUNCTION();
 
+        VkResult res = volkInitialize();
+        if(res!=VK_SUCCESS)
+            spdlog::error("Failed to load vulkan");
+
         createInstance();
 #ifdef SPRING_VULKAN_ENABLE_VALIDATION_LAYERS
         setupDebugMessenger();
@@ -80,7 +84,7 @@ namespace spring::graphics
             .applicationVersion = VK_MAKE_VERSION(1,0,0),
             .pEngineName = "SpringEngine",
             .engineVersion = VK_MAKE_VERSION(1,0,0),
-            .apiVersion = VK_API_VERSION_1_2
+            .apiVersion = VK_API_VERSION_1_3,
         };
 
         //m_requiredExtensions = getRequiredExtensions();
@@ -96,7 +100,7 @@ namespace spring::graphics
         vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionsCount, nullptr);
         std::vector<VkExtensionProperties> availableExtensions(availableExtensionsCount);
         vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionsCount, availableExtensions.data());
-        for (std::vector<const char*>::iterator reqExt = m_requiredExtensions.begin(); reqExt != m_requiredExtensions.end();)
+        for (auto reqExt = m_requiredExtensions.begin(); reqExt != m_requiredExtensions.end();)
         {
             bool found = false;
             for (const VkExtensionProperties& ext : availableExtensions)
@@ -125,6 +129,7 @@ namespace spring::graphics
             .sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
             .pApplicationInfo = &appInfo,
             .enabledLayerCount = 0,
+            .ppEnabledLayerNames = nullptr,
             .enabledExtensionCount = (uint32_t)m_requiredExtensions.size(),
             .ppEnabledExtensionNames = m_requiredExtensions.data(),
         };
@@ -154,7 +159,9 @@ namespace spring::graphics
         if (vkCreateInstance(&createInfo, nullptr, &m_instance) != VK_SUCCESS) {
             throw std::runtime_error("failed to create instance!");
         }
-	}
+
+        volkLoadInstanceOnly(m_instance);
+    }
 
     GraphicsSurface* SpringGraphicsApi_Vulkan::getSurface(SpringWindow* window)
     {

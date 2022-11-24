@@ -1,6 +1,5 @@
 #include <Spring/SpringCore/SpringPlatform.hpp>
 
-
 namespace spring::core {
 #if defined(SP_WIN32)
 

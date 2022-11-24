@@ -3,8 +3,15 @@ project(springaudio VERSION 1.0.0 LANGUAGES CXX)
 set(SRCS
 		"src/SpringAudioModule.cpp"
 		"src/SpringAudioApi.cpp"
+		)
+
+if (WIN32)
+	list(APPEND SRCS
 		"src/SpringAudioApi_NativeWindows.cpp"
-		"src/SpringAudioDevice_NativeWindows.cpp")
+		"src/SpringAudioDevice_NativeWindows.cpp"
+			)
+elseif(UNIX AND NOT APPLE)
+endif ()
 
 add_library(SpringAudio ${SRCS})
 add_library(Spring::SpringAudio ALIAS SpringAudio)

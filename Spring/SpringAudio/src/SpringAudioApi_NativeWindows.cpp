@@ -3,6 +3,7 @@
 #include <Spring/SpringAudio/SpringAudioDevice.hpp>
 #include <Spring/SpringCore/SpringPlatform.hpp>
 #include <Spring/SpringCore/SpringCommon.hpp>
+#include <Spring/SpringCore/SpringLog.hpp>
 
 #include <mmdeviceapi.h>
 #include <Audioclient.h>

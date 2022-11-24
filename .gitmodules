@@ -4,3 +4,9 @@
 [submodule "Spring/SpringGraphics/lib/glfw"]
 	path = Spring/SpringGraphics/lib/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "Spring/SpringGraphics/lib/VulkanMemoryAllocator"]
+	path = Spring/SpringGraphics/lib/VulkanMemoryAllocator
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+[submodule "Spring/SpringGraphics/lib/volk"]
+	path = Spring/SpringGraphics/lib/volk
+	url = https://github.com/zeux/volk.git

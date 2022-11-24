@@ -3,12 +3,13 @@
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
 #include <Spring/SpringGraphics/ISpringGraphicsApi.hpp>
 
-#include <Spring/SpringCore/SpringProfiler.hpp>
+#include <Spring/SpringCore/SpringCore.hpp>
 
 #include <Spring/SpringCore/SpringApplication.hpp>
 
-//#include <spdlog/spdlog.h>
-
+#if defined(SP_LINUX)
+#include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
+#endif
 namespace spring::graphics
 {
     SpringGraphicsModule::SpringGraphicsModule(core::SpringApplication* app) : SpringModule(app)
