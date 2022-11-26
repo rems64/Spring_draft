@@ -161,7 +161,7 @@ namespace spring::graphics
         bool createRenderPass(RenderPassDesc& desc, RenderPass* renderpass) override;
 		bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GraphicsPipeline* swapchain) override;
 		bool validatePipeline(const Ref<CommandList>& cmd) override;
-        bool createBuffer(BufferDesc desc, Buffer* buffer, void* data=nullptr) override;
+        bool createBuffer(BufferDesc desc, Buffer* buffer, void* data) override;
         bool createTexture(TextureDesc desc, Texture* texture) override;
         bool createShader(ShaderDesc desc, Shader* shader) override;
         bool createCommandBuffer(const Ref<CommandBuffer>& commandBuffer) override;

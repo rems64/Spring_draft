@@ -31,4 +31,5 @@ private:
     Ref<spring::graphics::CommandBuffer> m_commandBuffer;
     Ref<spring::graphics::CommandList> m_commandList;
     Ref<spring::graphics::Buffer> m_vertexBuffer;
+    Ref<spring::graphics::Texture> m_texture;
 };

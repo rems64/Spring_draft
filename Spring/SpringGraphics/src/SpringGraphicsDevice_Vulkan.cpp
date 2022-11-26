@@ -111,6 +111,9 @@ namespace spring::graphics
         VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
         std::vector<VkDescriptorSetLayoutBinding> layoutBindings;
 
+        VkPipelineDynamicStateCreateInfo dynamicState = {};
+        std::vector<VkDynamicState> dynamicStates = {};
+
         size_t hash = {};
 
         ~GraphicsPipeline_Vulkan()
@@ -168,51 +171,142 @@ namespace spring::graphics
 
     constexpr VkFormat getVkFormat(Format f) {
         switch(f) {
-            case Format::RG_32_SFLOAT:
-                return VK_FORMAT_R32G32_SFLOAT;
-            case Format::RG_32_SINT:
-                return VK_FORMAT_R32G32_SINT;
-            case Format::RG_32_UINT:
-                return VK_FORMAT_R32G32_UINT;
-            case Format::RGB_32_SFLOAT:
-                return VK_FORMAT_R32G32B32_SFLOAT;
-            case Format::RGB_32_SINT:
-                return VK_FORMAT_R32G32B32_SINT;
-            case Format::RGB_32_UINT:
-                return VK_FORMAT_R32G32B32_UINT;
-            case Format::RGBA_32_SFLOAT:
-                return VK_FORMAT_R32G32B32A32_SFLOAT;
-            case Format::RGBA_32_SINT:
-                return VK_FORMAT_R32G32B32A32_SINT;
-            case Format::RGBA_32_UINT:
-                return VK_FORMAT_R32G32B32A32_UINT;
-            default:
+            // R
+            case Format::R_32_SFLOAT:   return VK_FORMAT_R32_SFLOAT;
+            case Format::R_32_SINT:     return VK_FORMAT_R32_SINT;
+            case Format::R_32_UINT:     return VK_FORMAT_R32_UINT;
+            case Format::R_16_SFLOAT:   return VK_FORMAT_R16_SFLOAT;
+            case Format::R_16_UNORM:    return VK_FORMAT_R16_UNORM;
+            case Format::R_16_SNORM:    return VK_FORMAT_R16_SNORM;
+            case Format::R_16_SINT:     return VK_FORMAT_R16_SINT;
+            case Format::R_16_UINT:     return VK_FORMAT_R16_UINT;
+            case Format::R_8_SRGB:      return VK_FORMAT_R8_SRGB;
+            case Format::R_8_UNORM:     return VK_FORMAT_R8_UNORM;
+            case Format::R_8_SNORM:     return VK_FORMAT_R8_SNORM;
+            case Format::R_8_UINT:      return VK_FORMAT_R8_UINT;
+            case Format::R_8_SINT:      return VK_FORMAT_R8_SINT;
+
+            case Format::RG_32_SFLOAT:  return VK_FORMAT_R32G32_SFLOAT;
+            case Format::RG_32_SINT:    return VK_FORMAT_R32G32_SINT;
+            case Format::RG_32_UINT:    return VK_FORMAT_R32G32_UINT;
+            case Format::RG_16_SFLOAT:  return VK_FORMAT_R16G16_SFLOAT;
+            case Format::RG_16_UNORM:   return VK_FORMAT_R16G16_UNORM;
+            case Format::RG_16_SNORM:   return VK_FORMAT_R16G16_SNORM;
+            case Format::RG_16_SINT:    return VK_FORMAT_R16G16_SINT;
+            case Format::RG_16_UINT:    return VK_FORMAT_R16G16_UINT;
+            case Format::RG_8_SRGB:     return VK_FORMAT_R8G8_SRGB;
+            case Format::RG_8_UNORM:    return VK_FORMAT_R8G8_UNORM;
+            case Format::RG_8_SNORM:    return VK_FORMAT_R8G8_SNORM;
+            case Format::RG_8_UINT:     return VK_FORMAT_R8G8_UINT;
+            case Format::RG_8_SINT:     return VK_FORMAT_R8G8_SINT;
+
+            // RGB
+            case Format::RGB_32_SFLOAT: return VK_FORMAT_R32G32B32_SFLOAT;
+            case Format::RGB_32_SINT:   return VK_FORMAT_R32G32B32_SINT;
+            case Format::RGB_32_UINT:   return VK_FORMAT_R32G32B32_UINT;
+            case Format::RGB_16_SFLOAT: return VK_FORMAT_R16G16B16_SFLOAT;
+            case Format::RGB_16_UNORM:  return VK_FORMAT_R16G16B16_UNORM;
+            case Format::RGB_16_SNORM:  return VK_FORMAT_R16G16B16_SNORM;
+            case Format::RGB_16_SINT:   return VK_FORMAT_R16G16B16_SINT;
+            case Format::RGB_16_UINT:   return VK_FORMAT_R16G16B16_UINT;
+            case Format::RGB_8_SRGB:    return VK_FORMAT_R8G8B8_SRGB;
+            case Format::RGB_8_UNORM:   return VK_FORMAT_R8G8B8_UNORM;
+            case Format::RGB_8_SNORM:   return VK_FORMAT_R8G8B8_SNORM;
+            case Format::RGB_8_SINT:    return VK_FORMAT_R8G8B8_SINT;
+            case Format::RGB_8_UINT:    return VK_FORMAT_R8G8B8_UINT;
+
+            // RGBA
+            case Format::RGBA_32_SFLOAT:return VK_FORMAT_R32G32B32A32_SFLOAT;
+            case Format::RGBA_32_SINT:  return VK_FORMAT_R32G32B32A32_SINT;
+            case Format::RGBA_32_UINT:  return VK_FORMAT_R32G32B32A32_UINT;
+            case Format::RGBA_16_SFLOAT:return VK_FORMAT_R16G16B16A16_SFLOAT;
+            case Format::RGBA_16_UNORM: return VK_FORMAT_R16G16B16A16_UNORM;
+            case Format::RGBA_16_SNORM: return VK_FORMAT_R16G16B16A16_SNORM;
+            case Format::RGBA_16_SINT:  return VK_FORMAT_R16G16B16A16_SINT;
+            case Format::RGBA_16_UINT:  return VK_FORMAT_R16G16B16A16_UINT;
+            case Format::RGBA_8_SRGB:   return VK_FORMAT_R8G8B8A8_SRGB;
+            case Format::RGBA_8_UNORM:  return VK_FORMAT_R8G8B8A8_UNORM;
+            case Format::RGBA_8_SNORM:  return VK_FORMAT_R8G8B8A8_SNORM;
+            case Format::RGBA_8_UINT:   return VK_FORMAT_R8G8B8A8_UINT;
+            case Format::RGBA_8_SINT:   return VK_FORMAT_R8G8B8A8_SINT;
+
+
             case Format::Empty:
-                return VK_FORMAT_UNDEFINED;
+            default:            return VK_FORMAT_UNDEFINED;
         }
     }
 
     constexpr uint32_t getStride(Format f) {
         switch (f) {
+            // R
+            case Format::R_32_SFLOAT:
+            case Format::R_32_SINT:
+            case Format::R_32_UINT:     return 4u;
+            case Format::R_16_SFLOAT:
+            case Format::R_16_UNORM:
+            case Format::R_16_SNORM:
+            case Format::R_16_SINT:
+            case Format::R_16_UINT:     return 2u;
+            case Format::R_8_SRGB:
+            case Format::R_8_UNORM:
+            case Format::R_8_SNORM:
+            case Format::R_8_UINT:
+            case Format::R_8_SINT:      return 1u;
+
+            // RG
             case Format::RG_32_SFLOAT:
             case Format::RG_32_SINT:
-            case Format::RG_32_UINT:
-                return 8u;
+            case Format::RG_32_UINT:    return 8u;
+            case Format::RG_16_SFLOAT:
+            case Format::RG_16_UNORM:
+            case Format::RG_16_SNORM:
+            case Format::RG_16_SINT:
+            case Format::RG_16_UINT:    return 4u;
+            case Format::RG_8_SRGB:
+            case Format::RG_8_UNORM:
+            case Format::RG_8_SNORM:
+            case Format::RG_8_UINT:
+            case Format::RG_8_SINT:     return 2u;
+
+            // RGB
             case Format::RGB_32_SFLOAT:
             case Format::RGB_32_SINT:
-            case Format::RGB_32_UINT:
-                return 12u;
+            case Format::RGB_32_UINT:   return 12u;
+            case Format::RGB_16_SFLOAT:
+            case Format::RGB_16_UNORM:
+            case Format::RGB_16_SNORM:
+            case Format::RGB_16_SINT:
+            case Format::RGB_16_UINT:   return 6u;
+            case Format::RGB_8_SRGB:
+            case Format::RGB_8_UNORM:
+            case Format::RGB_8_SNORM:
+            case Format::RGB_8_SINT:
+            case Format::RGB_8_UINT:    return 3u;
+
+            // RGBA
             case Format::RGBA_32_SFLOAT:
             case Format::RGBA_32_SINT:
-            case Format::RGBA_32_UINT:
-                return 16u;
+            case Format::RGBA_32_UINT:  return 16u;
+            case Format::RGBA_16_SFLOAT:
+            case Format::RGBA_16_UNORM:
+            case Format::RGBA_16_SNORM:
+            case Format::RGBA_16_SINT:
+            case Format::RGBA_16_UINT:  return 8u;
+            case Format::RGBA_8_SRGB:
+            case Format::RGBA_8_UNORM:
+            case Format::RGBA_8_SNORM:
+            case Format::RGBA_8_UINT:
+            case Format::RGBA_8_SINT:   return 4u;
+
+
             case Format::Empty:
-            default:
-                return 16u;
+            default:                    return 4u;
         }
     }
 
     void CopyHandler::init(GraphicsDevice_Vulkan* gd) {
+        SP_PROFILE_FUNCTION();
+
         device = gd;
         VkCommandPoolCreateInfo createInfo = {
             .sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
@@ -238,7 +332,7 @@ namespace spring::graphics
         vkCreateSemaphore(device->m_device, &semaphoreCreateInfo, nullptr, &semaphore);
     }
 
-    CopyHandler::CopyTask CopyHandler::allocate(size_t size) {
+    CopyHandler::CopyTask CopyHandler::allocate(size_t size) { // NOLINT(misc-no-recursion)
         if(freeTasks.empty()) {
             auto task = CopyTask{};
 
@@ -286,6 +380,8 @@ namespace spring::graphics
     }
 
     void CopyHandler::submit(const CopyHandler::CopyTask& task) {
+        SP_PROFILE_FUNCTION();
+
         vkEndCommandBuffer(task.cmd);
 
         ongoing.push_back(task);
@@ -293,6 +389,8 @@ namespace spring::graphics
     }
 
     void CopyHandler::performCopy() {
+        SP_PROFILE_FUNCTION();
+
         if (!toSubmit.empty())
         {
             VkSubmitInfo submitInfo = {
@@ -314,7 +412,6 @@ namespace spring::graphics
 
             submitInfo.pNext = &timelineInfo;
 
-            spdlog::warn("Performing copy");
             VkResult res = vkQueueSubmit(device->m_graphicsQueue, 1, &submitInfo, VK_NULL_HANDLE); // TODO : copy queue
             assert(res == VK_SUCCESS);
 
@@ -739,7 +836,9 @@ namespace spring::graphics
 	VkImageView createImageView(VkDevice device, VkImage image, VkFormat format, VkImageAspectFlags aspectFlags,
 	                            uint32_t mipLevels)
 	{
-		const VkImageViewCreateInfo viewInfo
+        SP_PROFILE_FUNCTION();
+
+        const VkImageViewCreateInfo viewInfo
 		{
 			.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
 			.image = image,
@@ -1007,6 +1106,8 @@ namespace spring::graphics
 
     bool GraphicsDevice_Vulkan::createRenderPass(spring::graphics::RenderPassDesc &desc,
                                                  spring::graphics::RenderPass *renderpass) {
+        SP_PROFILE_FUNCTION();
+
         if(renderpass->isValid())
             spdlog::error("Attempting to override an already valid renderpass");
         auto internal_state = makeRef<RenderPass_Vulkan>();
@@ -1061,6 +1162,7 @@ namespace spring::graphics
 	bool GraphicsDevice_Vulkan::createGraphicsPipeline(GraphicsPipelineDesc& desc, GraphicsPipeline* pipeline)
 	{
 		SP_PROFILE_FUNCTION();
+
         auto internal_state = std::static_pointer_cast<GraphicsPipeline_Vulkan>(pipeline->internal_state);
         if (!pipeline->isValid())
         {
@@ -1099,7 +1201,7 @@ namespace spring::graphics
         {
             while(input.binding>=bindings.size()) {
                 VkVertexInputBindingDescription& b = bindings.emplace_back();
-                b.binding = bindings.size()-1;
+                b.binding = uint32_t(bindings.size())-1;
                 b.inputRate = VK_VERTEX_INPUT_RATE_MAX_ENUM;
                 strides.push_back(0);
             }
@@ -1141,8 +1243,8 @@ namespace spring::graphics
         VkViewport& viewport = internal_state->viewport;
         viewport.x = 0.0f;
         viewport.y = 0.0f;
-        viewport.width = 1264; // TODO Currently max device width (16384)
-        viewport.height = 681;
+        viewport.width = 16384; // Currently max device width (16384), adjusted on rendering
+        viewport.height = 16384;
         viewport.minDepth = 0.0f;
         viewport.maxDepth = 1.0f;
 
@@ -1188,6 +1290,17 @@ namespace spring::graphics
             throw std::runtime_error("failed to create pipeline layout!");
         }
 
+        std::vector<VkDynamicState>& dynamicStates = internal_state->dynamicStates;
+        dynamicStates.push_back(VK_DYNAMIC_STATE_VIEWPORT);
+        dynamicStates.push_back(VK_DYNAMIC_STATE_SCISSOR);
+
+        VkPipelineDynamicStateCreateInfo& dynamicState = internal_state->dynamicState;
+        dynamicState = {
+            .sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO,
+            .dynamicStateCount = static_cast<uint32_t>(dynamicStates.size()),
+            .pDynamicStates = dynamicStates.data(),
+        };
+
         internal_state->createInfo = {
             .sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
             .stageCount = 2,
@@ -1199,7 +1312,7 @@ namespace spring::graphics
             .pMultisampleState = &multisampling,
             .pDepthStencilState = nullptr, // Set on validation
             .pColorBlendState = nullptr, // Set on validation
-            .pDynamicState = nullptr,
+            .pDynamicState = &dynamicState,
             .layout = internal_state->pipelineLayout,
             .renderPass = nullptr, // Set on validation
             .subpass = 0,
@@ -1214,6 +1327,8 @@ namespace spring::graphics
 	}
 
     bool GraphicsDevice_Vulkan::validatePipeline(const Ref<CommandList>& cmd) {
+        SP_PROFILE_FUNCTION();
+
         auto cmd_internal = std::static_pointer_cast<CommandList_Vulkan>(cmd->internal_state);
         if (!cmd->isValid())
             core::error("Invalid command list");
@@ -1267,6 +1382,8 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::createBuffer(BufferDesc desc, Buffer *buffer, void* data) {
+        SP_PROFILE_FUNCTION();
+
         auto internal_state = makeRef<Buffer_Vulkan>();
         internal_state->allocationHandler = m_allocationHandler;
         buffer->internal_state = internal_state;
@@ -1315,31 +1432,40 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::createTexture(spring::graphics::TextureDesc desc, spring::graphics::Texture *texture) {
+        SP_PROFILE_FUNCTION();
+
         auto internal_state = makeRef<Texture_Vulkan>();
         internal_state->allocationHandler = m_allocationHandler;
         texture->internal_state = internal_state;
         texture->desc = desc;
 
+        if (desc.mipLevels == 0)
+            desc.mipLevels = static_cast<uint32_t>(std::floor(std::log2(std::max(desc.width, desc.height)))) + 1;
+
         VkImageCreateInfo imageInfo
-        {
-            .sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
-            .flags = 0,
-            .imageType = VK_IMAGE_TYPE_2D,
-            .format = getVkFormat(texture->desc.format),
-            .extent
-            {
-                .width = texture->desc.width,
-                .height = texture->desc.height,
-                .depth = 1
-            },
-            .mipLevels = texture->desc.mipLevels,
-            .arrayLayers = 1,
-            .samples = static_cast<VkSampleCountFlagBits>(texture->desc.samples),
-            .tiling = VK_IMAGE_TILING_OPTIMAL,
-            .usage = 0,
-            .sharingMode = VK_SHARING_MODE_EXCLUSIVE,
-            .initialLayout = VK_IMAGE_LAYOUT_UNDEFINED
-        };
+                {
+                        .sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+                        .flags = 0,
+                        .imageType = VK_IMAGE_TYPE_2D,
+                        .format = getVkFormat(texture->desc.format),
+                        .extent
+                                {
+                                        .width = texture->desc.width,
+                                        .height = texture->desc.height,
+                                        .depth = 1
+                                },
+                        .mipLevels = texture->desc.mipLevels,
+                        .arrayLayers = 1,
+                        .samples = static_cast<VkSampleCountFlagBits>(texture->desc.samples),
+                        .tiling = VK_IMAGE_TILING_OPTIMAL,
+                        .usage = 0,
+                        .sharingMode = VK_SHARING_MODE_EXCLUSIVE,
+                        .initialLayout = VK_IMAGE_LAYOUT_UNDEFINED
+                };
+
+        if (desc.usage == Usage::Default) {
+            imageInfo.usage |= VK_IMAGE_USAGE_SAMPLED_BIT;
+        }
 
         //if (vkCreateImage(m_device, &imageInfo, nullptr, &internal_state->texture) != VK_SUCCESS) {
         //    throw std::runtime_error("failed to create image!");
@@ -1355,8 +1481,9 @@ namespace spring::graphics
         //    .memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT)
         //};
 
-        VmaAllocationCreateInfo allocInfo = {};
-        allocInfo.usage = VMA_MEMORY_USAGE_AUTO;
+        VmaAllocationCreateInfo allocInfo = {
+            .usage = VMA_MEMORY_USAGE_AUTO,
+        };
 
         VkResult res = vmaCreateImage(m_allocationHandler->allocator, &imageInfo, &allocInfo, &internal_state->texture, &internal_state->allocation, nullptr);
 
@@ -1379,6 +1506,7 @@ namespace spring::graphics
     bool GraphicsDevice_Vulkan::createShader(ShaderDesc desc, Shader* shader)
 	{
 		SP_PROFILE_FUNCTION();
+
 		const Ref<Shader_Vulkan> internal_state = makeRef<Shader_Vulkan>();
 		internal_state->allocationHandler = m_allocationHandler;
 		shader->internal_state = internal_state;
@@ -1415,6 +1543,8 @@ namespace spring::graphics
 	}
 
     bool GraphicsDevice_Vulkan::createCommandBuffer(const Ref<CommandBuffer>& commandBuffer) {
+        SP_PROFILE_FUNCTION();
+
         auto internal_state = std::static_pointer_cast<CommandBuffer_Vulkan>(commandBuffer->internal_state);
         if(!commandBuffer->isValid())
             internal_state = makeRef<CommandBuffer_Vulkan>();
@@ -1454,11 +1584,15 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::bindPipeline(const Ref<CommandList>& cmd, const Ref<GraphicsPipeline>& pipeline) {
+        SP_PROFILE_FUNCTION();
+
         std::static_pointer_cast<CommandList_Vulkan>(cmd->internal_state)->pipeline = pipeline.get();
         return true;
     }
 
     bool GraphicsDevice_Vulkan::bindVertexBuffer(const Ref<CommandList>& cmd, const Ref<Buffer>& buffer, uint32_t first) {
+        SP_PROFILE_FUNCTION();
+
         auto internal_state = std::static_pointer_cast<Buffer_Vulkan>(buffer->internal_state);
         auto commandBuffer = std::static_pointer_cast<CommandBuffer_Vulkan>(cmd->commandBuffer->internal_state);
 
@@ -1470,6 +1604,8 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::beginCommandList(const Ref<CommandList>& cmd) {
+        SP_PROFILE_FUNCTION();
+
         vkDeviceWaitIdle(m_device);
         auto commandList = std::static_pointer_cast<CommandList_Vulkan>(cmd->internal_state);
         if(!cmd->isValid()) {
@@ -1489,13 +1625,27 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::beginRenderPass(const Ref<CommandList>& cmd, const Ref<SwapChain>& swapchain) {
+        SP_PROFILE_FUNCTION();
+
         auto commandList = std::static_pointer_cast<CommandList_Vulkan>(cmd->internal_state);
         auto swapchain_internal = std::static_pointer_cast<SwapChain_Vulkan>(swapchain->internal_state);
 
         commandList->swapchain = swapchain;
-
-        VkResult res = vkAcquireNextImageKHR(m_device, swapchain_internal->swapchain, UINT64_MAX, swapchain_internal->acquire_semaphore, VK_NULL_HANDLE, &swapchain_internal->currentImageIndex);
-
+        vkDeviceWaitIdle(m_device);
+        {
+            SP_PROFILE_SCOPE("AcquireNextImageKHR");
+            VkResult res = vkAcquireNextImageKHR(m_device, swapchain_internal->swapchain, UINT64_MAX,
+                                                 swapchain_internal->acquire_semaphore, VK_NULL_HANDLE,
+                                                 &swapchain_internal->currentImageIndex);
+            if (res == VK_ERROR_OUT_OF_DATE_KHR) {
+                spdlog::warn("Out of date KHR");
+            } else if (res == VK_SUBOPTIMAL_KHR) {
+                spdlog::warn("Not optimal swapchain");
+            } else if (res != VK_SUCCESS) {
+                spdlog::error("Failed to acquire swapchain image");
+                core::fatal("Failed to acquire swapchain image");
+            }
+        }
         auto renderpass = std::static_pointer_cast<RenderPass_Vulkan>(swapchain_internal->renderpass.internal_state);
 
         commandList->renderpass = &swapchain_internal->renderpass;
@@ -1526,6 +1676,8 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::endRenderPass(const Ref<graphics::CommandList>& cmd) {
+        SP_PROFILE_FUNCTION();
+
         auto cmdBuffer = std::static_pointer_cast<CommandBuffer_Vulkan>(cmd->commandBuffer->internal_state);
 
         vkCmdEndRenderPass(cmdBuffer->commandBuffers[cmdBuffer->currentIndex]);
@@ -1533,6 +1685,8 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::submitCommandList(const Ref<graphics::CommandList>& cmd) {
+        SP_PROFILE_FUNCTION();
+
         auto internal_state = std::static_pointer_cast<CommandList_Vulkan>(cmd->internal_state);
         auto cmdBuffer = std::static_pointer_cast<CommandBuffer_Vulkan>(cmd->commandBuffer->internal_state);
 
@@ -1557,25 +1711,29 @@ namespace spring::graphics
     }
 
     bool GraphicsDevice_Vulkan::fastDraw(const Ref<SwapChain>& swapchain, const Ref<GraphicsPipeline>& pipeline, const Ref<CommandList>& cmd) {
+        SP_PROFILE_FUNCTION();
+
         auto swapchain_internal = std::static_pointer_cast<SwapChain_Vulkan>(swapchain->internal_state);
         auto pipeline_internal  = std::static_pointer_cast<GraphicsPipeline_Vulkan>(pipeline->internal_state);
         auto cmd_internal       = std::static_pointer_cast<CommandBuffer_Vulkan>(cmd->commandBuffer->internal_state);
 
         vkCmdBindPipeline(cmd_internal->commandBuffers[cmd_internal->currentIndex], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_internal->pipeline);
 
-        //VkViewport viewport{};
-        //viewport.x = 0.0f;
-        //viewport.y = 0.0f;
-        //viewport.width = static_cast<float>(swapchain_internal->swapChainExtent.width);
-        //viewport.height = static_cast<float>(swapchain_internal->swapChainExtent.height);
-        //viewport.minDepth = 0.0f;
-        //viewport.maxDepth = 1.0f;
-        //vkCmdSetViewport(cmd_internal->commandBuffers[cmd_internal->currentIndex], 0, 1, &viewport);
+        VkViewport viewport {
+            .x = 0.0f,
+            .y = 0.0f,
+            .width = static_cast<float>(swapchain_internal->swapChainExtent.width),
+            .height = static_cast<float>(swapchain_internal->swapChainExtent.height),
+            .minDepth = 0.0f,
+            .maxDepth = 1.0f,
+        };
+        vkCmdSetViewport(cmd_internal->commandBuffers[cmd_internal->currentIndex], 0, 1, &viewport);
 
-        //VkRect2D scissor{};
-        //scissor.offset = {0, 0};
-        //scissor.extent = swapchain_internal->swapChainExtent;
-        //vkCmdSetScissor(cmd_internal->commandBuffers[cmd_internal->currentIndex], 0, 1, &scissor);
+        VkRect2D scissor {
+            .offset = {0, 0},
+            .extent = swapchain_internal->swapChainExtent,
+        };
+        vkCmdSetScissor(cmd_internal->commandBuffers[cmd_internal->currentIndex], 0, 1, &scissor);
 
         vkCmdDraw(cmd_internal->commandBuffers[cmd_internal->currentIndex], 3, 1, 0, 0);
         return true;
@@ -1583,6 +1741,8 @@ namespace spring::graphics
 
 
     void GraphicsDevice_Vulkan::CommandQueue::submit(spring::graphics::GraphicsDevice_Vulkan *device, VkFence fence) {
+        SP_PROFILE_FUNCTION();
+
         VkSubmitInfo submitInfo = {};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
         submitInfo.commandBufferCount = (uint32_t)submit_cmds.size();

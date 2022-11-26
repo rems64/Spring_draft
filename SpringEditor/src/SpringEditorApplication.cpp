@@ -18,8 +18,10 @@ SpringEditorApplication::SpringEditorApplication(const spring::core::SpringAppli
                                                                                                         m_fragmentShader(makeRef<graphics::Shader>()),
                                                                                                         m_commandBuffer(makeRef<graphics::CommandBuffer>()),
                                                                                                         m_commandList(makeRef<graphics::CommandList>()),
-                                                                                                        m_vertexBuffer(makeRef<graphics::Buffer>())
+                                                                                                        m_vertexBuffer(makeRef<graphics::Buffer>()),
+                                                                                                        m_texture(makeRef<graphics::Texture>())
 {
+    SP_PROFILE_FUNCTION();
 	m_graphicsModule = registerModule<spring::graphics::SpringGraphicsModule>();
 	m_audioModule = registerModule<spring::audio::SpringAudioModule>();
 
@@ -89,9 +91,21 @@ SpringEditorApplication::SpringEditorApplication(const spring::core::SpringAppli
     // COMMAND BUFFER
     m_mainDevice->createCommandBuffer(m_commandBuffer);
     m_commandList->commandBuffer = m_commandBuffer;
+
+    // TEXTURES
+    graphics::TextureDesc texDesc = {
+            .format = graphics::Format::RGBA_8_SRGB,
+            .usage = graphics::Usage::Default,
+            .width = 1024,
+            .height = 1024,
+            .samples = 1,
+            .mipLevels = 0,
+    };
+    m_mainDevice->createTexture(texDesc, m_texture.get());
 }
 
 int SpringEditorApplication::mainLoopCall() {
+    SP_PROFILE_FUNCTION();
     m_mainDevice->beginCommandList(m_commandList);
     m_mainDevice->beginRenderPass(m_commandList, m_swapChain);
     m_mainDevice->bindPipeline(m_commandList, m_graphicsPipeline);

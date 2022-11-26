@@ -10,5 +10,10 @@ namespace spring::core {
     void error(const char *message, const char *title) {
         MessageBoxA(nullptr, message, title, MB_OK | MB_ICONERROR);
     }
+
+    void fatal(const char *message, const char *title) {
+        MessageBoxA(nullptr, message, title, MB_OK | MB_ICONERROR);
+        throw std::runtime_error("Fatal error");
+    }
 #endif
 }

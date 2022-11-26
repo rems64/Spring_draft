@@ -18,7 +18,7 @@ namespace spring::core
     class SpringApplication
     {
     public:
-        SpringApplication(SpringApplicationInfos infos);
+        explicit SpringApplication(SpringApplicationInfos infos);
         virtual ~SpringApplication() = default;
 
         template<typename T>

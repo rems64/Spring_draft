@@ -14,14 +14,14 @@ namespace spring::core
 		if (m_output.is_open())
 		{
 			m_started = true;
-			m_output << "{\"otherData\": {},\"traceEvents\":[{}";
+			m_output << R"({"otherData": {},"traceEvents":[{})";
 			m_output.flush();
 		}
 		else
 		{
 			std::cout << "[ERROR] Failed to open profiling file" << std::endl;
 		}
-	};
+	}
 
 	void Profiler::endProfiling()
 	{
@@ -34,7 +34,7 @@ namespace spring::core
 			m_output.close();
 			m_started = false;
 		}
-	};
+	}
 
 
 }

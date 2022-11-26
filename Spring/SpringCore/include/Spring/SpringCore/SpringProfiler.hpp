@@ -58,7 +58,8 @@ namespace spring::core
 
 		~Profiler()
 		{
-			endProfiling();
+            if(m_started)
+			    endProfiling();
 		}
 
 		std::mutex m_writingMutex;

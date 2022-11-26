@@ -165,6 +165,8 @@ namespace spring::graphics
 
     GraphicsSurface* SpringGraphicsApi_Vulkan::getSurface(SpringWindow* window)
     {
+        SP_PROFILE_FUNCTION();
+
         Scope<GraphicsSurface> surface = makeScope<GraphicsSurface>();
 
         Ref<GraphicsSurface_Vulkan> surface_internal = makeRef<GraphicsSurface_Vulkan>();
@@ -198,6 +200,8 @@ namespace spring::graphics
 
     GraphicsDevice* SpringGraphicsApi_Vulkan::createDevice(GraphicsDeviceDesc desc = {})
 	{
+        SP_PROFILE_FUNCTION();
+
         Scope<GraphicsDevice_Vulkan> device = makeScope<GraphicsDevice_Vulkan>(desc, this);
         GraphicsDevice_Vulkan* devicePtr = device.get();
         m_devices.emplace_back(std::move(device));

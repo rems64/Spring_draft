@@ -13,20 +13,65 @@ namespace spring::graphics {
     };
 
     enum class Format {
-        //RG
+        // R
+        R_32_SFLOAT,
+        R_32_SINT,
+        R_32_UINT,
+        R_16_SFLOAT,
+        R_16_UNORM,
+        R_16_SNORM,
+        R_16_SINT,
+        R_16_UINT,
+        R_8_SRGB,
+        R_8_UNORM,
+        R_8_SNORM,
+        R_8_UINT,
+        R_8_SINT,
+
+        // RG
         RG_32_SFLOAT,
         RG_32_SINT,
         RG_32_UINT,
+        RG_16_SFLOAT,
+        RG_16_UNORM,
+        RG_16_SNORM,
+        RG_16_SINT,
+        RG_16_UINT,
+        RG_8_SRGB,
+        RG_8_UNORM,
+        RG_8_SNORM,
+        RG_8_UINT,
+        RG_8_SINT,
 
-        //RGB
+        // RGB
         RGB_32_SFLOAT,
         RGB_32_SINT,
         RGB_32_UINT,
+        RGB_16_SFLOAT,
+        RGB_16_UNORM,
+        RGB_16_SNORM,
+        RGB_16_SINT,
+        RGB_16_UINT,
+        RGB_8_SRGB,
+        RGB_8_UNORM,
+        RGB_8_SNORM,
+        RGB_8_UINT,
+        RGB_8_SINT,
 
-        //RGBA
+        // RGBA
         RGBA_32_SFLOAT,
         RGBA_32_SINT,
         RGBA_32_UINT,
+        RGBA_16_SFLOAT,
+        RGBA_16_UNORM,
+        RGBA_16_SNORM,
+        RGBA_16_SINT,
+        RGBA_16_UINT,
+        RGBA_8_SRGB,
+        RGBA_8_UNORM,
+        RGBA_8_SNORM,
+        RGBA_8_UINT,
+        RGBA_8_SINT,
 
         Empty,
     };
@@ -67,6 +112,12 @@ namespace spring::graphics {
         std::optional<uint32_t> presentFamily;
     };
 
+    enum class Usage {
+        Default,
+        CpuToGpu,
+        GpuToCpu
+    };
+
     enum class ShaderStage {
         Vertex,
         Fragment,
@@ -101,6 +152,7 @@ namespace spring::graphics {
     struct TextureDesc
     {
         Format format = Format::Empty;
+        Usage usage = Usage::Default;
         uint32_t width = 1;
         uint32_t height = 1;
         uint32_t samples = 0x08;

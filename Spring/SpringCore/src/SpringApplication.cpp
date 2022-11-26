@@ -76,7 +76,7 @@ namespace spring::core
         bool close = false;
         while (!close)
         {
-		    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+		    while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
 			    TranslateMessage(&msg);
 			    DispatchMessage(&msg);
 			    if (msg.message == WM_QUIT) {

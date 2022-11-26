@@ -11,7 +11,7 @@ namespace spring::graphics
 	struct GraphicsSurface_Vulkan
 	{
 		VkSurfaceKHR surface = VK_NULL_HANDLE;
-		VkInstance relatedInstance;
+		VkInstance relatedInstance = VK_NULL_HANDLE;
 
 		~GraphicsSurface_Vulkan()
 		{
@@ -24,20 +24,21 @@ namespace spring::graphics
 		friend GraphicsDevice_Vulkan; // Mainly for compatibility with validation layers needing to be enabled in device prior v1.3
 	public:
 		SpringGraphicsApi_Vulkan();
-		~SpringGraphicsApi_Vulkan();
+		~SpringGraphicsApi_Vulkan() override;
 
-		const char* getName();
-		GraphicsApiProperties getProperties();
+		const char* getName() override;
+		GraphicsApiProperties getProperties() override;
 
-		virtual void init();
-		virtual void shutdown();
+		void init() override;
+		void shutdown() override;
 
-		virtual GraphicsSurface* getSurface(SpringWindow* window) override;
+		GraphicsSurface* getSurface(SpringWindow* window) override;
 		void createInstance();
 		inline const VkInstance* getInstance() { return &m_instance; };
-		virtual GraphicsDevice* createDevice(GraphicsDeviceDesc desc) override;
+		GraphicsDevice* createDevice(GraphicsDeviceDesc desc) override;
 		void registerSurface(Scope<GraphicsSurface>& surface) { m_surfaces.emplace_back(std::move(surface)); };
-	private:
+
+    private:
 		VkInstance m_instance;
 		std::vector<Scope<GraphicsDevice_Vulkan>> m_devices;
 		std::vector<Scope<GraphicsSurface>> m_surfaces;
