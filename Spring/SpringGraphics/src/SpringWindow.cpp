@@ -4,23 +4,24 @@
 
 #if defined(SP_WIN32)
 #include <Spring/SpringGraphics/SpringWindow_Win32.hpp>
+#include <utility>
 #elif defined(SP_LINUX)
 #include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 #endif
 
 namespace spring::graphics
 {
-	std::string SpringWindow::getTitle()
+	std::string SpringWindow::getTitle() const
 	{
 		return m_desc.title;
 	}
 
 	void SpringWindow::setTitle(std::string title)
 	{
-		m_desc.title = title;
+		m_desc.title = std::move(title);
 	}
 
-	Ref<SpringWindow> SpringWindow::build(WindowDesc desc)
+	Ref<SpringWindow> SpringWindow::build(const WindowDesc& desc)
 	{
 		Ref<SpringWindow> window;
 
@@ -42,9 +43,6 @@ namespace spring::graphics
 	{
 		SP_PROFILE_FUNCTION();
 #if defined(SP_WIN32)
-		if (!true)
-			spdlog::error("Failed to initialize glfw");
-		return;
 #elif defined(SP_LINUX)
 		if (!glfwInit())
 			spdlog::error("Failed to initialize glfw");
@@ -58,8 +56,7 @@ namespace spring::graphics
 	void SpringWindow::shutdown()
 	{
 #if defined(SP_WIN32)
-		return;
-#elif defined(SP_LINUX)
+		#elif defined(SP_LINUX)
 		glfwTerminate();
 		return;
 #else

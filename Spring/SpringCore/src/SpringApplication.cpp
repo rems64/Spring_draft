@@ -2,8 +2,6 @@
 #include <Spring/SpringCore/SpringCore.hpp>
 #include <Spring/SpringCore/SpringCommon.hpp>
 
-#include <Spring/SpringCore/SpringMisc.hpp>
-
 #include <spdlog/spdlog.h>
 
 namespace spring::core
@@ -12,7 +10,7 @@ namespace spring::core
     SpringApplication::SpringApplication(SpringApplicationInfos infos) : m_modules()
     {
 
-        if (!!m_app)
+        if (m_app != nullptr)
         {
             spring::core::error("Application already exist");
         }

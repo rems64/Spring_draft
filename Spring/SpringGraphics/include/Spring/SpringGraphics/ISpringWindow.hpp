@@ -28,26 +28,26 @@ namespace spring::graphics
 	class SpringWindow
 	{
 	public:
-		SpringWindow(const WindowDesc desc) : m_desc(desc), m_closeCallback(nullptr) {};
-		virtual ~SpringWindow() {};
+		explicit SpringWindow(const WindowDesc& desc) : m_desc(desc), m_closeCallback(nullptr) {};
+		virtual ~SpringWindow() = default;
 
 		virtual bool construct() = 0;
 		virtual spWinHandle getHandle() = 0;
 		virtual bool buildSurface(SpringGraphicsApi* api) = 0;
-		virtual GraphicsSurface* getSurface() const = 0;
+		[[nodiscard]] virtual GraphicsSurface* getSurface() const = 0;
 
 		virtual void close() { if(m_closeCallback) m_closeCallback(this); };
 		virtual bool shouldClose() = 0;
 		
 		void setTitle(std::string title);
-		std::string getTitle();
+		std::string getTitle() const;
 
-		uint32_t getWidth() const { return m_desc.width; };
-		uint32_t getHeight() const { return m_desc.height; };
+		[[nodiscard]] uint32_t getWidth() const { return m_desc.width; };
+		[[nodiscard]] uint32_t getHeight() const { return m_desc.height; };
 
 		void setCloseCallback(void (*func)(SpringWindow*)) { m_closeCallback = func; };
 
-		static Ref<SpringWindow> build(WindowDesc desc);
+		static Ref<SpringWindow> build(const WindowDesc& desc);
 		static void shutdown();
 		static void initialize();
 

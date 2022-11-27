@@ -14,7 +14,7 @@ namespace spring::core
         const size_t fileSize = (size_t)file.tellg();
         std::vector<char> buffer(fileSize);
         file.seekg(0);
-        file.read(buffer.data(), fileSize);
+        file.read(buffer.data(), static_cast<std::streamsize>(fileSize));
         file.close();
 
         return buffer;

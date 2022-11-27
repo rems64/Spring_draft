@@ -36,3 +36,7 @@ target_precompile_headers(SpringCore
         )
 
 target_compile_features(SpringCore PRIVATE cxx_std_20)
+
+add_executable(test1 tests/test1.cpp)
+target_link_libraries(test1 PUBLIC SpringCore)
+add_test(FirstTest test1)

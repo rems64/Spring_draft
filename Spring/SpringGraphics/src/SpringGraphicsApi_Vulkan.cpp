@@ -2,7 +2,6 @@
 #include <Spring/SpringCore/SpringCore.hpp>
 #include "SpringGraphicsApi_Vulkan.hpp"
 
-#include <Spring/SpringGraphics/SpringWindow_Glfw.hpp>
 #include <Spring/SpringGraphics/ISpringWindow.hpp>
 
 namespace spring::graphics

@@ -20,13 +20,13 @@ namespace spring::core
     class SpringModule
     {
     public:
-        SpringModule(SpringApplication* app);
+        explicit SpringModule(SpringApplication* app);
         virtual ~SpringModule() = default;
 
         virtual void update(bool closeRequired) = 0;
         virtual bool canClose() = 0;
 
-        SpringModuleTypes getType() const;
+        [[nodiscard]] SpringModuleTypes getType() const;
     
     protected:
         SpringModuleTypes m_type;

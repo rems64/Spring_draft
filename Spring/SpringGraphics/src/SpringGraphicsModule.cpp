@@ -52,7 +52,6 @@ namespace spring::graphics
         }
         if (deletion && !anyWindow())
             m_app->shutdown();
-        return;
     }
 
     bool SpringGraphicsModule::canClose()
@@ -69,7 +68,7 @@ namespace spring::graphics
     Ref<SpringWindow> SpringGraphicsModule::createWindow(WindowDesc desc)
     {
         SP_PROFILE_FUNCTION();
-        Ref<SpringWindow> window = SpringWindow::build(desc);
+        Ref<SpringWindow> window = SpringWindow::build(std::move(desc));
         window->setCloseCallback(closeCallback);
         m_windows.emplace_back(window);
 
@@ -84,7 +83,7 @@ namespace spring::graphics
     bool SpringGraphicsModule::anyWindow() const
     {
         for (auto& w : m_windows)
-            if (w) { return true; };
+            if (w) { return true; }
 	    return false;
     }
 

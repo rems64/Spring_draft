@@ -39,7 +39,7 @@ namespace spring::graphics
 		void registerSurface(Scope<GraphicsSurface>& surface) { m_surfaces.emplace_back(std::move(surface)); };
 
     private:
-		VkInstance m_instance;
+		VkInstance m_instance{};
 		std::vector<Scope<GraphicsDevice_Vulkan>> m_devices;
 		std::vector<Scope<GraphicsSurface>> m_surfaces;
 		std::vector<const char*> m_requiredExtensions;
@@ -51,7 +51,7 @@ namespace spring::graphics
 		static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
 		std::vector<const char*> m_validationLayers;
-		VkDebugUtilsMessengerEXT m_debugMessenger;
+		VkDebugUtilsMessengerEXT m_debugMessenger{};
 #endif
 	};
 

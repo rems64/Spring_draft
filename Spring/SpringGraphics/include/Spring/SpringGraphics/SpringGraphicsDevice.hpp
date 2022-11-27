@@ -26,7 +26,7 @@ namespace spring::graphics
         virtual bool createRenderPass(RenderPassDesc& desc, RenderPass* renderpass) = 0;
 		virtual bool createGraphicsPipeline(GraphicsPipelineDesc& desc, GraphicsPipeline* swapchain) = 0;
 		virtual bool validatePipeline(const Ref<CommandList>& cmd) = 0;
-        virtual bool createBuffer(BufferDesc desc, Buffer* buffer, void* data=nullptr) = 0;
+        virtual bool createBuffer(BufferDesc desc, Buffer* buffer, void* data) = 0;
         virtual bool createTexture(TextureDesc desc, Texture* texture) = 0;
         virtual bool createShader(ShaderDesc desc, Shader* shader) = 0;
         virtual bool createCommandBuffer(const Ref<CommandBuffer>& commandBuffer) = 0;
